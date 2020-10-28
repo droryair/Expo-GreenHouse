@@ -1,15 +1,10 @@
-import { DrawerItem } from '@react-navigation/drawer';
 import * as React from 'react';
 import { Button, StyleSheet, View, TouchableOpacity, Text, TextInput} from 'react-native';
 
 export default function PlantIdentify({ navigation }) {
-    const [open,setOpen] = React.useState(false)
-    const openMenu = function(){
-      open ? navigation.openDrawer() : navigation.closeDrawer(); 
-      setOpen(!open)
-    }
     return (
       <View style={styles.container}>
+        <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
         <Text style={styles.header}> Identify Plant</Text>
         <TextInput style={styles.searchInput} placeholder="Search By Name"/>
         <TouchableOpacity style={styles.takePicture} >
@@ -19,11 +14,6 @@ export default function PlantIdentify({ navigation }) {
         <TouchableOpacity style={styles.fromGallery} >
             <Text  style={styles.buttonText}> Upload from Gallery </Text>
         </TouchableOpacity>
-        <DrawerItem
-              label="Toggle drawer"
-              onPress={() => props.navigation.toggleDrawer()}
-            />
-        <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
       </View>
     )
 }

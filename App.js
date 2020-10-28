@@ -10,6 +10,7 @@ import PlantIdentify from './Components/PlantIdentify'
 import Plants from './Stores/Plants'
 import MyGarden from './Components/MyGarden'
 import Home from './Components/Home'
+import CameraSearch from './Components/Camera'
 
 const PlantsContext = createContext({})
 export const PlantsProvider = PlantsContext.Provider
@@ -20,12 +21,6 @@ const store = plants
 const Drawer = createDrawerNavigator();
 
 export default function App() {
-//   <View style={styles.container}>
-//   <Text>Open up App.js to start working on your app!</Text>
-//   <Home/>
-//       <MyGarden />
-// </View>
-
   return (
     <>
       <NavigationContainer>
@@ -34,6 +29,7 @@ export default function App() {
             <Drawer.Screen name="PlantIdentify" component={PlantIdentify} />
             <Drawer.Screen name="MyGarden" component={MyGarden} />
             <Drawer.Screen name="Home" component={Home} />
+            <Drawer.Screen name="CameraSearch" component={CameraSearch} />
 
           </Drawer.Navigator>
          
