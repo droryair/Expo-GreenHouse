@@ -1,9 +1,6 @@
 import * as React from 'react';
 import { createContext, useContext } from 'react';
-
-import { Button, View } from 'react-native';
-
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View , Button} from 'react-native';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
@@ -22,20 +19,24 @@ const store = plants
 const Drawer = createDrawerNavigator();
 
 export default function App() {
+//   <View style={styles.container}>
+//   <Text>Open up App.js to start working on your app!</Text>
+//   <Home/>
+//       <MyGarden />
+// </View>
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-      <Home/>
-      <PlantsProvider value= {store}>
-          <MyGarden />
-      </PlantsProvider>
+    <>
       <NavigationContainer>
-        <Drawer.Navigator initialRouteName="PlantIdentify">
-          <Drawer.Screen name="PlantIdentify" component={PlantIdentify} />
-        </Drawer.Navigator>
+        <PlantsProvider value= {store}>
+          <Drawer.Navigator initialRouteName="PlantIdentify">
+            <Drawer.Screen name="PlantIdentify" component={PlantIdentify} />
+            <Drawer.Screen name="MyGarden" component={MyGarden} />
+            <Drawer.Screen name="Home" component={Home} />
+          </Drawer.Navigator>
+        </PlantsProvider>
       </NavigationContainer>
-    </View>
+    </>
 
   );
 }

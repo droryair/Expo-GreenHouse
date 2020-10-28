@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Text, View } from 'react-native';
 import { inject, observer, PropTypes } from "mobx-react";
 import { usePlantsStore } from '../App';
-import { Card, ListItem, Icon } from 'react-native-elements'
+// import { Card, ListItem, Icon } from 'react-native-elements'
 
 // component assumptions:
 // there is a store named "plants"
@@ -12,14 +12,12 @@ import { Card, ListItem, Icon } from 'react-native-elements'
 
 
 
-const MyGarden = () => {
+export default function MyGarden({ navigation }){
 
     const onPressAddPlant = ()=>{
         // <AddPlant />
     }
 
-    const store= usePlantsStore()
-    console.log(store)
     return (
         <View
             style={{
@@ -42,7 +40,7 @@ const MyGarden = () => {
                 {/* ) */}
             {/* })} */}
 
-            <Card>
+            {/* <Card>
                 <Card.Title>PLANT CARD</Card.Title>
                 <Card.Divider />
                 <Card.Image source="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ2IvVme1cm_BbG8uoXgr1cqy3ZQqSI1MFxdA&usqp=CAU" />
@@ -54,9 +52,7 @@ const MyGarden = () => {
                     buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
                     title='View Plant >' 
                 />
-            </Card>
+            </Card> */}
         </View>
     )
 }
-
-export default MyGarden;

@@ -21,8 +21,7 @@ const onPressRecommended =()=>{
 
 
 
-
-const Home = () => {
+export default function Home({ navigation }) {
     return (
         <View
             style={{
@@ -65,7 +64,3 @@ const Home = () => {
         </View>
     )
 }
-
-
-
-export default Home;
