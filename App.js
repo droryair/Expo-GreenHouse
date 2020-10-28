@@ -1,39 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import ImageList from './src/container/ImageList';
-import { Provider } from 'mobx-react';
-import Plants from './Stores/Plants'
-import Home from './Components/Home'
+import * as React from 'react';
+import { Button, View } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import PlantIdentify from './Components/PlantIdentify'  
 
-// additional needed components:
-// Plant- render each plant to "MyGarden" component
-// navbar - menue component
-
-
-
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-
-
-      <Provider store={store}>
-        <Plants />
-      </Provider>
-    </View>
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="PlantIdentify">
+        <Drawer.Screen name="PlantIdentify" component={PlantIdentify} />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-
