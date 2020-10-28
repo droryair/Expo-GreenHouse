@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Text, View } from 'react-native';
 import { inject, observer, PropTypes } from "mobx-react";
+import { usePlantsStore } from '../../App';
+
 // import { Card, ListItem, Icon } from 'react-native-elements'
 
 // component assumptions:

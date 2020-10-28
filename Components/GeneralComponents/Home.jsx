@@ -1,27 +1,36 @@
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { Button, Text, View } from 'react-native';
-import MyGarden from './MyGarden'
+import MyGarden from '../GardenComponents/MyGarden'
+import PlantIdentify from '../IdentifyComponents/PlantIdentify'
+import { createStackNavigator } from '@react-navigation/stack';
+
+
 //component assumptions:
 // there are components named : "MyGarden" ,"IdentifyPlants","Recommended"
 
 const isLoggedIn = true;
 
-const onPressGetStarted = () => {
-    // <Setup />
-}
-const onPressMyGarden =()=>{
-    <MyGarden/>
-}
-const onPressIdentifyPlants =()=>{
-    // <IdentifyPlants/>
-}
-const onPressRecommended =()=>{
-    // <Recommended/>
-}
+// const onPressGetStarted = () => {
+//     // <Setup />
+// }
+// const onPressIdentifyPlants = () => {
+//     // <IdentifyPlants/>
+// }
+// const onPressRecommended = () => {
+//     // <Recommended/>
+// }
 
 
+
+// const Stack = createStackNavigator();
 
 export default function Home({ navigation }) {
+
+    const hendlePress = (componentName) => {
+        return (navigation.navigate(componentName))
+    }
+
     return (
         <View
             style={{
@@ -33,26 +42,17 @@ export default function Home({ navigation }) {
             <Text>Hello, world!</Text>
             {isLoggedIn
                 ? <>
-                      <Button
-                        onPress={onPressMyGarden}
+                    <Button
+                        onPress={() => hendlePress('MyGarden')}
                         title="Tend Garden"
-                        color="#841584"
-                        accessibilityLabel="Tend Garden"
+                        color="green"
                     />
-                      <Button
-                        onPress={onPressIdentifyPlants}
+                    <Button
+                        onPress={() => hendlePress('PlantIdentify')}
                         title="Identify Plants"
-                        color="#841584"
-                        accessibilityLabel="Identify Plants"
+                        color="green"
                     />
-                      <Button
-                        onPress={onPressRecommended}
-                        title="Recommended For You"
-                        color="#841584"
-                        accessibilityLabel="Recommended For You"
-                    />
-                    
-                    {/* Tend Garden, Identify Plants, Recommended for you  */}
+
                 </>
                 : <>
                     <Button
@@ -66,3 +66,12 @@ export default function Home({ navigation }) {
         </View>
     )
 }
+
+                    // {/* <NavigationContainer> */}
+
+                    // {/* <Text>This is a link:</Text>
+                    // <Stack.Navigator>
+                    //     <Stack.Screen name="MyGarden" component={MyGarden} />
+                    // </Stack.Navigator> */}
+
+                    // {/* </NavigationContainer> */}
