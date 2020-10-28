@@ -4,11 +4,11 @@ import { StyleSheet, Text, View , Button} from 'react-native';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import PlantIdentify from './Components/PlantIdentify'
+import PlantIdentify from './Components/IdentifyComponents/PlantIdentify'
 
 import Plants from './Stores/Plants'
-import MyGarden from './Components/MyGarden'
-import Home from './Components/GeneralComponents/Home'
+import MyGarden from './Components/GardenComponents/MyGarden.jsx'
+import Home from './Components/GeneralComponents/Home.jsx'
 
 const PlantsContext = createContext({})
 export const PlantsProvider = PlantsContext.Provider
@@ -30,7 +30,7 @@ export default function App() {
     <>
       <NavigationContainer>
         <PlantsProvider value= {store}>
-          <Drawer.Navigator initialRouteName="PlantIdentify">
+          <Drawer.Navigator initialRouteName="Home">
             <Drawer.Screen name="PlantIdentify" component={PlantIdentify} />
             <Drawer.Screen name="MyGarden" component={MyGarden} />
             <Drawer.Screen name="Home" component={Home} />
