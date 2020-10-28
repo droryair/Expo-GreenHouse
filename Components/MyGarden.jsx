@@ -33,7 +33,7 @@ export default function MyGarden({ navigation }){
                 color="#841584"
                 accessibilityLabel="Add Plant"
             />
-
+            <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
             {/* Call a different component to render each plant */}
             {/* {props.plants.map(p=>{
                 return( */}

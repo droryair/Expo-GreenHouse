@@ -50,6 +50,7 @@ export default function Home({ navigation }) {
                         color="#841584"
                         accessibilityLabel="Recommended For You"
                     />
+                    <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
                     {/* Tend Garden, Identify Plants, Recommended for you  */}
                 </>
                 : <>
