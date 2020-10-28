@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { createContext, useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Provider } from 'mobx-react';
+// import { Provider } from 'mobx-react';
 import Plants from './Stores/Plants'
 import MyGarden from './Components/MyGarden'
 import Home from './Components/Home'
@@ -13,7 +13,7 @@ const PlantsContext = createContext({})
 export const PlantsProvider = PlantsContext.Provider
 export const usePlantsStore = () => useContext(PlantsContext)
 const plants = new Plants()
-const store = plants 
+const store = {plants}
 
 
 export default function App() {
@@ -24,7 +24,7 @@ export default function App() {
       <StatusBar style="auto" />
     <Home/>
 
-    <PlantsProvider value= {store}>
+    <PlantsProvider value={store}>
         <MyGarden />
     </PlantsProvider>
     </View>
