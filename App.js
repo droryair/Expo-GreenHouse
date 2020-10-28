@@ -5,18 +5,19 @@ import { StyleSheet, Text, View , Button} from 'react-native';
 
 import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import PlantIdentify from './Components/IdentifyComponents/PlantIdentify'
+import IdentifyStack from './Components/IdentifyComponents/IdentifyStack'
 
 import Plants from './Stores/Plants'
 import MyGarden from './Components/GardenComponents/MyGarden'
-import CameraSearch from './Components/Camera'
 import Home from './Components/GeneralComponents/Home'
+import Identification from './Stores/Identification';
 
 const PlantsContext = createContext({})
 export const PlantsProvider = PlantsContext.Provider
 export const usePlantsStore = () => useContext(PlantsContext)
 const plants = new Plants()
-const store = {plants}
+const identification = new Identification()
+const store = {plants , identification}
 
 const Drawer = createDrawerNavigator();
 
@@ -25,12 +26,11 @@ export default function App() {
 
     <>
       <NavigationContainer>
-        <PlantsProvider value= {store}>
+        <PlantsProvider  value= {store}>
           <Drawer.Navigator initialRouteName="Home">
-            <Drawer.Screen name="PlantIdentify" component={PlantIdentify} />
             <Drawer.Screen name="MyGarden" component={MyGarden} />
             <Drawer.Screen name="Home" component={Home} />
-            <Drawer.Screen name="CameraSearch" component={CameraSearch} />
+            <Drawer.Screen name="IdentifyStack" component={IdentifyStack} />
 
           </Drawer.Navigator>
          
