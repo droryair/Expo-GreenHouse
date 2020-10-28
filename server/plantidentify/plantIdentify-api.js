@@ -1,13 +1,13 @@
 const   express = require("express"),
         axios   = require("axios"),
         router  = express.Router(),
-        api_key = "4rzBUqqyzhqGHeDvWYdGkTJTmHmehVLM7PhAUZUmVvdoQ3Gz4a", 
         url     = "https://api.plant.id/v2/identify"
         
+const { plantIdApiKey1 } = require("../../config")
 router.post("/plantidentify", async (req, res) =>{
     try{
         const body = {
-            api_key, 
+            api_key:`${plantIdApiKey1}`, 
             images: req.body.images,
             modifiers: ["crops_fast", "similar_images"],
             plant_language: "en",
@@ -18,7 +18,6 @@ router.post("/plantidentify", async (req, res) =>{
                               "taxonomy",
                               "synonyms"]
           }
-    
         const plantData = await axios.post(url , body)
         res.send(plantData.data)
     }
