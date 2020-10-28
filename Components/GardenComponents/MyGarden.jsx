@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Text, View } from 'react-native';
 import { inject, observer, PropTypes } from "mobx-react";
 import { usePlantsStore } from '../../App';
+
 // import { Card, ListItem, Icon } from 'react-native-elements'
 
 // component assumptions:
@@ -20,11 +21,12 @@ export default function MyGarden({ navigation }){
 
     return (
         <View
-            style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center"
-            }}>
+        style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center"
+        }}>
+        <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
             <Text>My Garden</Text>
 
             <Button
@@ -33,7 +35,6 @@ export default function MyGarden({ navigation }){
                 color="#841584"
                 accessibilityLabel="Add Plant"
             />
-
             {/* Call a different component to render each plant */}
             {/* {props.plants.map(p=>{
                 return( */}

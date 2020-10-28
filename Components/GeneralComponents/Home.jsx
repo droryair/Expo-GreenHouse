@@ -38,6 +38,7 @@ export default function Home({ navigation }) {
                 justifyContent: "center",
                 alignItems: "center"
             }}>
+            <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
             <Text>Hello, world!</Text>
             {isLoggedIn
                 ? <>
@@ -51,6 +52,7 @@ export default function Home({ navigation }) {
                         title="Identify Plants"
                         color="green"
                     />
+
                 </>
                 : <>
                     <Button
