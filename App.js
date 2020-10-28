@@ -15,7 +15,7 @@ import PlantIdentify from './Components/PlantIdentify'
 >>>>>>> 584c38ce1291604cea45fd32d2196b59b8d76565
 import Plants from './Stores/Plants'
 import MyGarden from './Components/MyGarden'
-import Home from './Components/Home'
+import Home from './Components/GeneralComponents/Home'
 
 const PlantsContext = createContext({})
 export const PlantsProvider = PlantsContext.Provider
