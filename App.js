@@ -1,30 +1,35 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { createContext, useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import ImageList from './src/container/ImageList';
 import { Provider } from 'mobx-react';
 import Plants from './Stores/Plants'
+import MyGarden from './Components/MyGarden'
 import Home from './Components/Home'
 
 // additional needed components:
 // Plant- render each plant to "MyGarden" component
 // navbar - menue component
-
-
+const PlantsContext = createContext({})
+export const PlantsProvider = PlantsContext.Provider
+export const usePlantsStore = () => useContext(PlantsContext)
+const plants = new Plants()
+const store = plants 
 
 
 export default function App() {
+
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
+    <Home/>
 
-
-      <Provider store={store}>
-        <Plants />
-      </Provider>
+    <PlantsProvider value= {store}>
+        <MyGarden />
+    </PlantsProvider>
     </View>
   );
+
 }
 
 const styles = StyleSheet.create({
@@ -35,5 +40,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+
 
 

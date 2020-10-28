@@ -1,9 +1,16 @@
-import { decorate, observable, action } from "mobx";
+import { decorate, observable, action, makeObservable } from "mobx";
 import axios from 'axios';
 
-class Plants {
-    plants=[]
-
+export default class Plants {
+    plants=[{name:"daffodil", nickname:"difi"}]
+    constructor() {
+        makeObservable(this, {
+            plants: observable,
+            getPlants: action,
+            addPlant:action
+        })
+    }
+    
     getPlants = (gardenId) => {
         //axios get request
     }
@@ -13,10 +20,10 @@ class Plants {
     };
 }
 
-decorate(Plants, {
-    getPlants: action,
-    plants: observable,
-    addPlant: action,
-});
+// makeObservable( {
+//     getPlants: action,
+//     plants: observable,
+//     addPlant: action,
+// });
 
-export default new Plants();
+// export default Plants;
