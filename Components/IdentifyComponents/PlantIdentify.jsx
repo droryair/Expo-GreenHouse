@@ -2,12 +2,17 @@ import * as React from 'react';
 import { Button, StyleSheet, View, TouchableOpacity, Text, TextInput} from 'react-native';
 
 export default function PlantIdentify({ navigation }) {
+    const handlePress = (componentName) => {
+        return (navigation.navigate(componentName))
+    }
+
     return (
       <View style={styles.container}>
         <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
         <Text style={styles.header}> Identify Plant</Text>
         <TextInput style={styles.searchInput} placeholder="Search By Name"/>
-        <TouchableOpacity style={styles.takePicture} >
+
+        <TouchableOpacity style={styles.takePicture} onPress={() => handlePress("Camera")} >
             <Text style={styles.buttonText}> Take A Picture </Text>
         </TouchableOpacity>
 

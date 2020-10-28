@@ -1,25 +1,34 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
-import * as ImageManipulator from 'expo-image-manipulator';
-import { Camera } from 'expo-camera';export default function App() {
+import { Camera } from 'expo-camera';
+
+function CameraSearch({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null)
-  const [type, setType] = useState(Camera.Constants.Type.back);useEffect(() => {
+  const [type, setType] = useState(Camera.Constants.Type.back);
+  
+  useEffect(() => {
     (async () => {
       const { status } = await Camera.requestPermissionsAsync();
       setHasPermission(status === 'granted');
     })();
-  }, []);if (hasPermission === null) {
+  }, []);
+  
+  if (hasPermission === null) {
     return <View />;
   }
+
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
+  }
+  const back = async () =>{
+    await navigation.navigate("PlantIdentify")
   }
   return (
     <View style={{ flex: 1 }}>
       <Camera style={{ flex: 1 }} type={type} ref={ref => {
         setCameraRef(ref) ;
-  }}>
+      }}>
         <View
           style={{
             flex: 1,
@@ -42,10 +51,8 @@ import { Camera } from 'expo-camera';export default function App() {
           </TouchableOpacity>
           <TouchableOpacity style={{alignSelf: 'center'}} onPress={async() => {
             if(cameraRef){
-              let photo = await cameraRef.takePictureAsync();
-              let base64 =  photo.uri
-              console.log('photo', photo);
-              console.log('photo', base64);
+              let photo = await cameraRef.takePictureAsync({base64: true});
+              await back()
 
             }
           }}>
@@ -74,3 +81,6 @@ import { Camera } from 'expo-camera';export default function App() {
     </View>
   );
 }
+// ))
+
+export default CameraSearch
