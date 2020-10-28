@@ -29,6 +29,7 @@ export default function Home({ navigation }) {
                 justifyContent: "center",
                 alignItems: "center"
             }}>
+            <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
             <Text>Hello, world!</Text>
             {isLoggedIn
                 ? <>
@@ -50,6 +51,7 @@ export default function Home({ navigation }) {
                         color="#841584"
                         accessibilityLabel="Recommended For You"
                     />
+                    
                     {/* Tend Garden, Identify Plants, Recommended for you  */}
                 </>
                 : <>

@@ -4,6 +4,7 @@ import { Button, StyleSheet, View, TouchableOpacity, Text, TextInput} from 'reac
 export default function PlantIdentify({ navigation }) {
     return (
       <View style={styles.container}>
+        <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
         <Text style={styles.header}> Identify Plant</Text>
         <TextInput style={styles.searchInput} placeholder="Search By Name"/>
         <TouchableOpacity style={styles.takePicture} >
