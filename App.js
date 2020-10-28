@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-import { StatusBar } from 'expo-status-bar';
-import React, { createContext, useContext } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-// import { Provider } from 'mobx-react';
-=======
 import * as React from 'react';
 import { createContext, useContext } from 'react';
 import { StyleSheet, Text, View , Button} from 'react-native';
@@ -12,7 +6,6 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import PlantIdentify from './Components/PlantIdentify'
 
->>>>>>> 584c38ce1291604cea45fd32d2196b59b8d76565
 import Plants from './Stores/Plants'
 import MyGarden from './Components/MyGarden'
 import Home from './Components/GeneralComponents/Home'
