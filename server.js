@@ -19,10 +19,10 @@ app.use(function (req, res, next) {
 //  ^ DELETE AFTER DEVELOPMENT ^
 
 
-app.use('/',api.botanist)
+// app.use('/',api.botanist)
 app.use('/',api.plantIdentify)
-app.use('/',api.plants)
-app.use('/',api.user)
+// app.use('/',api.plants)
+// app.use('/',api.user)
 
 const port = 3001
 app.listen(port,function(){
