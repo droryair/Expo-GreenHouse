@@ -9,19 +9,21 @@ import PlantIdentify from './Components/PlantIdentify'
 
 import Plants from './Stores/Plants'
 import MyGarden from './Components/MyGarden'
-import Home from './Components/Home'
+
 import CameraSearch from './Components/Camera'
+import Home from './Components/GeneralComponents/Home'
 
 const PlantsContext = createContext({})
 export const PlantsProvider = PlantsContext.Provider
 export const usePlantsStore = () => useContext(PlantsContext)
 const plants = new Plants()
-const store = plants 
+const store = {plants}
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
+
     <>
       <NavigationContainer>
         <PlantsProvider value= {store}>
