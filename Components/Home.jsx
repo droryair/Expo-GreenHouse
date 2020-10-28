@@ -1,12 +1,13 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Button, Text, View } from 'react-native';
 import MyGarden from './MyGarden'
 //component assumptions:
 // there are components named : "MyGarden" ,"IdentifyPlants","Recommended"
 
+const isLoggedIn = true;
 
 const onPressGetStarted = () => {
-    <Setup />
+    // <Setup />
 }
 const onPressMyGarden =()=>{
     <MyGarden/>

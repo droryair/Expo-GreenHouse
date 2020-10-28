@@ -1,6 +1,8 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Button, Text, View } from 'react-native';
 import { inject, observer, PropTypes } from "mobx-react";
+import { usePlantsStore } from '../App';
+import { Card, ListItem, Icon } from 'react-native-elements'
 
 // component assumptions:
 // there is a store named "plants"
@@ -9,11 +11,15 @@ import { inject, observer, PropTypes } from "mobx-react";
 
 
 
-const onPressAddPlant = ()=>{
-    // <AddPlant />
-}
 
-const Home = () => {
+const MyGarden = () => {
+
+    const onPressAddPlant = ()=>{
+        // <AddPlant />
+    }
+
+    const store= usePlantsStore()
+    console.log(store)
     return (
         <View
             style={{
@@ -53,4 +59,4 @@ const Home = () => {
     )
 }
 
-export default inject("plants")(observer(Home));
+export default MyGarden;
