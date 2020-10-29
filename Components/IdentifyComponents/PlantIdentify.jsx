@@ -23,7 +23,7 @@ export default function PlantIdentify({ navigation }) {
             <Text  style={styles.buttonText}> Upload from Gallery </Text>
         </TouchableOpacity>
 
-        <View style={styles.images}>
+        <View style={styles.imagesContainer}>
             {plantsStore.identification.getImages().map(i => <Image source={i} style={styles.image}alt="boohoo"/>)}
         </View>
       </View>
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
         textAlign:"center", 
         padding:5
     },
-    images:{
+    imagesContainer:{
         flexDirection:"row"
     },
     image:{
