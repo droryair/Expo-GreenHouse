@@ -5,12 +5,12 @@ import { Text, View } from 'react-native';
 // and rendering each plant from a given array
 
 
-export default function RenderPlant(){
+export default function RenderPlant({plants}){
     console.log("render plants")
 
     // const store = usePlantsStore()
     // const areas = store.gardenAreas.areas
-    const plants = areas[0].plants
+    // const plants = areas[0].plants
     console.log(plants)
 
 // const plants = props.plants

@@ -15,6 +15,10 @@ export default function Home({ navigation }) {
         return (navigation.navigate(componentName))
     }
 
+
+    const handleGarden=()=>{
+        return(navigation.navigate('MyGarden',{navigate:navigation.navigate}))
+    }
     return (
         <View
             style={{
@@ -27,7 +31,7 @@ export default function Home({ navigation }) {
             {isLoggedIn
                 ? <>
                     <Button
-                        onPress={() => hendlePress('MyGarden')}
+                        onPress={() => handleGarden()}
                         title="Tend Garden"
                         color="green"
                     />

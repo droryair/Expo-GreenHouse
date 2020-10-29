@@ -1,6 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Button, Text, View, TouchableOpacity } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 import RenderPlant from '../GardenComponents/RenderPlant'
 import { createContext, useContext } from 'react';
@@ -26,11 +26,17 @@ export default function GardenArea(props) {
 
 
     const handlePress = () => {
-        console.log("pressed")
         return (
-            navigation.navigate('MyGarden', { screen: 'RenderPlant' })
-            // navigation.navigate('RenderPlant')
-            // areas[0].plants.map(p => <RenderPlant plant={p} />)
+            <>
+            {console.log("pressed")}
+            {/* // navigation.navigate('MyGarden', { screen: 'RenderPlant' }) */}
+            <View>
+
+            <RenderPlant area={areas[0]}/>
+            </View>
+            {/* // navigation.navigate('RenderPlant')
+            // areas[0].plants.map(p => <RenderPlant plant={p} />) */}
+        </>
         )
     }
 
@@ -48,12 +54,14 @@ export default function GardenArea(props) {
                     </ul>
                 </Text>
                 {/* {area.plants.map((p,i)=> <RenderPlant key={i} plant={p}/>)} */}
-                <Button
+                <TouchableOpacity
                     icon={<Icon name='code' color='green' />}
                     buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
                     title='View Garden >'
                     onPress={() =>handlePress()}
-                />
+                >
+                    <Text>HI</Text>
+                </TouchableOpacity>
             </Card>
         </View>
     )
