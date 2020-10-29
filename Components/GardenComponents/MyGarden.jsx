@@ -5,6 +5,7 @@ import { usePlantsStore } from '../../App';
 import { Card, ListItem, Icon } from 'react-native-elements'
 import GardenArea from '../GardenComponents/GardenArea'
 import { createStackNavigator } from '@react-navigation/stack';
+import RenderPlant from './RenderPlant';
 
 //COMPONENT RESPONSIBILITIES
 // this component will be responsible for rendering garden management page,
@@ -18,14 +19,38 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
-export default function MyGarden(props) {
+export default function MyGarden({ navigation: { navigate } }) {
     const store = usePlantsStore()
     const areas = store.gardenAreas.areas
-    const navigation = props.navigation
+    // const navigation = props.navigation
 
     const onPressAddArea = () => {
         // <NewArea />
     }
+
+    const handlePress = (area) => {
+        return (
+            navigate('RenderPlant',{plants:area.plants})
+            // <>
+            //     {console.log("pressed")}
+            //     {area.plants.map((p, i) => {
+            //         return (
+            //             <View key={i}
+            //                 style={{
+            //                     flex: 1,
+            //                     justifyContent: "center",
+            //                     alignItems: "center"
+            //                 }}>
+            //                 {/* {plants.map((p,i)=><Text key={i}>{p}</Text>)} */}
+            //                 <Text>PLANT! {p}</Text>
+            //             </View>
+            //         )
+            //     })}
+            // </>
+        )
+    }
+
+
 
     return (
         <View
@@ -50,11 +75,29 @@ export default function MyGarden(props) {
                     flexDirection: 'row'
                 }}>
                 {areas.map((a, i) => {
+                    // return (
+                    //     <GardenArea key={i} area={a} navigation = {navigation}/>
+                    // )
                     return (
-                        <GardenArea key={i} area={a} navigation = {navigation}/>
-                    // <Stack.Navigator initialRouteName="GardenArea">
-                    //     <Stack.Screen name="GardenArea" component={GardenArea}/>
-                    // </Stack.Navigator>
+                        <Card key={i}>
+                            <Card.Title>{a.nickName}</Card.Title>
+                            <Card.Divider />
+                            <img height="300" src={a.imgURL} />
+                            <Text style={{ marginBottom: 10 }}>
+                                <ul>
+                                    {a.conditions.map((c, i) => <li key={i}>{c}</li>)}
+                                </ul>
+                            </Text>
+                            {/* {area.plants.map((p,i)=> <RenderPlant key={i} plant={p}/>)} */}
+                            <Button
+                                icon={<Icon name='code' color='green' />}
+                                buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
+                                title='View Garden >'
+                                onPress={() => handlePress(a)}
+                            >
+                                <Text>HI</Text>
+                            </Button>
+                        </Card>
                     )
                 }
                 )}
