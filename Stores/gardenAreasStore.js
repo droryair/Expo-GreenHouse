@@ -1,7 +1,9 @@
 import { decorate, observable, action, makeObservable } from "mobx";
 import axios from 'axios';
+import { useState } from "react";
 
 export default class gardenAreasStore {
+    Areas=[]
     areas = [{
         type: "Balcony",
         nickName: "Eastern Balcony",
@@ -22,15 +24,21 @@ export default class gardenAreasStore {
         plants: ['4', '8', '10']
     }
     ] 
+    
        constructor() {
         makeObservable(this, {
+            Areas:observable,
             areas: observable,
             getAreas: action,
             addArea:action
         })
     }
     
-    getAreas = () => {
+    getAreas = async() => {
+        await axios.get('/gardens',function(res){
+            console.log(res)
+            Areas.push(res)
+        })
         //axios get request
     }
 

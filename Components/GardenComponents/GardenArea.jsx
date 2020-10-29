@@ -29,7 +29,7 @@ export default function GardenArea(props) {
     return (
         <View>
             <Card>
-                <Card.Title>{area.nickName? area.nickName:area.name}</Card.Title>
+                <Card.Title>{area.nickName? area.nickName:area.type}</Card.Title>
                 <Card.Divider />
                 <img height="300" src={area.imgURL? area.imgURL : balcony }/>
                 <Text style={{ marginBottom: 10 }}>
