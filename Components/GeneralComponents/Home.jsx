@@ -8,17 +8,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const isLoggedIn = true;
 
+const onPressGetStarted =()=>{
+     //<Login/Signup/>
+}
 
 export default function Home({ navigation }) {
 
     const hendlePress = (componentName) => {
-        return (navigation.navigate(componentName))
+        return (navigation.navigate(componentName ,{navigate:navigation}))
     }
 
-
-    const handleGarden=()=>{
-        return(navigation.navigate('MyGarden',{navigate:navigation.navigate}))
-    }
     return (
         <View
             style={{
@@ -31,16 +30,15 @@ export default function Home({ navigation }) {
             {isLoggedIn
                 ? <>
                     <Button
-                        onPress={() => handleGarden()}
+                        onPress={() => hendlePress('GardenStack')}
                         title="Tend Garden"
                         color="green"
                     />
                     <Button
-                        onPress={() => hendlePress('PlantIdentify')}
+                        onPress={() => hendlePress('IdentifyStack')}
                         title="Identify Plants"
                         color="green"
                     />
-
                 </>
                 : <>
                     <Button
