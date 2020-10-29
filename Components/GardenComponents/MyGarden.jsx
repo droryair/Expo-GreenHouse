@@ -29,12 +29,7 @@ export default function MyGarden({ navigation }) {
         // <NewArea />
     }
 
-
-
-
     return (
-
-
 
         <View
             style={{
