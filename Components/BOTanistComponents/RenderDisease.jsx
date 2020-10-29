@@ -1,6 +1,10 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
+// this component will be responsible to determine a disease format
+// and rendering each disease from a given array
+
+
 export default function RenderDisease(){
 
     return (

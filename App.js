@@ -11,13 +11,15 @@ import Plants from './Stores/Plants'
 import MyGarden from './Components/GardenComponents/MyGarden'
 import Home from './Components/GeneralComponents/Home'
 import Identification from './Stores/Identification';
+import gardenAreasStore from './Stores/gardenAreasStore';
 
 const PlantsContext = createContext({})
 export const PlantsProvider = PlantsContext.Provider
 export const usePlantsStore = () => useContext(PlantsContext)
 const plants = new Plants()
 const identification = new Identification()
-const store = {plants , identification}
+const gardenAreas = new gardenAreasStore()
+const store = {plants , identification, gardenAreas}
 
 const Drawer = createDrawerNavigator();
 
@@ -26,14 +28,13 @@ export default function App() {
 
     <>
       <NavigationContainer>
-        <PlantsProvider  value= {store}>
+        <PlantsProvider value={store}>
           <Drawer.Navigator initialRouteName="Home">
             <Drawer.Screen name="MyGarden" component={MyGarden} />
             <Drawer.Screen name="Home" component={Home} />
             <Drawer.Screen name="IdentifyStack" component={IdentifyStack} />
-
           </Drawer.Navigator>
-         
+
         </PlantsProvider>
       </NavigationContainer>
     </>
