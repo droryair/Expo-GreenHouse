@@ -13,9 +13,14 @@ export default class Identification {
 
     saveImage(img){
         this.images.push(img)
+        console.log(img.length);
     }
 
     printImages(){
-        console.log(this.images);
+        // console.log(this.images);
+    }
+
+    getImages(){
+        return this.images
     }
 }

@@ -15,6 +15,7 @@ import Identification from './Stores/Identification';
 const PlantsContext = createContext({})
 export const PlantsProvider = PlantsContext.Provider
 export const usePlantsStore = () => useContext(PlantsContext)
+
 const plants = new Plants()
 const identification = new Identification()
 const store = {plants , identification}
@@ -26,7 +27,7 @@ export default function App() {
 
     <>
       <NavigationContainer>
-        <PlantsProvider  value= {store}>
+        <PlantsProvider  value={store}>
           <Drawer.Navigator initialRouteName="Home">
             <Drawer.Screen name="MyGarden" component={MyGarden} />
             <Drawer.Screen name="Home" component={Home} />

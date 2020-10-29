@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
+import { usePlantsStore } from '../../App';
 
 function CameraSearch({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null)
   const [type, setType] = useState(Camera.Constants.Type.back);
-  
+  const plantsStore = usePlantsStore()
+
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestPermissionsAsync();
@@ -52,8 +54,8 @@ function CameraSearch({ navigation }) {
           <TouchableOpacity style={{alignSelf: 'center'}} onPress={async() => {
             if(cameraRef){
               let photo = await cameraRef.takePictureAsync({base64: true});
-              await back()
-
+              plantsStore.identification.saveImage(photo)
+              back()
             }
           }}>
             <View style={{ 

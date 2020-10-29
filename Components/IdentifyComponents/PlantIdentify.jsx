@@ -1,11 +1,14 @@
 import * as React from 'react';
-import { Button, StyleSheet, View, TouchableOpacity, Text, TextInput} from 'react-native';
+import { Button, StyleSheet, View, TouchableOpacity, Text, TextInput, Image} from 'react-native';
+import { usePlantsStore } from '../../App';
 
 export default function PlantIdentify({ navigation }) {
     const handlePress = (componentName) => {
         return (navigation.navigate(componentName))
     }
 
+    const plantsStore = usePlantsStore()
+    
     return (
       <View style={styles.container}>
         <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
@@ -16,9 +19,13 @@ export default function PlantIdentify({ navigation }) {
             <Text style={styles.buttonText}> Take A Picture </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.fromGallery} >
+        <TouchableOpacity style={styles.fromGallery}  onPress={() => handlePress("FromGallery")}>
             <Text  style={styles.buttonText}> Upload from Gallery </Text>
         </TouchableOpacity>
+
+        <View style={styles.images}>
+            {plantsStore.identification.getImages().map(i => <Image source={i} style={styles.image}alt="boohoo"/>)}
+        </View>
       </View>
     )
 }
@@ -57,5 +64,13 @@ const styles = StyleSheet.create({
         color:"white",
         textAlign:"center", 
         padding:5
+    },
+    images:{
+        flexDirection:"row"
+    },
+    image:{
+        width: 100, 
+        height:100, 
+        margin: 5    
     }
 })

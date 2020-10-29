@@ -14,7 +14,6 @@ import { usePlantsStore } from '../../App';
 
 
 export default function MyGarden({ navigation }){
-
     const onPressAddPlant = ()=>{
         // <AddPlant />
     }
