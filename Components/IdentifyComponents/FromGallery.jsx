@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Image, View, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import { usePlantsStore } from '../../App';
 
 export default function ImagePickerExample() {
+  const plantsStore = usePlantsStore()
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -24,9 +26,9 @@ export default function ImagePickerExample() {
       aspect: [5, 5],
       quality: 1,
     });
-
+    
     console.log(result);
-
+    plantsStore.identification.saveImage(result.uri)
     if (!result.cancelled) {
       setImage(result.uri);
     }
