@@ -6,6 +6,7 @@ import RenderPlant from '../GardenComponents/RenderPlant'
 import { createContext, useContext } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { usePlantsStore } from '../../App';
+import balcony from '../../assets/balcony.png'
 
 // this component will be responsible to determine a garden format
 // and rendering it.
@@ -15,53 +16,35 @@ import { usePlantsStore } from '../../App';
 
 export default function GardenArea(props) {
 
-    const store = usePlantsStore()
-    const areas = store.gardenAreas.areas
     const navigation = props.navigation
-
-    // const {area}= props
-    // const plants = area.plants
-    // const store = plants
-
-
-
+    const area = props.area
+    const plants = area.plants
+    
     const handlePress = () => {
         return (
-            <>
-            {console.log("pressed")}
-            {/* // navigation.navigate('MyGarden', { screen: 'RenderPlant' }) */}
-            <View>
-
-            <RenderPlant area={areas[0]}/>
-            </View>
-            {/* // navigation.navigate('RenderPlant')
-            // areas[0].plants.map(p => <RenderPlant plant={p} />) */}
-        </>
+            navigation.navigate('RenderPlant', { plants,area })
         )
     }
-
     
     return (
         <View>
-
             <Card>
-                <Card.Title>{areas[0].nickName}</Card.Title>
+                <Card.Title>{area.nickName? area.nickName:area.name}</Card.Title>
                 <Card.Divider />
-                <img height="300" src={areas[0].imgURL}/>
+                <img height="300" src={area.imgURL? area.imgURL : balcony }/>
                 <Text style={{ marginBottom: 10 }}>
                     <ul>
-                        {areas[0].conditions.map((c, i) => <li key={i}>{c}</li>)}
+                        {area.conditions.map((c, i) => <li key={i}>{c}</li>)}
                     </ul>
                 </Text>
                 {/* {area.plants.map((p,i)=> <RenderPlant key={i} plant={p}/>)} */}
-                <TouchableOpacity
+                <Button
                     icon={<Icon name='code' color='green' />}
                     buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
                     title='View Garden >'
                     onPress={() =>handlePress()}
                 >
-                    <Text>HI</Text>
-                </TouchableOpacity>
+                </Button>
             </Card>
         </View>
     )
