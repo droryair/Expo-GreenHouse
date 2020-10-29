@@ -22,7 +22,8 @@ export default class Identification {
                     images:[img]
                 })
             });
-            this.plantData = await response.json()
+            console.log("response" ,response);
+            this.plantData = response
         }
         catch(err){
             console.log("error");
