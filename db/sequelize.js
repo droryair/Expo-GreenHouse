@@ -1,5 +1,5 @@
 const { Sequelize } = require("sequelize")
-const { dbUser, dbPassword ,dbHost,dbPort,dbName} = require("../config")
+const { dbUser, dbPassword, dbHost, dbPort, dbName } = require("../config")
 const sequelize = new Sequelize(
   `mysql://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}`
 )
