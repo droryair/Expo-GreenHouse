@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { Button, Image, View, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { usePlantsStore } from '../../App';
+import { PlantsContext } from '../../App';
 
 export default function ImagePickerExample() {
-  const plantsStore = usePlantsStore()
+  const plantsStore = useContext(PlantsContext)
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -27,8 +27,8 @@ export default function ImagePickerExample() {
       quality: 1,
     });
     
-    console.log(result);
     plantsStore.identification.saveImage(result.uri)
+    console.log(result.uri);
     if (!result.cancelled) {
       setImage(result.uri);
     }

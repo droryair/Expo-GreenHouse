@@ -1,31 +1,32 @@
 import {observable, action, makeObservable } from "mobx";
-import uuid  from 'react-native-uuid';
 
 export default class Identification {
-    images = []
     constructor() {
+        this.images = []
+        this.plantData = {}
         makeObservable(this, {
             images:      observable, 
-            saveImage:   action,
-            printImages: action,
-            removeImage: action,
-
-
+            plantData:   observable, 
+            searchImage: action
         })
     }
-
-    saveImage(img){
-        this.images.push({id:uuid.v4(),img})
-    }
-
-    printImages(){
-        // console.log(this.images);
-    }
-    removeImage(id){
-        const index = this.images.findIndex(i => i.id === id)
-        this.images.splice(index, 1)
-    }
-    getImages(){
-        return this.images
+    searchImage = async  (img) => {
+        try{
+            let response  = await fetch('http://192.168.1.204:3001/plantidentify', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                  },
+                body: JSON.stringify({
+                    images:[img]
+                })
+            });
+            this.plantData = await response.json()
+        }
+        catch(err){
+            console.log("error");
+            alert( err)
+        }
     }
 }

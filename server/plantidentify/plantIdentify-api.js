@@ -19,11 +19,12 @@ router.post("/plantidentify", async (req, res) =>{
                               "synonyms"]
           }
         const plantData = await axios.post(url , body)
+        console.log(plantData.data);
         res.send(plantData.data)
     }
     catch(err){
+        console.log("error");
         res.send(err)
     }
 })
-
 module.exports = router

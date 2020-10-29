@@ -12,9 +12,8 @@ import MyGarden from './Components/GardenComponents/MyGarden'
 import Home from './Components/GeneralComponents/Home'
 import Identification from './Stores/Identification';
 
-const PlantsContext = createContext({})
+export const PlantsContext = createContext({})
 export const PlantsProvider = PlantsContext.Provider
-export const usePlantsStore = () => useContext(PlantsContext)
 
 const plants = new Plants()
 const identification = new Identification()
@@ -32,9 +31,7 @@ export default function App() {
             <Drawer.Screen name="MyGarden" component={MyGarden} />
             <Drawer.Screen name="Home" component={Home} />
             <Drawer.Screen name="IdentifyStack" component={IdentifyStack} />
-
           </Drawer.Navigator>
-         
         </PlantsProvider>
       </NavigationContainer>
     </>
