@@ -6,24 +6,8 @@ import PlantIdentify from '../IdentifyComponents/PlantIdentify'
 import { createStackNavigator } from '@react-navigation/stack';
 
 
-//component assumptions:
-// there are components named : "MyGarden" ,"IdentifyPlants","Recommended"
-
 const isLoggedIn = true;
 
-// const onPressGetStarted = () => {
-//     // <Setup />
-// }
-// const onPressIdentifyPlants = () => {
-//     // <IdentifyPlants/>
-// }
-// const onPressRecommended = () => {
-//     // <Recommended/>
-// }
-
-
-
-// const Stack = createStackNavigator();
 
 export default function Home({ navigation }) {
 
@@ -66,12 +50,3 @@ export default function Home({ navigation }) {
         </View>
     )
 }
-
-                    // {/* <NavigationContainer> */}
-
-                    // {/* <Text>This is a link:</Text>
-                    // <Stack.Navigator>
-                    //     <Stack.Screen name="MyGarden" component={MyGarden} />
-                    // </Stack.Navigator> */}
-
-                    // {/* </NavigationContainer> */}

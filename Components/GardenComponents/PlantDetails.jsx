@@ -1,8 +1,12 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-export default function PlantDetails(){
 
+// this component will be responsible to determine a plant details format
+// and rendering them from a given plant details object
+
+
+export default function PlantDetails(){
     return (
         <View
             style={{
