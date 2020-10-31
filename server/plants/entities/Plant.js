@@ -1,22 +1,10 @@
 class Plant {
-  constructor(
-    scientificName,
-    type,
-    nickname,
-    wateringFrequency,
-    conditions,
-    diseases,
-    imgLink,
-    characteristics
-  ) {
+  constructor(scientificName, conditions, diseases, imgLink, measurements) {
     this.scientificName = scientificName
-    this.type = type
-    this.nickname = nickname
-    this.wateringFrequency = wateringFrequency
     this.conditions = conditions
     this.diseases = diseases
     this.imgLink = imgLink
-    this.characteristics = characteristics
+    this.measurements = measurements
   }
 }
 

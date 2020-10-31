@@ -1,8 +1,8 @@
 class Disease{
-    constructor(name,scientificName,symptoms,img,treatment){
+    constructor(name,scientificName,mainSymptom,img,treatment){
         this.name = name
         this.scientificName = scientificName
-        this.symptoms=symptoms
+        this.mainSymptom=mainSymptom
         this.img=img,
         this.treatment=treatment
     }
