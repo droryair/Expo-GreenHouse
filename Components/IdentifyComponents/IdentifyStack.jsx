@@ -14,7 +14,6 @@ export default function IdentifyStack() {
         <Stack.Screen name="Camera" component={Camera} />
         <Stack.Screen name="FromGallery" component={FromGallery} />
         <Stack.Screen name="Results" component={Results} />
-
       </Stack.Navigator>
     );
   }

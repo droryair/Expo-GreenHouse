@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { createContext, useContext } from 'react';
-import { StyleSheet, Text, View , Button} from 'react-native';
+import { createContext } from 'react';
+import { StyleSheet} from 'react-native';
 
-import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import IdentifyStack from './Components/IdentifyComponents/IdentifyStack'
 
@@ -25,15 +25,15 @@ export default function App() {
   return (
 
     <>
-      <NavigationContainer>
-        <PlantsProvider  value={store}>
-          <Drawer.Navigator initialRouteName="Home">
-            <Drawer.Screen name="MyGarden" component={MyGarden} />
-            <Drawer.Screen name="Home" component={Home} />
-            <Drawer.Screen name="IdentifyStack" component={IdentifyStack} />
-          </Drawer.Navigator>
-        </PlantsProvider>
-      </NavigationContainer>
+      <PlantsProvider  value={store}>
+        <NavigationContainer>
+            <Drawer.Navigator initialRouteName="Home">
+              <Drawer.Screen name="MyGarden" component={MyGarden} />
+              <Drawer.Screen name="Home" component={Home} />
+              <Drawer.Screen name="IdentifyStack" component={IdentifyStack} />
+            </Drawer.Navigator>
+        </NavigationContainer>
+      </PlantsProvider>
     </>
 
   );

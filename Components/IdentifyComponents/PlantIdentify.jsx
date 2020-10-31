@@ -20,6 +20,11 @@ export default function PlantIdentify({ navigation }) {
             <TouchableOpacity style={styles.fromGallery}  onPress={() => handlePress("FromGallery")}>
                 <Text  style={styles.buttonText}> Upload from Gallery </Text>
             </TouchableOpacity>
+
+            <TouchableOpacity style={styles.fromGallery}  onPress={() => plantsStore.identification.toggle() }>
+                <Text  style={styles.buttonText}> Toggle switch </Text>
+            </TouchableOpacity>
+            {plantsStore.identification.switch ? <Text>True</Text> : <Text>false</Text> }
         </View>
     )
 }

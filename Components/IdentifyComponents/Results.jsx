@@ -13,7 +13,9 @@ export default function Results({ navigation }) {
             <TouchableOpacity style={styles.takePicture} onPress={() => navigation.navigate("PlantIdentify")} >
                 <Text style={styles.buttonText}> Back </Text>
             </TouchableOpacity>
-            {console.log(plantsStore.identification.plantData)}
+            <Text style={styles.header}> {plantsStore.identification.plantData.length}</Text>
+            <Text style={styles.header}> {plantsStore.identification.plantData.finished_datetime}</Text>
+            <Text style={styles.header}> {plantsStore.identification.plantData.finished_datetime}</Text>
             <Text style={styles.header}> {plantsStore.identification.plantData.id}</Text>
             
         </View>

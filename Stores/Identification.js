@@ -4,30 +4,41 @@ export default class Identification {
     constructor() {
         this.images = []
         this.plantData = {}
+        this.switch = true
+
         makeObservable(this, {
             images:      observable, 
-            plantData:   observable, 
-            searchImage: action
+            plantData:   observable,
+            switch:      observable,
+            searchImage: action,
+            toggle:      action,
+
         })
     }
-    searchImage = async  (img) => {
-        try{
-            let response  = await fetch('http://192.168.1.204:3001/plantidentify', {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                  },
-                body: JSON.stringify({
-                    images:[img]
-                })
-            });
-            console.log("response" ,response);
-            this.plantData = response
-        }
-        catch(err){
-            console.log("error");
-            alert( err)
-        }
+    searchImage = async  (img) => {        
+        fetch('http://192.168.1.204:3001/plantidentify', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                },
+            body: JSON.stringify({
+                images:[img]
+            })
+        })
+        .then(response => response.json())
+        .then(responseJson => {
+            console.log(responseJson);
+            this.plantData = responseJson
+        })
+        .catch(err => {
+            console.log(err);
+            alert(err)
+        })
+        
+    }
+    toggle(){
+        alert(this.switch)
+        this.switch = !this.switch
     }
 }
