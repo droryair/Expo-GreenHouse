@@ -6,23 +6,6 @@ const sequelize = require('../../db/sequelize')
 const { jwtSecret } = require('../../config')
 
 
-// const User = sequelize.define('User', {
-
-//     full_name: {
-//         type: DataTypes.STRING,
-//         allowNull: false
-//     },
-//     lastName: {
-//         type: DataTypes.STRING
-//         // allowNull defaults to true
-//     }
-// }, {
-//     tableName: 'users'
-
-// });
-
-
-
 
 
 
@@ -52,7 +35,6 @@ router.post("/register", async (req, res) => {
 
                     await sequelize.query(`INSERT INTO users VALUES(NULL,"${full_name}","${email}","${passwordHash}","${city_name}",1,0,now())`)
                         .then(([result, metadata]) => {
-                            console.log(req.body)
                             res.json({
                                 id: result,
                                 firstName: full_name.split(' ')[0],

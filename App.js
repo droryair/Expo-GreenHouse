@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { createContext, useContext } from 'react';
-import { StyleSheet, Text, View , Button} from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
 import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
@@ -19,7 +19,7 @@ export const usePlantsStore = () => useContext(PlantsContext)
 const plants = new Plants()
 const identification = new Identification()
 const gardenAreas = new gardenAreasStore()
-const store = {plants , identification, gardenAreas}
+const store = { plants, identification, gardenAreas }
 
 const Drawer = createDrawerNavigator();
 
