@@ -33,9 +33,9 @@ export default class gardenAreasStore {
             addArea:action
         })
     }
-    
-    getAreas = async() => {
-        await axios.get('/gardens',function(res){
+
+    getAreas = async () => {
+        await axios.get('/gardens', function (res) {
             console.log(res)
             Areas.push(res)
         })

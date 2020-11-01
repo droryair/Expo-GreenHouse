@@ -11,30 +11,42 @@ import Plants from './Stores/Plants'
 import MyGarden from './Components/GardenComponents/MyGarden'
 import Home from './Components/GeneralComponents/Home'
 import Identification from './Stores/Identification';
+import gardenAreasStore from './Stores/gardenAreasStore';
+import RenderPlant from './Components/GardenComponents/RenderPlant';
+import PlantDetails from './Components/GardenComponents/PlantDetails';
+import GardenStack from './Components/GardenComponents/GardenStack';
+import PushNotifications from './Components/PushNotifications/PushNotifications'
+import NotificationsStack from './Components/PushNotifications/NotificationsStack'
 
 const plants = new Plants()
 const identification = new Identification()
-const stores = {plants , identification}
+const store = {plants , identification}
 
-export const PlantsContext = createContext(stores)
+export const PlantsContext = createContext(store)
 export const PlantsProvider = PlantsContext.Provider
+export const usePlantsStore = () => useContext(PlantsContext)
 
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-
     <>
-      <PlantsProvider  value={stores}>
-        <NavigationContainer>
-            <Drawer.Navigator initialRouteName="Home">
-              <Drawer.Screen name="MyGarden" component={MyGarden} />
-              <Drawer.Screen name="Home" component={Home} />
-              <Drawer.Screen name="IdentifyStack" component={IdentifyStack} />
-            </Drawer.Navigator>
-        </NavigationContainer>
-      </PlantsProvider>
+      <NavigationContainer>
+        <PlantsProvider value={store}>
+          <Drawer.Navigator initialRouteName="Home">
+            {/* <Drawer.Screen name="MyGarden" component={MyGarden} /> */}
+            <Drawer.Screen name="Home" component={Home} />
+            <Drawer.Screen name="IdentifyStack" component={IdentifyStack} />
+            <Drawer.Screen name="GardenStack" component={GardenStack} />
+            <Drawer.Screen name="NotificationsStack" component={NotificationsStack}/>
+
+            {/* <Drawer.Screen name="RenderPlant" component={RenderPlant}/>
+            <Drawer.Screen name="PlantDetails" component={PlantDetails}/> */}
+          </Drawer.Navigator>
+
+        </PlantsProvider>
+      </NavigationContainer>
     </>
 
   );

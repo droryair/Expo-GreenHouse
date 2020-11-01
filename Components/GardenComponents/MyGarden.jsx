@@ -1,7 +1,18 @@
 import React from 'react';
 import { Button, Text, View } from 'react-native';
 import { inject, observer, PropTypes } from "mobx-react";
-import { usePlantsStore } from '../../App';
+import { PlantsProvider, usePlantsStore } from '../../App';
+import { Card, ListItem, Icon } from 'react-native-elements'
+import GardenArea from '../GardenComponents/GardenArea'
+import { createStackNavigator } from '@react-navigation/stack';
+import RenderPlant from './RenderPlant';
+import { NavigationContainer } from '@react-navigation/native';
+import { ScrollView } from 'react-native-gesture-handler';
+
+//COMPONENT RESPONSIBILITIES
+// this component will be responsible for rendering garden management page,
+// and calling the "GardenArea" component with all of the existing garden areas array
+
 
 // import { Card, ListItem, Icon } from 'react-native-elements'
 
@@ -24,8 +35,9 @@ export default function MyGarden({ navigation }){
             flex: 1,
             justifyContent: "center",
             alignItems: "center"
-        }}>
-        <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
+            }}>
+                <ScrollView>
+            <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
             <Text>My Garden</Text>
 
             <Button
@@ -34,25 +46,21 @@ export default function MyGarden({ navigation }){
                 color="#841584"
                 accessibilityLabel="Add Plant"
             />
-            {/* Call a different component to render each plant */}
-            {/* {props.plants.map(p=>{
-                return( */}
-                {/* ) */}
-            {/* })} */}
-
-            {/* <Card>
-                <Card.Title>PLANT CARD</Card.Title>
-                <Card.Divider />
-                <Card.Image source="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ2IvVme1cm_BbG8uoXgr1cqy3ZQqSI1MFxdA&usqp=CAU" />
-                <Text style={{ marginBottom: 10 }}>
-                    Here will be the info about the plant
-                </Text>
-                <Button
-                    icon={<Icon name='code' color='green' />}
-                    buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
-                    title='View Plant >' 
-                />
-            </Card> */}
+            {/* <View */}
+                {/* style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: 'row'
+                }}> */}
+                {areas.map((a, i) => {
+                    return (
+                        <GardenArea key={i} area={a} navigation={navigation} />
+                    )
+                }
+                )}
+            {/* </View> */}
+            </ScrollView>
         </View>
     )
 }
