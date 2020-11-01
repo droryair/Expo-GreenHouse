@@ -2,12 +2,8 @@ import React from 'react';
 import { Button, Text, View, Image, ScrollView, StyleSheet } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 import plantIcon from '../../assets/plant.png'
-
-
 // this component will be responsible to determine a plant format
 // and rendering each plant from a given array
-
-
 export default function RenderPlant(props) {
     console.log("render plants")
     const plants = props.route.params.plants

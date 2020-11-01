@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-export default function BOTanistBubble(){
+export default function RenderDisease(){
 
     return (
         <View
@@ -10,7 +10,7 @@ export default function BOTanistBubble(){
                 justifyContent: "center",
                 alignItems: "center"
             }}>
-            <Text>BOTanist Bubble</Text>
+            <Text>Render Disease</Text>
         </View>
     )
 }

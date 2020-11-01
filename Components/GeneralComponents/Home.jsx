@@ -6,16 +6,29 @@ import PlantIdentify from '../IdentifyComponents/PlantIdentify'
 import { createStackNavigator } from '@react-navigation/stack';
 
 
+//component assumptions:
+// there are components named : "MyGarden" ,"IdentifyPlants","Recommended"
+
 const isLoggedIn = true;
 
-const onPressGetStarted =()=>{
-     //<Login/Signup/>
-}
+// const onPressGetStarted = () => {
+//     // <Setup />
+// }
+// const onPressIdentifyPlants = () => {
+//     // <IdentifyPlants/>
+// }
+// const onPressRecommended = () => {
+//     // <Recommended/>
+// }
+
+
+
+// const Stack = createStackNavigator();
 
 export default function Home({ navigation }) {
 
     const hendlePress = (componentName) => {
-        return (navigation.navigate(componentName ,{navigate:navigation}))
+        return (navigation.navigate(componentName))
     }
 
     return (
@@ -30,15 +43,16 @@ export default function Home({ navigation }) {
             {isLoggedIn
                 ? <>
                     <Button
-                        onPress={() => hendlePress('GardenStack')}
+                        onPress={() => hendlePress('MyGarden')}
                         title="Tend Garden"
                         color="green"
                     />
                     <Button
-                        onPress={() => hendlePress('IdentifyStack')}
+                        onPress={() => hendlePress('PlantIdentify')}
                         title="Identify Plants"
                         color="green"
                     />
+
                 </>
                 : <>
                     <Button
@@ -52,3 +66,12 @@ export default function Home({ navigation }) {
         </View>
     )
 }
+
+                    // {/* <NavigationContainer> */}
+
+                    // {/* <Text>This is a link:</Text>
+                    // <Stack.Navigator>
+                    //     <Stack.Screen name="MyGarden" component={MyGarden} />
+                    // </Stack.Navigator> */}
+
+                    // {/* </NavigationContainer> */}

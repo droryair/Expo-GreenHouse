@@ -1,4 +1,3 @@
-import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { Button, Text, View, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
@@ -8,12 +7,6 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { usePlantsStore } from '../../App';
 import balcony from '../../assets/balcony.png'
 import { FlatList } from 'react-native-gesture-handler';
-
-// this component will be responsible to determine a garden format
-// and rendering it.
-
-
-
 
 export default function GardenArea(props) {
 

@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import { createContext, useContext } from 'react';
-import { StyleSheet, Text, View , Button} from 'react-native';
+import { StyleSheet} from 'react-native';
 
-import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import IdentifyStack from './Components/IdentifyComponents/IdentifyStack'
 
@@ -18,13 +18,16 @@ import GardenStack from './Components/GardenComponents/GardenStack';
 import PushNotifications from './Components/PushNotifications/PushNotifications'
 import NotificationsStack from './Components/PushNotifications/NotificationsStack'
 
-const PlantsContext = createContext({})
-export const PlantsProvider = PlantsContext.Provider
-export const usePlantsStore = () => useContext(PlantsContext)
 const plants = new Plants()
 const identification = new Identification()
 const gardenAreas = new gardenAreasStore()
+
 const store = {plants , identification, gardenAreas}
+
+export const PlantsContext = createContext(store)
+export const PlantsProvider = PlantsContext.Provider
+export const usePlantsStore = () => useContext(PlantsContext)
+
 
 const Drawer = createDrawerNavigator();
 
