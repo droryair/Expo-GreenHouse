@@ -69,7 +69,7 @@ const scrapePlantDetails = async (plantName, detailsUrl) => {
   )
   $d(sunlight).each((i, element) => {
     const sunLevel = $d(element).find("p").text().toLocaleLowerCase().trim()
-    conditions.push(new Condition("sun level", sunLevel))
+    conditions.push(new Condition("sun_level", sunLevel))
   })
 
   // Get direction condition/s

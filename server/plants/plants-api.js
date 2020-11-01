@@ -25,7 +25,7 @@ router.get("/gardens/:userId", async (req, res) => {
 
 router.post("/plant", async (req, res) => {
   try {
-    const { plantInfo } = req.body
+    const plantInfo = req.body
     const newPlant = await plants.savePlantToDB(plantInfo)
     res.send(newPlant)
   } catch (err) {

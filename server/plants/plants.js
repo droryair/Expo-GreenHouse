@@ -3,7 +3,8 @@ const {
   scrapeDiseaseDetails,
 } = require("./scraping/scrapeByDetailsUrl")
 const searchPlantsByName = require("./scraping/scrapeByName")
-const plantModel = require("./models/Plant")
+const controller = require("../../db/controllers/controller")
+const { plants } = require("../../db/sequelize")
 
 const searchPlantsFullInfo = async (plantName, detailsUrl) => {
   const plantDetails = await scrapePlantDetails(plantName, detailsUrl)
@@ -19,8 +20,7 @@ const searchPlantsFullInfo = async (plantName, detailsUrl) => {
 }
 
 const savePlantToDB = async (plant) => {
-  const db = require("../../db/sequelize")
-  for (let d of plant.diseases) {
+  plant.diseases.map(async (d) => {
     const diseaseDetails = await scrapeDiseaseDetails(d)
     const {
       scientific_name,
@@ -38,15 +38,10 @@ const savePlantToDB = async (plant) => {
       img,
       url: d.url,
     }
-
-    diseases.push(disease)
-  }
-
-  const newPlant = await db.query(
-    `INSERT INTO plants VALUES(null, '${plant.nickname}', '${plant.name}',${plant.garden_area_id},'${plant.img_link}',${plant.watering_frequency},'${plant.measurements}',now(),now(),0)`
-  )
-  console.log(newPlant)
-  return newPlant
+    return disease
+  })
+  //const newPlantFullData = await controller.plants.createPlant(plant)
+  // return newPlantFullData
 }
 
 module.exports = { searchPlantsByName, searchPlantsFullInfo, savePlantToDB }
