@@ -1,18 +1,12 @@
-import {observable, action, makeObservable } from "mobx";
+import {observable, action, makeObservable, toJS } from "mobx";
 
 export default class Identification {
     constructor() {
-        this.images = []
         this.plantData = {}
-        this.switch = true
 
         makeObservable(this, {
-            images:      observable, 
             plantData:   observable,
-            switch:      observable,
             searchImage: action,
-            toggle:      action,
-
         })
     }
     searchImage = async  (img) => {        
@@ -28,17 +22,14 @@ export default class Identification {
         })
         .then(response => response.json())
         .then(responseJson => {
-            console.log(responseJson);
-            this.plantData = responseJson
+            // this.plantData.imagesUrl = responseJson.images[0].url
+            this.plantData = {...responseJson.suggestion}
+            // console.log(this.plantData);
         })
         .catch(err => {
             console.log(err);
             alert(err)
         })
         
-    }
-    toggle(){
-        alert(this.switch)
-        this.switch = !this.switch
     }
 }

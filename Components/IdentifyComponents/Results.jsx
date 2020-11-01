@@ -1,26 +1,31 @@
+import { observer } from 'mobx-react';
+import { toJS } from 'mobx';
 import * as React from 'react';
 import {useContext} from 'react';
 import { Button, StyleSheet, View, TouchableOpacity, Text, TextInput, Image} from 'react-native';
 import { PlantsContext } from '../../App';
 
-export default function Results({ navigation }) {
+  const Results = observer(({ navigation }) => {
     const plantsStore = useContext(PlantsContext)
-    
+    const modifiedPlantData = toJS(plantsStore.identification.plantData)
+    const printStore = () =>{
+        console.log(toJS(plantsStore.identification.plantData))
+    }
     return ( 
         <View style={styles.container}>
-            <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
             <Text style={styles.header}> Search Result</Text>
             <TouchableOpacity style={styles.takePicture} onPress={() => navigation.navigate("PlantIdentify")} >
                 <Text style={styles.buttonText}> Back </Text>
             </TouchableOpacity>
-            <Text style={styles.header}> {plantsStore.identification.plantData.length}</Text>
-            <Text style={styles.header}> {plantsStore.identification.plantData.finished_datetime}</Text>
-            <Text style={styles.header}> {plantsStore.identification.plantData.finished_datetime}</Text>
-            <Text style={styles.header}> {plantsStore.identification.plantData.id}</Text>
+            <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
+            <Button title="Print Store" onPress={printStore} />
             
+            <Text style={styles.header}>{toJS(plantsStore.identification.plantData).id}</Text>
+            
+
         </View>
     )
-}
+})
 const styles = StyleSheet.create({
     container:{
         flex: 1,
@@ -33,3 +38,5 @@ const styles = StyleSheet.create({
         marginBottom: 50
     }
 })
+
+export default Results

@@ -11,7 +11,6 @@ app.use(bodyParser.urlencoded({
     limit: "50mb",
     extended: true,
     parameterLimit: 100000,
-    extended: true 
 }))
 
 app.use(function (req, res, next) {

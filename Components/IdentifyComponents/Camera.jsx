@@ -80,6 +80,5 @@ function CameraSearch({ navigation }) {
     </View>
   );
 }
-// ))
 
 export default CameraSearch

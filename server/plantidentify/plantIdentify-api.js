@@ -23,98 +23,86 @@ router.post("/plantidentify", async (req, res) =>{
         // res.send(plantData.data)
         res.send(
 
-            {
-                id: 7164251,
-                custom_id: "ziv ziv ziv",
-                meta_data: {
-                  latitude: null,
-                  longitude: null,
-                  date: '2020-10-30',
-                  datetime: '2020-10-30'
-                },
-                uploaded_datetime: 1604061551.232358,
-                finished_datetime: 1604061553.444943,
-                images: [
-                  {
-                    file_name: '825c3b11906540ce95225a5e8128d16c.jpg',
-                    url: 'https://plant.id/media/images/825c3b11906540ce95225a5e8128d16c.jpg'
-                  }
-                ],
-                suggestions: [
-                  {
-                    id: 52559921,
-                    plant_name: 'Euphorbia trigona',
-                    plant_details: [Object],
-                    probability: 0.32437512263111234,
-                    confirmed: false,
-                    similar_images: [Array]
-                  },
-                  {
-                    id: 52559922,
-                    plant_name: 'Cereus',
-                    plant_details: [Object],
-                    probability: 0.16113332108548475,
-                    confirmed: false,
-                    similar_images: [Array]
-                  },
-                  {
-                    id: 52559923,
-                    plant_name: 'Cereus jamacaru',
-                    plant_details: [Object],
-                    probability: 0.11295860463819073,
-                    confirmed: false,
-                    similar_images: [Array]
-                  },
-                  {
-                    id: 52559924,
-                    plant_name: 'Euphorbia',
-                    plant_details: [Object],
-                    probability: 0.044559296184496965,
-                    confirmed: false,
-                    similar_images: [Array]
-                  },
-                  {
-                    id: 52559925,
-                    plant_name: 'Marginatocereus marginatus',
-                    plant_details: [Object],
-                    probability: 0.04325503014630893,
-                    confirmed: false,
-                    similar_images: [Array]
-                  },
-                  {
-                    id: 52559926,
-                    plant_name: 'Cereus hildmannianus',
-                    plant_details: [Object],
-                    probability: 0.02925900849240598,
-                    confirmed: false,
-                    similar_images: [Array]
-                  },
-                  {
-                    id: 52559927,
-                    plant_name: 'Pachycereus pringlei',
-                    plant_details: [Object],
-                    probability: 0.02346105146587007,
-                    confirmed: false,
-                    similar_images: [Array]
-                  },
-                  {
-                    id: 52559928,
-                    plant_name: 'Echinopsis',
-                    plant_details: [Object],
-                    probability: 0.019137298501046358,
-                    confirmed: false,
-                    similar_images: [Array]
-                  }
-                ],
-                modifiers: [ 'crops_fast', 'similar_images' ],
-                secret: 'xXHQivl5OxYc7Hn',
-                fail_cause: null,
-                countable: true,
-                feedback: null
+          {
+            id: 7076075,
+            custom_id: null,
+            meta_data: {
+              latitude: null,
+              longitude: null,
+              date: '2020-10-26',
+              datetime: '2020-10-26'
+            },
+            uploaded_datetime: 1603726551.637281,
+            finished_datetime: 1603726552.527181,
+            images: [
+              {
+                file_name: 'c2e2281d7d2e4490a3fdc5fc875f050f.jpg',
+                url: 'https://plant.id/media/images/c2e2281d7d2e4490a3fdc5fc875f050f.jpg'
               }
-
-
-
+            ],
+            suggestion: {
+                id: 51868256,
+                plant_name: 'Ficus benghalensis',
+                plant_details: {
+                  scientific_name: 'Ficus benghalensis',
+                  structured_name: {
+                    genus: 'ficus',
+                    species: 'benghalensis'
+                  },
+                  common_names: [
+                    'Banyan',
+                    'Banyan tree',
+                    'Banyan fig',
+                    'Indian banyan'
+                  ],
+                  url: 'http://en.wikipedia.org/wiki/Ficus_benghalensis',
+                  name_authority: 'Ficus benghalensis L.',
+                  wiki_description: {
+                    value: 'Ficus benghalensis, commonly known as the banyan, banyan fig and Indian banyan, is a tree native to the Indian Subcontinent. Specimens in India are among the largest trees in the world by canopy coverage.',
+                    citation: 'http://en.wikipedia.org/wiki/Ficus_benghalensis',
+                    license_name: 'CC BY-SA 3.0',
+                    license_url: 'https://creativecommons.org/licenses/by-sa/3.0/'
+                  },
+                  taxonomy: {
+                    kingdom: 'Plantae',
+                    phylum: 'Tracheophyta',
+                    'class': 'Magnoliopsida',
+                    order: 'Rosales',
+                    family: 'Moraceae',
+                    genus: 'Ficus'
+                  },
+                  synonyms: [
+                    'Ficus indica',
+                    'Urostigma benghalense'
+                  ]
+                },
+                probability: 0.22450020143648652,
+                confirmed: false,
+                similar_images: [
+                  {
+                    id: 'f8e196650bc6e5b12cd0ece24afd85f2',
+                    similarity: 0.8202677492409174,
+                    url: 'https://storage.googleapis.com/plant_id_images/similar_images/2019_05/images/Ficus benghalensis/f8e196650bc6e5b12cd0ece24afd85f2.jpg',
+                    url_small: 'https://storage.googleapis.com/plant_id_images/similar_images/2019_05/images/Ficus benghalensis/f8e196650bc6e5b12cd0ece24afd85f2.small.jpg'
+                  },
+                  {
+                    id: '2306d705da88fc895edda6f53e299861',
+                    similarity: 0.720397443406311,
+                    url: 'https://storage.googleapis.com/plant_id_images/similar_images/2019_05/images/Ficus benghalensis/2306d705da88fc895edda6f53e299861.jpg',
+                    url_small: 'https://storage.googleapis.com/plant_id_images/similar_images/2019_05/images/Ficus benghalensis/2306d705da88fc895edda6f53e299861.small.jpg'
+                  }
+                ]
+              }
+            ,
+            modifiers: [
+              'crops_fast',
+              'similar_images'
+            ],
+            secret: '0VmkEAoRHlvEyBA',
+            fail_cause: null,
+            countable: true,
+            feedback: null
+          }
         )
     }
     catch(err){

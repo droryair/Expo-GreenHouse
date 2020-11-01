@@ -1,14 +1,16 @@
+import { observer } from 'mobx-react';
 import * as React from 'react';
 import {useContext} from 'react';
 import { Button, StyleSheet, View, TouchableOpacity, Text, TextInput, Image} from 'react-native';
 import { PlantsContext } from '../../App';
 
-export default function PlantIdentify({ navigation }) {
+const  PlantIdentify = observer(({ navigation }) => {
     const plantsStore = useContext(PlantsContext)
     const handlePress = (componentName) => {
         return (navigation.navigate(componentName))
     }
     return ( 
+
         <View style={styles.container}>
             <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
             <Text style={styles.header}> Identify Plant</Text>
@@ -16,18 +18,9 @@ export default function PlantIdentify({ navigation }) {
             <TouchableOpacity style={styles.takePicture} onPress={() => handlePress("Camera")} >
                 <Text style={styles.buttonText}> Take A Picture </Text>
             </TouchableOpacity>
-
-            <TouchableOpacity style={styles.fromGallery}  onPress={() => handlePress("FromGallery")}>
-                <Text  style={styles.buttonText}> Upload from Gallery </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.fromGallery}  onPress={() => plantsStore.identification.toggle() }>
-                <Text  style={styles.buttonText}> Toggle switch </Text>
-            </TouchableOpacity>
-            {plantsStore.identification.switch ? <Text>True</Text> : <Text>false</Text> }
         </View>
     )
-}
+})
 const styles = StyleSheet.create({
     container:{
         flex: 1,
@@ -45,17 +38,7 @@ const styles = StyleSheet.create({
         width:200,
         height:40,
         borderRadius:5,
-    },
-    fromGallery:{
-        margin:10,
-        backgroundColor:'green',
-        width:200,
-        height:40,
-        borderRadius:5,
-    },
-    buttonText:{
-        color:"white",
-        textAlign:"center", 
-        padding:5
-    },
+    }
 })
+
+export default PlantIdentify
