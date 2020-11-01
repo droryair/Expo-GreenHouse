@@ -3,6 +3,7 @@ const bodyParser = require("body-parser")
 const path = require("path")
 const api = require("./server/api")
 const app = express()
+require("dotenv").config()
 
 // DELETE AFTER DEVELOPMENT
 app.use(bodyParser.json({ limit: "5mb", extended: true }))
@@ -23,7 +24,7 @@ app.use(function (req, res, next) {
 // app.use('/',api.botanist)
 app.use("/", api.plantIdentify)
 app.use("/", api.plants)
-// app.use('/',api.user)
+app.use("/", api.users)
 
 const port = 3001
 app.listen(port, function () {
