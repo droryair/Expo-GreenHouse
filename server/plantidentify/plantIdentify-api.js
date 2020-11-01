@@ -21,8 +21,8 @@ router.post("/plantidentify", async (req, res) =>{
         // const plantData = await axios.post(url , body)
         // console.log(plantData.data);
         // res.send(plantData.data)
+        
         res.send(
-
           {
             id: 7076075,
             custom_id: null,
@@ -40,7 +40,7 @@ router.post("/plantidentify", async (req, res) =>{
                 url: 'https://plant.id/media/images/c2e2281d7d2e4490a3fdc5fc875f050f.jpg'
               }
             ],
-            suggestion: {
+            suggestions: [{
                 id: 51868256,
                 plant_name: 'Ficus benghalensis',
                 plant_details: {
@@ -92,7 +92,7 @@ router.post("/plantidentify", async (req, res) =>{
                     url_small: 'https://storage.googleapis.com/plant_id_images/similar_images/2019_05/images/Ficus benghalensis/2306d705da88fc895edda6f53e299861.small.jpg'
                   }
                 ]
-              }
+              }]
             ,
             modifiers: [
               'crops_fast',
