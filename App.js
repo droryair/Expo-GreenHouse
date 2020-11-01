@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
 import { StyleSheet} from 'react-native';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -20,7 +20,9 @@ import NotificationsStack from './Components/PushNotifications/NotificationsStac
 
 const plants = new Plants()
 const identification = new Identification()
-const store = {plants , identification}
+const gardenAreas = new gardenAreasStore()
+
+const store = {plants , identification, gardenAreas}
 
 export const PlantsContext = createContext(store)
 export const PlantsProvider = PlantsContext.Provider

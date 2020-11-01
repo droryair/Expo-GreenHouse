@@ -8,27 +8,20 @@ import { createStackNavigator } from '@react-navigation/stack';
 import RenderPlant from './RenderPlant';
 import { NavigationContainer } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
-
 //COMPONENT RESPONSIBILITIES
 // this component will be responsible for rendering garden management page,
 // and calling the "GardenArea" component with all of the existing garden areas array
-
-
-// import { Card, ListItem, Icon } from 'react-native-elements'
-
 // component assumptions:
 // there is a store named "plants"
 //there is a component named "AddPlant"
-
-
-
-
-
-export default function MyGarden({ navigation }){
-    const onPressAddPlant = ()=>{
-        // <AddPlant />
+// const Stack = createStackNavigator();
+// const Drawer = createDrawerNavigator();
+export default function MyGarden({ navigation }) {
+    const store = usePlantsStore()
+    const areas = store.gardenAreas.areas
+    const onPressAddArea = () => {
+        // <NewArea />
     }
-
     return (
         <View
         style={{
@@ -39,12 +32,10 @@ export default function MyGarden({ navigation }){
                 <ScrollView>
             <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
             <Text>My Garden</Text>
-
             <Button
-                onPress={onPressAddPlant}
-                title="+"
-                color="#841584"
-                accessibilityLabel="Add Plant"
+                onPress={onPressAddArea}
+                title="+ | New Garden Area"
+                color="green"
             />
             {/* <View */}
                 {/* style={{
