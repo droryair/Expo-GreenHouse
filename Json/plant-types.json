@@ -1,0 +1,17 @@
+[
+    { "id": 1, "name": "Alpines" },
+    { "id": 2, "name": "Annuals & biennials" },
+    { "id": 3, "name": "Aquatic plants" },
+    { "id": 4, "name": "Bulbs" },
+    { "id": 5, "name": "Catci & succulents" },
+    { "id": 6, "name": "Carnivorous plants" },
+    { "id": 7, "name": "Climbers" },
+    { "id": 8, "name": "Ferns" },
+    { "id": 9, "name": "Grasses" },
+    { "id": 10, "name": "Heather" },
+    { "id": 11, "name": "Hedges" },
+    { "id": 12, "name": "Houseplants" },
+    { "id": 13, "name": "Perennials" },
+    { "id": 14, "name": "Shrubs" },
+    { "id": 15, "name": "Trees" }
+  ]
