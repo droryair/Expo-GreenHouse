@@ -2,6 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import PlantIdentify from './PlantIdentify'
 import Camera from './Camera'
+import PushNotifications from'../PushNotifications/PushNotifications'
 const Stack = createStackNavigator();
 
 export default function IdentifyStack() {

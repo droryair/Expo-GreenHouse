@@ -15,7 +15,8 @@ import gardenAreasStore from './Stores/gardenAreasStore';
 import RenderPlant from './Components/GardenComponents/RenderPlant';
 import PlantDetails from './Components/GardenComponents/PlantDetails';
 import GardenStack from './Components/GardenComponents/GardenStack';
-
+import PushNotifications from './Components/PushNotifications/PushNotifications'
+import NotificationsStack from './Components/PushNotifications/NotificationsStack'
 
 const PlantsContext = createContext({})
 export const PlantsProvider = PlantsContext.Provider
@@ -29,7 +30,6 @@ const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-
     <>
       <NavigationContainer>
         <PlantsProvider value={store}>
@@ -38,6 +38,8 @@ export default function App() {
             <Drawer.Screen name="Home" component={Home} />
             <Drawer.Screen name="IdentifyStack" component={IdentifyStack} />
             <Drawer.Screen name="GardenStack" component={GardenStack} />
+            <Drawer.Screen name="NotificationsStack" component={NotificationsStack}/>
+
             {/* <Drawer.Screen name="RenderPlant" component={RenderPlant}/>
             <Drawer.Screen name="PlantDetails" component={PlantDetails}/> */}
           </Drawer.Navigator>
