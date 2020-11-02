@@ -11,7 +11,8 @@ const { jwtSecret } = require('../../config')
 
 router.post("/register", async (req, res) => {
     try {
-        let { id, full_name, email, password, city_name, rank_id, xp, created_at } = req.body;
+        let { full_name, email, password, city_name } = req.body.user;
+
 
         // validate
 
@@ -40,9 +41,7 @@ router.post("/register", async (req, res) => {
                                 firstName: full_name.split(' ')[0],
                                 lastName: full_name.split(' ')[1],
                                 email: email,
-                                city: city_name,
-                                rankID: rank_id,
-                                xp: xp,
+                                city: city_name
                             });
                         })
                         .catch(e => console.log(e))
@@ -55,7 +54,7 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { email, password } = req.body.user;
 
         // validate
         if (!email || !password)
@@ -88,9 +87,13 @@ router.post("/login", async (req, res) => {
                         token,
                         user: {
                             id: results[0].id,
-                            full_name: results[0].full_name,
+                            firstName: results[0].full_name.split(' ')[0],
+                            lastName: results[0].full_name.split(' ')[1],
                             email: results[0].email,
-                            city_name: results[0].city_name
+                            city: results[0].city_name,
+                            rank_id: results[0].rank_id,
+                            xp: results[0].xp,
+                            createdAt: results[0].created_at
                         },
                     });
                 }
@@ -121,9 +124,11 @@ router.delete("/delete", auth, async (req, res) => {
 router.post("/tokenIsValid", async (req, res) => {
     try {
         const token = req.header("x-auth-token");
+
         if (!token || token == null) return res.json(false);
 
         const verified = jwt.verify(token, process.env.JWT_SECRET);
+
         if (!verified) return res.json(false);
 
         await sequelize.query(`SELECT * FROM users WHERE id = "${verified.id}"`)
@@ -138,16 +143,18 @@ router.post("/tokenIsValid", async (req, res) => {
 
 router.get("/", auth, async (req, res) => {
     await sequelize.query(`SELECT * FROM users WHERE id = "${req.user}"`)
-    res.json({
-        id: result[0].id,
-        firstName: result[0].full_name.split(' ')[0],
-        lastName: result[0].full_name.split(' ')[1],
-        email: result[0].email,
-        city: result[0].city_name,
-        rankID: result[0].rank_id,
-        xp: result[0].xp,
-        createdAt: result[0].created_at
-    });
+        .then(async function ([results, metadata]) {
+            res.json({
+                id: results[0].id,
+                firstName: results[0].full_name.split(' ')[0],
+                lastName: results[0].full_name.split(' ')[1],
+                email: results[0].email,
+                city: results[0].city_name,
+                rankID: results[0].rank_id,
+                xp: results[0].xp,
+                createdAt: results[0].created_at
+            });
+        })
 });
 
 module.exports = router;

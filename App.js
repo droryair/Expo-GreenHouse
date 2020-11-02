@@ -12,6 +12,11 @@ import MyGarden from './Components/GardenComponents/MyGarden'
 import Home from './Components/GeneralComponents/Home'
 import Identification from './Stores/Identification';
 import gardenAreasStore from './Stores/gardenAreasStore';
+import User from './Stores/userStore';
+import Register from './Components/UserComponents/diffRegister';
+import Login from './Components/UserComponents/diffLogin';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const PlantsContext = createContext({})
 export const PlantsProvider = PlantsContext.Provider
@@ -19,22 +24,75 @@ export const usePlantsStore = () => useContext(PlantsContext)
 const plants = new Plants()
 const identification = new Identification()
 const gardenAreas = new gardenAreasStore()
-const store = { plants, identification, gardenAreas }
+const user = new User
+const store = { plants, identification, gardenAreas, user }
 
 const Drawer = createDrawerNavigator();
 
+console.log(store.user);
+
+
+
 export default function App() {
+
+
+  React.useEffect(() => {
+    const checkedLoggedIn = async () => {
+      const token = await AsyncStorage.getItem('auth-token')
+      console.log(token);
+      if (token !== null) {
+        await fetch('http://192.168.1.11:3001', {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'x-auth-token': token
+          }
+        })
+          .then(response => response.json())
+          .then(async responseJson => {
+            console.log(responseJson);
+            let user = {
+              city: responseJson.city,
+              createdAt: responseJson.createdAt,
+              email: responseJson.email,
+              firstName: responseJson.firstName,
+              id: responseJson.id,
+              lastName: responseJson.lastName,
+              rankID: responseJson.rankID,
+              xp: responseJson.xp
+            }
+            store.user.getUserDetails(user, token)
+
+          })
+          .catch(err => {
+            console.log(err)
+            alert(err)
+          })
+      }
+    }
+    checkedLoggedIn()
+  }, [])
   return (
 
     <>
       <NavigationContainer>
         <PlantsProvider value={store}>
-          <Drawer.Navigator initialRouteName="Home">
-            <Drawer.Screen name="MyGarden" component={MyGarden} />
-            <Drawer.Screen name="Home" component={Home} />
-            <Drawer.Screen name="IdentifyStack" component={IdentifyStack} />
-          </Drawer.Navigator>
+          {!store.user.isLoggedIn ?
+            <>
+              <Login />
+              {/* <Register />  */}
+            </>
+            :
+            <>
 
+              <Drawer.Navigator initialRouteName="Home">
+                <Drawer.Screen name="MyGarden" component={MyGarden} />
+                <Drawer.Screen name="Home" component={Home} />
+                <Drawer.Screen name="IdentifyStack" component={IdentifyStack} />
+              </Drawer.Navigator>
+            </>
+          }
         </PlantsProvider>
       </NavigationContainer>
     </>

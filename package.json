@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.13.1",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/drawer": "^5.10.0",
     "@react-navigation/native": "^5.8.0",
@@ -16,6 +17,7 @@
     "bcrypt": "^5.0.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "expo": "~39.0.2",
     "expo-camera": "~9.0.0",
