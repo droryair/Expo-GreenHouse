@@ -1,7 +1,7 @@
 [
-  { "type": "sun_level", "value": "full sun" },
-  { "type": "sun_level", "value": "partial sun" },
-  { "type": "sun_level", "value": "shade" },
+  { "type": "sun level", "value": "full sun" },
+  { "type": "sun level", "value": "partial sun" },
+  { "type": "sun level", "value": "shade" },
   { "type": "soil", "value": "chalk" },
   { "type": "soil", "value": "sand" },
   { "type": "soil", "value": "loam" },

@@ -1,0 +1,88 @@
+[
+    {
+        "diseaseName": "Leaf Spot",
+        "category": "@@@fungal/Bacterial@@@",
+        "symptoms": [
+            "spots on foliage",
+            "variety of dots with different sizes and colors",
+            "small yellow-orange bumps filled with powdery spores on the leaves"
+        ],
+        "treatment": [],
+        "imgUrl": ""
+    },
+    {
+        "diseaseName": "Botrytis Blight",
+        "category": "fungal",
+        "symptoms": [
+            "buds and flowers to develop abnormally and turn brown",
+            "irregular flecks and brown spots on the flowers",
+            "Soft, brown spots appear on leaves, stem, and flowers following a cool damp period"
+        ],
+        "treatment": [
+            "Pick up and destroy the debris that falls to the ground under the plant.",
+            "Prune off and destroy infected parts of the plant.",
+            "Disinfect pruners with a 10 percent solution of household bleach between cuts to avoid spreading the disease. ",
+            "Destroy infected plant material by burning, or bury the debris under at least a foot of soil if burning isn’t allowed in your area."
+        ],
+        "imgUrl": "https://www.missouribotanicalgarden.org/Portals/0/Gardening/Gardening%20Help/images/Pests/Botrytis_Blight144.jpg"
+    },
+    {
+        "diseaseName": "",
+        "category": "",
+        "symptoms": [
+        ],
+        "treatment": [
+         ],
+        "imgUrl":""
+    },
+    {
+        "diseaseName": "",
+        "category": "",
+        "symptoms": [
+        ],
+        "treatment": [
+         ],
+        "imgUrl":""
+    },
+    
+
+
+
+
+
+    {
+        "diseaseName": "Powdery Mildew",
+        "category": "fungal",
+        "symptoms": [
+            "white, powdery spots or patches on the top side of leaves or on plant stems",
+            "plant looks like it's dusted with white powder",
+            "yellow and twisted leaves"
+        ],
+        "treatment": [],
+        "imgUrl": ""
+    },
+
+
+
+
+    {
+        "diseaseName": "Rust",
+        "category": "fungal",
+        "symptoms": [
+            "tiny specks",
+            "spots on leaves in color from orange to rusty-brown, brownish-yellow, purple and red",
+            "bumpy-looking pustules",
+            "spores that are spread by wind or splashing water"
+        ],
+        "treatment": [],
+        "imgUrl": ""
+    }
+
+
+
+
+]
+
+
+
+

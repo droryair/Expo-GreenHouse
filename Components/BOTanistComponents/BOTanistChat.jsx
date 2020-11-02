@@ -1,11 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-
-// this component will be responsible for the actual conversation of the BOTanist with the user;
-// Q&A, gathering data, and rendering results
-
-
 export default function BOTanistChat(){
 
     return (
