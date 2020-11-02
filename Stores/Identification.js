@@ -6,13 +6,23 @@ export default class Identification {
         this.identified = {}
         this.image = ""
         this.wikiData = ""
+        this.similarImage = ""
         makeObservable(this, {
-            plantData:    observable,
-            identified:   observable,
-            image:        observable,
-            wikiData:        observable,
-            searchImage: action,
+            plantData:      observable,
+            identified:     observable,
+            image:          observable,
+            wikiData:       observable,
+            similarImage:   observable,
+            searchImage:    action,
+            clearData:      action,
         })
+    }
+    clearData = async () =>{
+        this.plantData = {}
+        this.identified = {}
+        this.image = ""
+        this.wikiData = ""
+        this.similarImage = ""
     }
     searchImage = async (img) => {        
         fetch('http://192.168.1.204:3001/plantidentify', {
@@ -27,10 +37,11 @@ export default class Identification {
         })
         .then(response => response.json())
         .then(responseJson => {
-                this.plantData  = {...responseJson}
-                this.identified = {...responseJson.suggestions[0]}
-                this.image      = responseJson.images[0].url
-                this.wikiData   = responseJson.suggestions[0].plant_details.wiki_description.value
+                this.plantData      = {...responseJson}
+                this.identified     = {...responseJson.suggestions[0]}
+                this.image          = responseJson.images[0].url
+                this.wikiData       = responseJson.suggestions[0].plant_details.wiki_description.value 
+                this.similarImage   = responseJson.suggestions[0].similar_images[0].url 
         })
         .catch(err => {
             console.log(err);

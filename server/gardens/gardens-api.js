@@ -1,24 +1,35 @@
-const { Sequelize } = require("sequelize/types")
+const gardens = require("./gardens")
 
-const   express = require("express"),
-        axios   = require("axios"),
-        router  = express.Router(),
-        url     = "https://api.plant.id/v2/identify"
-        
-        router.get('/gardens',function(req,res){
-            const userId = req.query.userId
-            try {
-                const result = sequelize.query(
-                    `SELECT *
-                    FROM users
-                    WHERE user_id = '${userId}'`)
-                console.log(result[0])
-                res.send(result[0])
-            } catch (err) {
-                err
-            }
+const express = require("express"),
+  router = express.Router()
 
-    })
-    
+router.post("/garden", async (req, res) => {
+  try {
+    const { gardenInfo } = req.body
+    const newGardenArea = await gardens.createGardenArea(gardenInfo)
+    res.send(newGardenArea)
+  } catch (err) {
+    res.send(err)
+  }
+})
+
+router.get("/gardens/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params
+    const gardenAreas = await gardens.getAllGardenAreasOfUser(userId)
+    res.send(gardenAreas)
+  } catch (err) {
+    res.send(err)
+  }
+})
+router.delete("/garden/:gardentId", async (req, res) => {
+  try {
+    const { gardenId } = req.params
+    const remainingGardens = await gardens.deleteGardenArea(gardenId)
+    res.send(remainingGardens)
+  } catch (err) {
+    res.send(err)
+  }
+})
 
 module.exports = router
