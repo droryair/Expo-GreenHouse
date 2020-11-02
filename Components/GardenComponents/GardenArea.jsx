@@ -1,69 +1,84 @@
-import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import { Button, Text, View, TouchableOpacity } from 'react-native';
+import { Button, Text, View, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 import RenderPlant from '../GardenComponents/RenderPlant'
 import { createContext, useContext } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { usePlantsStore } from '../../App';
-
-// this component will be responsible to determine a garden format
-// and rendering it.
-
-
-
+import balcony from '../../assets/balcony.png'
+import { FlatList } from 'react-native-gesture-handler';
 
 export default function GardenArea(props) {
 
-    const store = usePlantsStore()
-    const areas = store.gardenAreas.areas
     const navigation = props.navigation
-
-    // const {area}= props
-    // const plants = area.plants
-    // const store = plants
-
-
+    const area = props.area
+    const plants = area.plants
 
     const handlePress = () => {
         return (
-            <>
-            {console.log("pressed")}
-            {/* // navigation.navigate('MyGarden', { screen: 'RenderPlant' }) */}
-            <View>
-
-            <RenderPlant area={areas[0]}/>
-            </View>
-            {/* // navigation.navigate('RenderPlant')
-            // areas[0].plants.map(p => <RenderPlant plant={p} />) */}
-        </>
+            navigation.navigate('RenderPlant', { plants, area })
         )
     }
 
-    
     return (
         <View>
-
+        <ScrollView>
             <Card>
-                <Card.Title>{areas[0].nickName}</Card.Title>
-                <Card.Divider />
-                <img height="300" src={areas[0].imgURL}/>
-                <Text style={{ marginBottom: 10 }}>
-                    <ul>
-                        {areas[0].conditions.map((c, i) => <li key={i}>{c}</li>)}
-                    </ul>
+                <Text>
+                    <Card.Title>{area.nickName ? area.nickName : area.type}</Card.Title>
                 </Text>
-                {/* {area.plants.map((p,i)=> <RenderPlant key={i} plant={p}/>)} */}
-                <TouchableOpacity
-                    icon={<Icon name='code' color='green' />}
-                    buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
-                    title='View Garden >'
-                    onPress={() =>handlePress()}
-                >
-                    <Text>HI</Text>
-                </TouchableOpacity>
+                <Card.Divider />
+                <Image
+                style={styles.tinyLogo}
+                    source={area.imgURL ? area.imgURL : balcony}
+                />
+                <Text style={{ marginBottom: 10 }}>
+                    {/* <ul>
+                        {area.conditions.map((c, i) => <li key={i}>{c}</li>)}
+                    </ul> */}
+                    {area.conditions.map((c, i) => {
+                        return (
+                            <FlatList
+                                key={i}
+                                data={[
+                                    { key: `${c}` }
+                                ]}
+                                renderItem={({ item }) => <Text style={styles.item}>{item.key}</Text>}
+                            />
+                        )
+                    })}
+
+                </Text>
+                <Text>
+                    <Button
+                        icon={<Icon name='code' color='green' />}
+                        buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
+                        title='View Garden >'
+                        onPress={() => handlePress()}
+                    />
+                </Text>
             </Card>
+        </ScrollView>
         </View>
     )
 }
-{/* <RenderPlant plants={area.plants}/> */ }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingTop: 22
+    },
+    item: {
+        padding: 10,
+        fontSize: 18,
+        height: 44,
+    },
+    tinyLogo: {
+        width: 50,
+        height: 50,
+      },
+});
+
+// {/* <RenderPlant plants={area.plants}/> */ }
+// {/* {area.plants.map((p,i)=> <RenderPlant key={i} plant={p}/>)} */}
+// {/* <Image height="300" source={area.imgURL? area.imgURL : balcony }/> */}

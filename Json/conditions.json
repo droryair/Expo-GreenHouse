@@ -1,0 +1,18 @@
+[
+  { "type": "sun level", "value": "full sun" },
+  { "type": "sun level", "value": "partial sun" },
+  { "type": "sun level", "value": "shade" },
+  { "type": "soil", "value": "chalk" },
+  { "type": "soil", "value": "sand" },
+  { "type": "soil", "value": "loam" },
+  { "type": "soil", "value": "clay" },
+  { "type": "moisture", "value": "moist but well-drained" },
+  { "type": "moisture", "value": "poorly-drained" },
+  { "type": "moisture", "value": "well-drained" },
+  { "type": "aspect", "value": "east-facing" },
+  { "type": "aspect", "value": "west-facing" },
+  { "type": "aspect", "value": "north-facing" },
+  { "type": "aspect", "value": "south-facing" },
+  { "type": "sheltered", "value": "true" },
+  { "type": "sheltered", "value": "false" }
+]

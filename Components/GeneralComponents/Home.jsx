@@ -11,6 +11,25 @@ import { usePlantsStore } from '../../App';
 
 
 
+//component assumptions:
+// there are components named : "MyGarden" ,"IdentifyPlants","Recommended"
+
+
+
+
+// const onPressGetStarted = () => {
+//     // <Setup />
+// }
+// const onPressIdentifyPlants = () => {
+//     // <IdentifyPlants/>
+// }
+// const onPressRecommended = () => {
+//     // <Recommended/>
+// }
+
+
+
+// const Stack = createStackNavigator();
 
 export default function Home({ navigation }) {
 
@@ -22,6 +41,7 @@ export default function Home({ navigation }) {
     }
 
 
+
     const handleGarden = () => {
         return (navigation.navigate('MyGarden', { navigate: navigation.navigate }))
     }
@@ -31,6 +51,8 @@ export default function Home({ navigation }) {
         console.log(allStorage);
         store.user.isLoggedIn = false
     }
+
+
 
     return (
         <View
@@ -44,7 +66,7 @@ export default function Home({ navigation }) {
             {store.user.isLoggedIn
                 ? <>
                     <Button
-                        onPress={() => handleGarden()}
+                        onPress={() => hendlePress('MyGarden')}
                         title="Tend Garden"
                         color="green"
                     />
@@ -77,3 +99,12 @@ export default function Home({ navigation }) {
         </View>
     )
 }
+
+                    // {/* <NavigationContainer> */}
+
+                    // {/* <Text>This is a link:</Text>
+                    // <Stack.Navigator>
+                    //     <Stack.Screen name="MyGarden" component={MyGarden} />
+                    // </Stack.Navigator> */}
+
+                    // {/* </NavigationContainer> */}

@@ -1,9 +1,7 @@
-const router = require("express").Router();
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const auth = require("./middleware/auth");
-const sequelize = require('../../db/sequelize')
-const { jwtSecret } = require('../../config')
+const express = require("express"),
+    axios = require("axios"),
+    router = express.Router()
+
 
 
 
@@ -158,3 +156,4 @@ router.get("/", auth, async (req, res) => {
 });
 
 module.exports = router;
+

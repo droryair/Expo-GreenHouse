@@ -1,28 +1,61 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-
+import { Button, Text, View, Image, ScrollView, StyleSheet } from 'react-native';
+import { Card, Icon } from 'react-native-elements';
+import plantIcon from '../../assets/plant.png'
 // this component will be responsible to determine a plant format
 // and rendering each plant from a given array
-
-
-export default function RenderPlant({plants}){
+export default function RenderPlant(props) {
     console.log("render plants")
-
-    // const store = usePlantsStore()
-    // const areas = store.gardenAreas.areas
-    // const plants = areas[0].plants
-    console.log(plants)
-
-// const plants = props.plants
+    const plants = props.route.params.plants
+    const navigation = props.navigation
+    const area = props.route.params.area
+    console.log(area);
+    const handlePress = (plant) => {
+        return (
+            navigation.navigate('PlantDetails', { plant })
+        )
+    }
     return (
-        <View
-            style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center"
-            }}>
-            {/* {plants.map((p,i)=><Text key={i}>{p}</Text>)} */}
-            <Text>PLANT!</Text>
-        </View>
+        <ScrollView>
+            <View
+                style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center"
+                }}>
+                <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
+                <Text>These are the plants in your -{area.nickName ? area.nickName : area.type}- garden area</Text>
+                <View>
+                    {plants.map((p, i) => {
+                        return (
+                            <Card key={i}>
+                                <Text>
+                                    <Card.Title>id: {p}</Card.Title>
+                                </Text>
+                                <Card.Divider />
+                                <Image
+                                    style={styles.tinyLogo}
+                                    source={p.imgURL ? p.imgURL : plantIcon}
+                                />
+                                <Text style={{ marginBottom: 10 }}>
+                                </Text>
+                                <Button
+                                    icon={<Icon name='code' color='green' />}
+                                    buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
+                                    title='View Plant >'
+                                    onPress={() => handlePress(p)}
+                                />
+                            </Card>
+                        )
+                    })}
+                </View>
+            </View>
+        </ScrollView>
     )
 }
+const styles = StyleSheet.create({
+    tinyLogo: {
+        width: 50,
+        height: 50,
+    },
+});
