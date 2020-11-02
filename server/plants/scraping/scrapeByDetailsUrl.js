@@ -14,7 +14,11 @@ const scrapeDiseaseDetails = async (disease) => {
   let img = $d(
     "div.carousel__image-container.image-frame.image-frame--no-border.js-carousel-nav-target > div > div"
   ).attr("style")
-  img = img ? img.split(`"`)[1] : null
+  if (img) {
+    img = `https://www.rhs.org.uk/${img.split(`"`)[1]}`
+  } else {
+    img = null
+  }
 
   let details = {}
   let quickFacts = $d(
@@ -29,22 +33,26 @@ const scrapeDiseaseDetails = async (disease) => {
       type === "Main symptoms"
     ) {
       type = type.toLowerCase().replace(" ", "_")
-      const value = fact
+      let value = fact
         .split("<strong>")[1]
         .split("</strong>")[1]
         .replace("\n", "")
         .trim()
+      value = value.includes("<" || ">")
+        ? value.split(">")[1].split("</")[0].replace(":", "")
+        : value.replace(":", "")
       details[type] = value
     }
   }
 
   const treatment = $d("#section-4 > div.content-steps p").first().text()
   const newDisease = new Disease(
-    d.name,
-    details.scientificName,
-    details.mainSymptom,
+    disease.name,
+    details.scientific_name || null,
+    details.main_symptoms || null,
+    details.most_active || null,
     img,
-    treatment
+    treatment || null
   )
   return newDisease
 }
@@ -69,7 +77,7 @@ const scrapePlantDetails = async (plantName, detailsUrl) => {
   )
   $d(sunlight).each((i, element) => {
     const sunLevel = $d(element).find("p").text().toLocaleLowerCase().trim()
-    conditions.push(new Condition("sun_level", sunLevel))
+    conditions.push(new Condition("sun level", sunLevel))
   })
 
   // Get direction condition/s

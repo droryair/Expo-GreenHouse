@@ -28,6 +28,10 @@ router.post("/plant", async (req, res) => {
     const plantInfo = req.body
     const newPlant = await plants.savePlantToDB(plantInfo)
     res.send(newPlant)
+
+    //const diseases = await plants.savePlantDiseasesToDB(newPlant)
+    //const conditions = await plants.savePlantConditionsToDB(plantInfo)
+    // tell Frontend when done
   } catch (err) {
     res.send(err)
   }

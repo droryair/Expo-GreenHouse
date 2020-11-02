@@ -4,7 +4,7 @@ const {
 } = require("./scraping/scrapeByDetailsUrl")
 const searchPlantsByName = require("./scraping/scrapeByName")
 const controller = require("../../db/controllers/controller")
-const { plants } = require("../../db/sequelize")
+const db = require("../../db/sequelize")
 
 const searchPlantsFullInfo = async (plantName, detailsUrl) => {
   const plantDetails = await scrapePlantDetails(plantName, detailsUrl)
@@ -20,28 +20,33 @@ const searchPlantsFullInfo = async (plantName, detailsUrl) => {
 }
 
 const savePlantToDB = async (plant) => {
-  plant.diseases.map(async (d) => {
-    const diseaseDetails = await scrapeDiseaseDetails(d)
-    const {
-      scientific_name,
-      most_active,
-      treatment,
-      main_symptom,
-      img,
-    } = diseaseDetails
-    const disease = {
-      name: d.name,
-      scientific_name,
-      most_active,
-      treatment,
-      main_symptom,
-      img,
-      url: d.url,
-    }
-    return disease
-  })
-  //const newPlantFullData = await controller.plants.createPlant(plant)
-  // return newPlantFullData
+  const newPlantFullData = await controller.plants.createPlant(plant)
+  return newPlantFullData
 }
 
-module.exports = { searchPlantsByName, searchPlantsFullInfo, savePlantToDB }
+const savePlantDiseasesToDB = async (plant) => {
+  for (let d of plant.diseases) {
+    const diseaseFullDetails = await scrapeDiseaseDetails(d)
+    await controller.plants.associatePlantDisease(
+      diseaseFullDetails,
+      plant.scientific_name
+    )
+  }
+}
+
+const savePlantConditionsToDB = async (plant) => {
+  for (let conditionFullDetails of plant.conditions) {
+    await controller.plants.associatePlantCondition(
+      conditionFullDetails,
+      plant.scientific_name
+    )
+  }
+}
+
+module.exports = {
+  searchPlantsByName,
+  searchPlantsFullInfo,
+  savePlantToDB,
+  savePlantDiseasesToDB,
+  savePlantConditionsToDB,
+}
