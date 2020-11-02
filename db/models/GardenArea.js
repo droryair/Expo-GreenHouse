@@ -5,6 +5,9 @@ module.exports = (sequelize, DataTypes) => {
     user_id: DataTypes.INTEGER,
     garden_area_id: DataTypes.INTEGER,
     is_sheltered: DataTypes.BOOLEAN,
+  },
+  {
+    timestamps: false,
   })
   return GardenArea
 }
