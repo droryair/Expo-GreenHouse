@@ -5,7 +5,8 @@ class Disease {
     main_symptoms,
     most_active,
     img_link,
-    treatment
+    treatment,
+    external_link
   ) {
     this.name = name
     this.scientific_name = scientific_name
@@ -13,6 +14,7 @@ class Disease {
     this.img_link = img_link
     this.treatment = treatment
     this.time_of_year = most_active
+    this.external_link = external_link
   }
 }
 

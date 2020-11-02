@@ -13,10 +13,10 @@ const createPlant = async (plant) => {
       created_at: now,
       updated_at: now,
       is_deleted: 0,
+      external_link: plant.external_link,
     })
 
     console.log("successfully created plant. id: " + newPlant.id)
-    // newPlant[diseases]
     return newPlant
   } catch (error) {
     return { message: "Error while creating plant", error }
@@ -26,7 +26,7 @@ const createPlant = async (plant) => {
 const associatePlantDisease = async (diseaseDetails, plantGroup) => {
   // Add disease if doesn't exist then associate to plant group if not associated yet
   try {
-    const disease = await db.diseases.findOrCreate({
+    const diseaseData = await db.diseases.findOrCreate({
       where: { scientific_name: diseaseDetails.scientific_name },
       defaults: {
         name: diseaseDetails.name,
@@ -35,29 +35,35 @@ const associatePlantDisease = async (diseaseDetails, plantGroup) => {
         treatment: diseaseDetails.treatment,
         main_symptoms: diseaseDetails.main_symptoms,
         img_link: diseaseDetails.img_link,
+        external_link: diseaseDetails.external_link,
       },
     })
+    const disease = diseaseData[0].dataValues
     await db.diseaseToPlant.findOrCreate({
       where: { plant_group: plantGroup, disease_id: disease.id },
       defaults: { disease_id: disease.id, plant_group: plantGroup },
     })
+    return disease
   } catch (error) {
-    console.log({
-      message: "Error while plant to disease association",
+    const errMsg = {
+      message: "Error occured during plant to disease association",
       error,
-    })
+    }
+    console.log(errMsg)
+    return errMsg
   }
 }
 const associatePlantCondition = async (conditionDetails, plantGroup) => {
   // Add condition if doesn't exist then associate to plant group if not associated yet
   try {
-    const condition = await db.conditions.findOrCreate({
+    const conditionData = await db.conditions.findOrCreate({
       where: { name: conditionDetails.name, value: conditionDetails.value },
       defaults: {
         name: conditionDetails.name,
         value: conditionDetails.value,
       },
     })
+    const condition = conditionData[0].dataValues
     await db.plantToCondition.findOrCreate({
       where: { condition_id: condition.id, plant_group: plantGroup },
       defaults: {
@@ -65,11 +71,14 @@ const associatePlantCondition = async (conditionDetails, plantGroup) => {
         plant_group: plantGroup,
       },
     })
+    return condition
   } catch (error) {
-    console.log({
-      message: "Error while plant to condition association",
+    const errMsg = {
+      message: "Error occured during plant to condition association",
       error,
-    })
+    }
+    console.log(errMsg)
+    return errMsg
   }
 }
 

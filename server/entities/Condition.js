@@ -1,6 +1,6 @@
 class Condition{
-    constructor(type,value){
-        this.type = type
+    constructor(name,value){
+        this.name = name
         this.value = value
     }
 }
