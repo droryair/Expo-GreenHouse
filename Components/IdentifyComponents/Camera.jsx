@@ -51,8 +51,9 @@ function CameraSearch({ navigation }) {
           <TouchableOpacity style={{alignSelf: 'center'}} onPress={async() => {
             if(cameraRef){
               let photo = await cameraRef.takePictureAsync({base64: true});
+              plantsStore.identification.clearData()
               plantsStore.identification.searchImage(photo.base64)
-              navigation.navigate("Results")
+              navigation.goBack()
             }
           }}>
             <View style={{ 
