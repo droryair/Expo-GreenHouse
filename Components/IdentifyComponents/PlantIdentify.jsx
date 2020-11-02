@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import {useContext} from 'react';
-import { Button, StyleSheet, View, TouchableOpacity, Text, Image} from 'react-native';
+import { Button, StyleSheet, View, TouchableOpacity, Text, Image, ScrollView} from 'react-native';
 import { PlantsContext } from '../../App';
 
 const  PlantIdentify = observer(({ navigation }) => {
@@ -11,23 +11,24 @@ const  PlantIdentify = observer(({ navigation }) => {
     }
     return ( 
         <View style={styles.container}>
-            <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
-            <Text style={styles.header}> Take a picture of your plant</Text>
-            <TouchableOpacity style={styles.takePicture} onPress={() => handlePress("Camera")} >
-                <Text style={styles.buttonText}> Take A Picture </Text>
-            </TouchableOpacity>
-            <Text style={styles.plantHeader}>{plantsStore.identification.identified.plant_name}</Text>
-            { plantsStore.identification.similarImage 
-                ? <Image
-                    style={styles.plantImage}
-                    source={{
-                    uri: plantsStore.identification.similarImage,
-                    }}
-                    />
-                : null
-            }
-
-            <Text>{plantsStore.identification.wikiData}</Text>
+                <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
+                <Text style={styles.header}> Take a picture of your plant</Text>
+                <TouchableOpacity style={styles.takePicture} onPress={() => handlePress("Camera")} >
+                    <Text style={styles.buttonText}> Take A Picture </Text>
+                </TouchableOpacity>
+                <Text style={styles.plantHeader}>{plantsStore.identification.identified.plant_name}</Text>
+            <ScrollView>
+                {plantsStore.identification.similarImage 
+                    ? <Image
+                        style={styles.plantImage}
+                        source={{
+                        uri: plantsStore.identification.similarImage,
+                        }}
+                        />
+                    : null
+                }
+                <Text>{plantsStore.identification.wikiData}</Text>
+            </ScrollView>
         </View>
     )
 })
