@@ -1,8 +1,8 @@
 const puppeteer = require("puppeteer")
 const cheerio = require("cheerio")
-const Disease = require("../entities/Disease")
-const Condition = require("../entities/Condition")
-const Plant = require("../entities/Plant")
+const Disease = require("../../entities/Disease")
+const Condition = require("../../entities/Condition")
+const Plant = require("../../entities/Plant")
 
 const scrapeDiseaseDetails = async (disease) => {
   const detailsBrowser = await puppeteer.launch()
@@ -14,7 +14,11 @@ const scrapeDiseaseDetails = async (disease) => {
   let img = $d(
     "div.carousel__image-container.image-frame.image-frame--no-border.js-carousel-nav-target > div > div"
   ).attr("style")
-  img = img ? img.split(`"`)[1] : null
+  if (img) {
+    img = `https://www.rhs.org.uk/${img.split(`"`)[1]}`
+  } else {
+    img = "N/A"
+  }
 
   let details = {}
   let quickFacts = $d(
@@ -22,29 +26,45 @@ const scrapeDiseaseDetails = async (disease) => {
   ).html()
   quickFacts = quickFacts.split("<br>")
   for (let fact of quickFacts) {
-    let type = fact.split("<strong>")[1].split("</strong>")[0].replace(":", "")
+    let type = fact
+      .split("<strong>")[1]
+      .split("</strong>")[0]
+      .replace(":", "")
+      .trim()
+    if (type === "Main symptom") {
+      type = "Main symptoms"
+    }
     if (
       type === "Scientific name" ||
       type === "Most active" ||
       type === "Main symptoms"
     ) {
       type = type.toLowerCase().replace(" ", "_")
-      const value = fact
+      let value = fact
         .split("<strong>")[1]
         .split("</strong>")[1]
         .replace("\n", "")
         .trim()
+      value = value.includes("<" || ">")
+        ? value.split(">")[1].split("</")[0].replace(":", "")
+        : value.replace(":", "").trim()
+
+      if (value.includes(",")) {
+        value = value.split(",")[0]
+      }
       details[type] = value
     }
   }
 
   const treatment = $d("#section-4 > div.content-steps p").first().text()
   const newDisease = new Disease(
-    d.name,
-    details.scientificName,
-    details.mainSymptom,
+    disease.name,
+    details.scientific_name || "N/A",
+    details.main_symptoms || "N/A",
+    details.most_active || "N/A",
     img,
-    treatment
+    treatment || "N/A",
+    disease.url
   )
   return newDisease
 }
@@ -59,7 +79,7 @@ const scrapePlantDetails = async (plantName, detailsUrl) => {
   let img = $d(
     "#skip-content > div.container.clr div.plant-image.g7 div.cover-image__img"
   ).attr("style")
-  img = img ? img.split(`"`)[1] : null
+  img = img ? img.split(`"`)[1] : "N/A"
 
   const conditions = []
 
@@ -110,6 +130,7 @@ const scrapePlantDetails = async (plantName, detailsUrl) => {
       const values = value.includes(",") ? value.split(",") : [value]
 
       for (let v of values) {
+        v = v.trim()
         const condition = new Condition(type.toLowerCase(), v)
         conditions.push(condition)
       }
@@ -159,7 +180,14 @@ const scrapePlantDetails = async (plantName, detailsUrl) => {
     })
   detailsBrowser.close()
 
-  const newPlant = new Plant(plantName, conditions, diseases, img, measurements)
+  const newPlant = new Plant(
+    plantName,
+    conditions,
+    diseases,
+    img,
+    measurements,
+    detailsUrl
+  )
   return newPlant
 }
 
