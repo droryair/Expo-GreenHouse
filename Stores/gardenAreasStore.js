@@ -22,8 +22,7 @@ export default class gardenAreasStore {
         imgURL: "",
         conditions: ["Full Shadow", "High humidity"],
         plants: ['4', '8', '10']
-    }
-    ] 
+    }] 
     
        constructor() {
         makeObservable(this, {

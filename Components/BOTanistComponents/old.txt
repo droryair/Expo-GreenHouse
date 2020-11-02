@@ -1,0 +1,183 @@
+import React, { useState } from 'react';
+import { Button, Text, View } from 'react-native';
+import { ListItem } from 'react-native-elements';
+import { usePlantsStore } from '../../App';
+import GardenArea from '../GardenComponents/GardenArea';
+import Json from './BOTanistMessages.json'
+
+
+export default function BOTanistChat() {
+    const [currentChat, setCurrentChat] = useState([])
+
+    const userName = "Dror"
+    const PLantstore = usePlantsStore()
+    const areas = PLantstore.gardenAreas.areas
+    const botStore = PLantstore.botanistStore
+    var gardensNames = areas.map(area => {
+        return area.nickName ? area.nickName : area.type
+    })
+
+    console.log(botStore.chatHistory)
+
+
+    const updateState=(data)=>{
+        botStore.updateState(data)
+        // const newState = [...currentChat]
+        // newState.push(data)
+        // setCurrentChat(newState)
+    }
+
+
+
+
+
+    const Welcome = () => {
+        const message = Json.welcome.replace("user_name", userName)
+        // chatHistory.push(currentChat)
+        updateState(
+            
+                <>
+                    <Text key={9872837}>{message}</Text>
+                    <Button
+                        title="Help me pick a new plant to adopt!"
+                        onPress={suggestions} />
+                    <Button
+                        title="One of my plants is sick..."
+                        onPress={diseases} />
+                </>
+            
+        )
+
+
+        // setCurrentChat(
+        //     ...currentChat,
+        //     [
+        //         <Text>{message}</Text>,
+        //         <Button
+        //             title="Help me pick a new plant to adopt!"
+        //             onPress={() => suggestions()} />,
+        //         <Button
+        //             title="One of my plants is sick..."
+        //             onPress={() => diseases()} />
+        //     ])
+    }
+
+
+    const suggestions = () => {
+        const gardenMessage = Json.suggestions.garden
+        // chatHistory.push(currentChat)
+        updateState(
+            <>
+                <Text>{gardenMessage}</Text>
+                {gardensNames.map((garden, i) => {
+                    return <Button
+                        key={i}
+                        title={garden}
+                        onPress={() => resultsFunction(garden)} />
+                })}
+                <Button key={34567898765}
+                    title="None of the above"
+                    onPress={noGarden}
+                />
+            </>
+        )
+        // setCurrentChat(
+        //     ...currentChat,
+        //     [
+        //         <>
+        //             <Text>{gardenMessage}</Text>
+        //             {gardensNames.map((garden, i) => {
+        //                 return <Button
+        //                     key={i}
+        //                     title={garden}
+        //                     onPress={() => resultsFunction(garden)} />
+        //             })}
+        //             <Button key={34567898765}
+        //                 title="None of the above"
+        //                 onPress={() => noGarden()}
+        //             />
+        //         </>
+        //     ])
+    }
+
+
+
+    const noGarden = () => {
+        const noGarednaMessage = Json.suggestions.none
+        setCurrentChat([
+            ...currentChat,
+            [
+                <Text key={34875}>{noGarednaMessage}</Text>
+            ]
+        ])
+    }
+
+
+    const resultsFunction = async (garden) => {
+        console.log(garden)
+        const resultsMessage = Json.suggestions.results.replace("garden_name", garden)
+        const noMatches = Json.suggestions.no_matches
+        const gardenConditions = garden.conditions
+        await console.log("looking for results from the DB")
+        const results = ["cacti", "herbs"]
+
+        setCurrentChat(
+            ...currentChat,
+            [
+                results
+                    ? <>
+                        <Text>{resultsMessage}</Text>
+                        {results.map((result, i) => {
+                            return (
+                                <ListItem key={i} >
+                                    <Text >{result}</Text>
+                                </ListItem>
+                            )
+                        }
+                        )}
+                    </>
+                    : <Text>{noMatches}</Text>
+            ])
+    }
+
+
+
+
+
+
+
+    const diseases = () => {
+
+    }
+
+
+
+
+
+
+
+    console.log("chat history", botStore.chatHistory)
+    return (
+        <View
+            style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center"
+            }}>
+            <Text>BOTanist Chat</Text>
+
+
+            {botStore.chatHistory.length > 0
+                ? botStore.chatHistory.map((element, i) => <View key={i}>{element}</View>)
+                : <Button
+                    onPress={Welcome}
+                    title="welcome"
+                />
+            }
+
+        </View>
+    )
+}
+
+
+
