@@ -21,7 +21,7 @@ router.post("/plantidentify", async (req, res) => {
         const plantData = await axios.post(url, body)
         res.send(plantData.data)
         // console.log(plantData.data);
-        
+
         // res.send(
         //   {
         //     id: 7076075,
@@ -105,12 +105,9 @@ router.post("/plantidentify", async (req, res) => {
         //   }
         // )
     }
-<<<<<<< HEAD
+
     catch (err) {
-=======
-    catch(err){
         console.log("error");
->>>>>>> cd8d498ef6e80b2ec747a435b640e7bf34f01438
         res.send(err)
     }
 })
