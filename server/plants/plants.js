@@ -48,10 +48,30 @@ const savePlantConditionsToDB = async (plant) => {
   return conditions
 }
 
+const getPlantInfo = async (plantId) => {
+  const plant = await controller.plants.getPlantById(plantId)
+  return plant
+}
+const updatePlantInfo = async (plantId, updatedDetails) => {
+  const updatedPlant = await controller.plants.updatePlant(
+    plantId,
+    updatedDetails
+  )
+
+  return updatedPlant
+}
+const deletePlantFromDB = async (plantId) => {
+  const plant = await controller.plants.deletePlant(plantId)
+  return plant
+}
+
 module.exports = {
   searchPlantsByName,
   searchPlantsFullInfo,
   savePlantToDB,
   savePlantDiseasesToDB,
   savePlantConditionsToDB,
+  getPlantInfo,
+  updatePlantInfo,
+  deletePlantFromDB,
 }

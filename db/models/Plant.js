@@ -10,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
       measurements: DataTypes.JSON,
       created_at: DataTypes.DATE,
       updated_at: DataTypes.DATE,
-      is_deleted: DataTypes.BOOLEAN,
       external_link: DataTypes.TEXT,
     },
     {
