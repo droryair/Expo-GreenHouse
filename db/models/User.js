@@ -8,6 +8,9 @@ module.exports = (sequelize, DataTypes) => {
     rank_id: DataTypes.INTEGER,
     xp: DataTypes.INTEGER,
     created_at: DataTypes.TIME,
+  },
+  {
+    timestamps: false,
   })
   return User
 }
