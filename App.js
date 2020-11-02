@@ -17,12 +17,16 @@ import PlantDetails from './Components/GardenComponents/PlantDetails';
 import GardenStack from './Components/GardenComponents/GardenStack';
 import PushNotifications from './Components/PushNotifications/PushNotifications'
 import NotificationsStack from './Components/PushNotifications/NotificationsStack'
+import BOTanistChat from './Components/BOTanistComponents/BOTanistChat'
+import BOTanistStore from './Stores/BOTanistStore';
 
-const plants = new Plants()
+// const plants = new Plants()
 const identification = new Identification()
 const gardenAreas = new gardenAreasStore()
+const botanistStore = new BOTanistStore()
+const PlantsStore = new Plants()
 
-const store = {plants , identification, gardenAreas}
+const store = {PlantsStore , identification, gardenAreas,botanistStore}
 
 export const PlantsContext = createContext(store)
 export const PlantsProvider = PlantsContext.Provider
@@ -42,6 +46,7 @@ export default function App() {
             <Drawer.Screen name="IdentifyStack" component={IdentifyStack} />
             <Drawer.Screen name="GardenStack" component={GardenStack} />
             <Drawer.Screen name="NotificationsStack" component={NotificationsStack}/>
+            <Drawer.Screen name="BOTanistChat" component={BOTanistChat}/>
 
             {/* <Drawer.Screen name="RenderPlant" component={RenderPlant}/>
             <Drawer.Screen name="PlantDetails" component={PlantDetails}/> */}
