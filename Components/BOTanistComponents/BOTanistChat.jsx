@@ -7,11 +7,10 @@ import Json from './BOTanistMessages.json'
 import { RadioButton, Text } from 'react-native-paper';
 
 
-// ADD MENU BUTTON
 
 
 
-export default function BOTanistChat() {
+export default function BOTanistChat({navigation}) {
     const [currentChat, setCurrentChat] = useState([])
     const [value, setValue] = useState('1')
 
@@ -249,6 +248,9 @@ export default function BOTanistChat() {
                 justifyContent: "center",
                 alignItems: "center"
             }}>
+
+            <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
+
             <Text>BOTanist Chat</Text>
 
 

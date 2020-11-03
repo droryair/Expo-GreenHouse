@@ -13,11 +13,11 @@ import User from './Stores/userStore';
 import Register from './Components/UserComponents/diffRegister';
 import Login from './Components/UserComponents/diffLogin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import RenderPlant from './Components/GardenComponents/RenderPlant';
-import PlantDetails from './Components/GardenComponents/PlantDetails';
+// import RenderPlant from './Components/GardenComponents/RenderPlant';
+// import PlantDetails from './Components/GardenComponents/PlantDetails';
 import GardenStack from './Components/GardenComponents/GardenStack';
-import PushNotifications from './Components/PushNotifications/PushNotifications'
-import NotificationsStack from './Components/PushNotifications/NotificationsStack'
+// import PushNotifications from './Components/PushNotifications/PushNotifications'
+// import NotificationsStack from './Components/PushNotifications/NotificationsStack'
 import BOTanistChat from './Components/BOTanistComponents/BOTanistChat'
 import DiseasesStore from './Stores/DiseasesStore';
 
@@ -81,24 +81,13 @@ export default function App() {
     <>
       <NavigationContainer>
         <PlantsProvider value={store}>
-
-           <Drawer.Navigator initialRouteName="Home"> */}
-            {/* <Drawer.Screen name="MyGarden" component={MyGarden} /> */}
-            <Drawer.Screen name="Home" component={Home} />
-            <Drawer.Screen name="IdentifyStack" component={IdentifyStack} />
-            <Drawer.Screen name="GardenStack" component={GardenStack} />
-            <Drawer.Screen name="NotificationsStack" component={NotificationsStack}/>
-            <Drawer.Screen name="BOTanistChat" component={BOTanistChat}/>
-            {/* <Drawer.Screen name="RenderPlant" component={RenderPlant}/>
-            <Drawer.Screen name="PlantDetails" component={PlantDetails}/> */}
-          </Drawer.Navigator>
-
-          {!store.user.isLoggedIn ?
+ 
+          {!store.user.isLoggedIn ?   //false?
             <>
               <Login />
-              {/* <Register />  */}
+              <Register /> 
             </>
-            :
+            : 
             <>
 
               <Drawer.Navigator initialRouteName="Home">
@@ -106,11 +95,11 @@ export default function App() {
                 <Drawer.Screen name="Home" component={Home} />
                 <Drawer.Screen name="IdentifyStack" component={IdentifyStack} />
                 <Drawer.Screen name="GardenStack" component={GardenStack} />
-                <Drawer.Screen name="NotificationsStack" component={NotificationsStack} />
+                {/* <Drawer.Screen name="NotificationsStack" component={NotificationsStack} /> */}
                 <Drawer.Screen name="BOTanistChat" component={BOTanistChat} />
 
-                {/* <Drawer.Screen name="RenderPlant" component={RenderPlant}/>
-            <Drawer.Screen name="PlantDetails" component={PlantDetails}/> */}
+                 {/* <Drawer.Screen name="RenderPlant" component={RenderPlant}/> */}
+            {/* <Drawer.Screen name="PlantDetails" component={PlantDetails}/> */}
               </Drawer.Navigator>
             </>
           }
