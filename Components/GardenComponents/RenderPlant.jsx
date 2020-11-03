@@ -16,7 +16,6 @@ const RenderPlant = observer((props) => {
     const area = props.route.params.area
 
     useEffect(()=>{
-        console.log(props);
         store.gardenAreas.getGardensPlants(area.id)
     },[])
 
