@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export default class gardenAreasStore {
     Areas = []
+    currentGardenPlants = []
     constructor(utils, user) {
         this.utils = utils
         this.user = user
@@ -11,9 +12,11 @@ export default class gardenAreasStore {
         }
     this.getAreas()
     makeObservable(this, {
-        Areas:observable,
-        getAreas: action,
-        addArea:action
+        Areas:               observable,
+        currentGardenPlants: observable,
+        getAreas:            action,
+        getGardensPlants:    action,
+        addArea:             action
     })
     
 }
@@ -23,8 +26,22 @@ export default class gardenAreasStore {
         })
         .then(response => response.json())
         .then(responseJson => {
-            console.log(responseJson)
             this.Areas = responseJson
+        })
+        .catch(err => {
+            console.log(err);
+            alert(err)
+        })
+        
+    }
+    getGardensPlants = async (gardenId) => {        
+        this.currentGardenPlants = []
+        fetch(`${this.utils.serverUrl}:3001/gardens/allPlants/${gardenId}`, {
+        method: 'GET'
+        })
+        .then(response => response.json())
+        .then(responseJson => {
+            this.currentGardenPlants = responseJson
         })
         .catch(err => {
             console.log(err);
