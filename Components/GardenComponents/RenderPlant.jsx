@@ -30,7 +30,7 @@ export default function RenderPlant(props) {
                 }}>
                 <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
                 <Text>These are the plants in your -{area.nickName ? area.nickName : area.type}- garden area</Text>
-                <View>
+                {/* <View>
                     {plants.map((p, i) => {
                         return (
                             <Card key={i}>
@@ -53,7 +53,7 @@ export default function RenderPlant(props) {
                             </Card>
                         )
                     })}
-                </View>
+                </View> */}
             </View>
         </ScrollView>
     )

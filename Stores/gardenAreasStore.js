@@ -3,7 +3,6 @@ import axios from 'axios';
 
 export default class gardenAreasStore {
     Areas = []
-    ip = "192.168.1.204"
     constructor(utils, user) {
         this.utils = utils
         this.user = user
