@@ -4,7 +4,9 @@ import axios from 'axios';
 export default class gardenAreasStore {
     Areas = []
     ip = "192.168.1.204"
-    constructor() {
+    constructor(utils, user) {
+        this.utils = utils
+        this.user = user
         this.currentUser = {
             id: 1
         }
@@ -17,7 +19,7 @@ export default class gardenAreasStore {
     
 }
     getAreas = async () => {        
-        fetch(`http://${this.ip}:3001/gardens/${this.currentUser.id}`, {
+        fetch(`${this.utils.serverUrl}:3001/gardens/${this.currentUser.id}`, {
         method: 'GET'
         })
         .then(response => response.json())

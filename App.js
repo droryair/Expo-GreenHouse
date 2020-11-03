@@ -31,13 +31,13 @@ import EmptyState from "./Components/UtilityComponents/EmptyState"
 import LoadingState from "./Components/UtilityComponents/LoadingState"
 import SnackBar from "./Components/UtilityComponents/SnackBar"
 
-const identification = new Identification()
-const gardenAreas = new gardenAreasStore()
+const utilityStore = new UtilityStore()
 const user = new User()
+const identification = new Identification(utilityStore)
+const gardenAreas = new gardenAreasStore(utilityStore, user)
 
 const PlantsStore = new Plants()
 const Diseases = new DiseasesStore()
-const utilityStore = new UtilityStore()
 
 const store = {
   PlantsStore,

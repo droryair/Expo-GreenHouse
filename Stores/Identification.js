@@ -1,7 +1,8 @@
 import {observable, action, makeObservable, toJS } from "mobx";
 
 export default class Identification {
-    constructor() {
+    constructor(utils) {
+        this.utils = utils
         this.plantData = {}
         this.identified = {}
         this.image = ""
@@ -25,7 +26,7 @@ export default class Identification {
         this.similarImage = ""
     }
     searchImage = async (img) => {        
-        fetch('http://192.168.1.204:3001/plantidentify', {
+        fetch(`${this.utils.serverUrl}:3001/plantidentify`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',

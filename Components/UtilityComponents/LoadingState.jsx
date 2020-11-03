@@ -22,12 +22,12 @@ export default function LoadingState() {
   )
 }
 
-const styles = StyleSheet.create({
-  image: {
-    height: 250,
-    width: 250,
-    borderRadius: "50px",
-    boxShadow: "1px 1px 5px 2px black",
-  },
-  text: { marginTop: "10px", marginBottom: "10px" },
-})
+// const styles = StyleSheet.create({
+  // image: {
+  //   height: 250,
+  //   width: 250,
+    // borderRadius: "50",
+    // boxShadow: "1px 1px 5px 2px black",
+  // },
+  // text: { marginTop: "10px", marginBottom: "10px" },
+// })

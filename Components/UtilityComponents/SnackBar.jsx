@@ -22,12 +22,12 @@ export default function SnackBar(props) {
   )
 }
 
-const styles = StyleSheet.create({
-  snackBar: {
-    backgroundColor: "black",
-    color: "black",
-    width: "50%",
-    height: "auto",
-    maxHeight: "50px",
-  },
-})
+// const styles = StyleSheet.create({
+//   snackBar: {
+//     backgroundColor: "black",
+//     color: "black",
+//     width: "50%",
+//     height: "auto",
+//     maxHeight: "50px",
+//   },
+// })
