@@ -37,17 +37,9 @@ export default class gardenAreasStore {
         
     }
 
-    // getAreas = async () => {
-    //     await axios.get(`http://http://192.168.1.204:3001/:3001/gardens/${this.currentUser.id}`, function (res) {
-    //         console.log(res)
-    //         Areas.push(res)
-    //     })
-    //     //axios get request
-    // }
-
     getAreas = async () => {        
-        // fetch(`http://http://192.168.1.204:3001/:3001/gardens/${this.currentUser.id}`, {
-        fetch(`http://192.168.1.204:3001/gardens/1`, {
+        fetch(`http://192.168.1.204:3001/gardens/${this.currentUser.id}`, {
+        // fetch(`http://192.168.1.204:3001/gardens/1`, {
             method: 'GET'
         })
         .then(response => response.json())

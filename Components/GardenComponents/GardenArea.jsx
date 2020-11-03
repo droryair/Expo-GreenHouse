@@ -42,7 +42,7 @@ export default function GardenArea(props) {
                             <FlatList
                                 key={i}
                                 data={[
-                                    { key: `${c}` }
+                                    { key: `${c.value}` }
                                 ]}
                                 renderItem={({ item }) => <Text style={styles.item}>{item.key}</Text>}
                             />
