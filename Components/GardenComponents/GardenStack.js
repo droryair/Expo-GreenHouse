@@ -12,7 +12,6 @@ export default function GardenStack() {
         <Stack.Screen name="MyGarden" component={MyGarden}/>
         <Stack.Screen name="RenderPlant" component={RenderPlant}/>
         <Stack.Screen name="PlantDetails" component={PlantDetails}/>
-
       </Stack.Navigator>
     );
   }

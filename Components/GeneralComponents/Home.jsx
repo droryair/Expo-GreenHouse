@@ -4,12 +4,18 @@ import { Button, Text, View } from 'react-native';
 import MyGarden from '../GardenComponents/MyGarden'
 import PlantIdentify from '../IdentifyComponents/PlantIdentify'
 import { createStackNavigator } from '@react-navigation/stack';
+import { get } from 'mobx';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { usePlantsStore } from '../../App';
+
+
 
 
 //component assumptions:
 // there are components named : "MyGarden" ,"IdentifyPlants","Recommended"
 
-const isLoggedIn = true;
+
+
 
 // const onPressGetStarted = () => {
 //     // <Setup />
@@ -27,9 +33,26 @@ const isLoggedIn = true;
 
 export default function Home({ navigation }) {
 
+    const store = usePlantsStore()
+
+
     const hendlePress = (componentName) => {
         return (navigation.navigate(componentName))
     }
+
+
+
+    const handleGarden = () => {
+        return (navigation.navigate('MyGarden', { navigate: navigation.navigate }))
+    }
+    const logout = async () => {
+        await AsyncStorage.removeItem('auth-token')
+        const allStorage = await AsyncStorage.getAllKeys()
+        console.log(allStorage);
+        store.user.isLoggedIn = false
+    }
+
+
 
     return (
         <View
@@ -40,7 +63,7 @@ export default function Home({ navigation }) {
             }}>
             <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
             <Text>Hello, world!</Text>
-            {isLoggedIn
+            {store.user.isLoggedIn
                 ? <>
                     <Button
                         onPress={() => hendlePress('MyGarden')}
@@ -52,14 +75,24 @@ export default function Home({ navigation }) {
                         title="Identify Plants"
                         color="green"
                     />
+                    <Button
+                        onPress={logout}
+                        title="Logout"
+                        color="green"
+                    />
 
                 </>
                 : <>
                     <Button
-                        onPress={onPressGetStarted}
+
                         title="Get Started"
                         color="#841584"
                         accessibilityLabel="Get Started"
+                    />
+                    <Button
+                        onPress={logout}
+                        title="Logout"
+                        color="green"
                     />
                 </>
             }
