@@ -1,16 +1,40 @@
-import { decorate, observable, action, makeObservable } from "mobx";
+import { decorate, observable, action, makeObservable, flowResult } from "mobx";
 import axios from 'axios';
 
 export default class Plants {
-    plants=[{name:"daffodil", nickname:"difi"}]
+    plantsArr = [
+        {
+            id: "1",
+            name: "daffodil",
+            nickname: "difi",
+            possibleDiseases: ["1"]
+        },
+        {
+            id: "5",
+            name: "daffodil",
+            nickname: "difi",
+            possibleDiseases: ["1"]
+        },        {
+            id: "6",
+            name: "daffodil",
+            nickname: "difi",
+            possibleDiseases: ["1"]
+        },
+        {
+            id: "9",
+            name: "daffodil",
+            nickname: "difi",
+            possibleDiseases: ["1"]
+        }
+    ]
     constructor() {
         makeObservable(this, {
-            plants: observable,
+            plantsArr: observable,
             getPlants: action,
-            addPlant:action
+            addPlant: action
         })
     }
-    
+
     getPlants = (gardenId) => {
         //axios get request
     }
