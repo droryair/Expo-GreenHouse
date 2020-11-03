@@ -1,10 +1,15 @@
-const express = require("express"),
-    axios = require("axios"),
-    router = express.Router()
 
-
-
-
+const router = require("express").Router();
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const auth = require("./middleware/auth");
+// const sequelize = require('../../db/sequelize')
+const { jwtSecret } = require('../../config')
+const { dbUser, dbPassword, dbHost, dbPort, dbName } = require("../../config")
+const Sequelize = require('sequelize')
+const sequelize = new Sequelize(
+    `mysql://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}`
+)
 
 
 router.post("/register", async (req, res) => {
@@ -142,6 +147,7 @@ router.post("/tokenIsValid", async (req, res) => {
 router.get("/", auth, async (req, res) => {
     await sequelize.query(`SELECT * FROM users WHERE id = "${req.user}"`)
         .then(async function ([results, metadata]) {
+            console.log(results);
             res.json({
                 id: results[0].id,
                 firstName: results[0].full_name.split(' ')[0],

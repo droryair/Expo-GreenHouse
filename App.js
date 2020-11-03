@@ -7,7 +7,7 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 
 
 
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerItem, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import IdentifyStack from './Components/IdentifyComponents/IdentifyStack'
 
@@ -18,8 +18,8 @@ import Identification from './Stores/Identification';
 import gardenAreasStore from './Stores/gardenAreasStore';
 
 import User from './Stores/userStore';
-import Register from './Components/UserComponents/diffRegister';
-import Login from './Components/UserComponents/diffLogin';
+import Register from './Components/UserComponents/Register';
+import Login from './Components/UserComponents/Login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -29,6 +29,10 @@ import GardenStack from './Components/GardenComponents/GardenStack';
 import PushNotifications from './Components/PushNotifications/PushNotifications'
 import NotificationsStack from './Components/PushNotifications/NotificationsStack'
 import BOTanistChat from './Components/BOTanistComponents/BOTanistChat'
+import GetStarted from './Components/GeneralComponents/GetStarted';
+import AuthStack from './Components/UserComponents/AuthStack';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Logout from './Components/UserComponents/Logout';
 
 
 
@@ -58,69 +62,41 @@ console.log(store.user);
 export default function App() {
 
 
-  React.useEffect(() => {
-    const checkedLoggedIn = async () => {
-      const token = await AsyncStorage.getItem('auth-token')
-      console.log(token);
-      if (token !== null) {
-        await fetch('http://192.168.1.11:3001', {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            'x-auth-token': token
-          }
-        })
-          .then(response => response.json())
-          .then(async responseJson => {
-            console.log(responseJson);
-            let user = {
-              city: responseJson.city,
-              createdAt: responseJson.createdAt,
-              email: responseJson.email,
-              firstName: responseJson.firstName,
-              id: responseJson.id,
-              lastName: responseJson.lastName,
-              rankID: responseJson.rankID,
-              xp: responseJson.xp
-            }
-            store.user.getUserDetails(user, token)
+  const logout = async () => {
+    await AsyncStorage.removeItem('auth-token')
+    const allStorage = await AsyncStorage.getAllKeys()
+    console.log(allStorage);
+    store.user.isLoggedIn = false
+  }
 
-          })
-          .catch(err => {
-            console.log(err)
-            alert(err)
-          })
-      }
-    }
-    checkedLoggedIn()
-  }, [])
   return (
     <>
+
       <NavigationContainer>
         <PlantsProvider value={store}>
 
-          {!store.user.isLoggedIn ?
-            <>
-              <Login />
-              {/* <Register />  */}
-            </>
-            :
-            <>
 
-              <Drawer.Navigator initialRouteName="Home">
-                {/* <Drawer.Screen name="MyGarden" component={MyGarden} /> */}
-                <Drawer.Screen name="Home" component={Home} />
-                <Drawer.Screen name="IdentifyStack" component={IdentifyStack} />
-                <Drawer.Screen name="GardenStack" component={GardenStack} />
-                <Drawer.Screen name="NotificationsStack" component={NotificationsStack} />
-                <Drawer.Screen name="BOTanistChat" component={BOTanistChat} />
+          <>
+            <Drawer.Navigator initialRouteName="Home">
+              {/* <Drawer.Screen name="MyGarden" component={MyGarden} /> */}
+              {/* <Drawer.Screen name="Home" component={Home} /> */}
+              <Drawer.Screen name="Home" component={AuthStack} />
+              <Drawer.Screen name="Identify Plant" component={IdentifyStack} />
+              <Drawer.Screen name="My Garden" component={GardenStack} />
+              {/* <Drawer.Screen name="NotificationsStack" component={NotificationsStack} /> */}
+              <Drawer.Screen name="BOTanist" component={BOTanistChat} />
+              <Drawer.Screen name="Logout" component={Logout} />
 
-                {/* <Drawer.Screen name="RenderPlant" component={RenderPlant}/>
+              {/* <Drawer.Screen name="Login" component={Login} /> */}
+
+              {/* <Drawer.Screen name="RenderPlant" component={RenderPlant}/>
             <Drawer.Screen name="PlantDetails" component={PlantDetails}/> */}
-              </Drawer.Navigator>
-            </>
-          }
+            </Drawer.Navigator>
+
+            {/* <DrawerContentScrollView >              
+              <DrawerItem label="Logout" onPress={() => logout()} />
+            </DrawerContentScrollView> */}
+          </>
         </PlantsProvider>
       </NavigationContainer>
     </>
