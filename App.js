@@ -109,28 +109,26 @@ const App = observer(() => {
     <>
       <NavigationContainer>
         <PlantsProvider value={store}>
-          {!store.user.isLoggedIn ? (
-            <>
-              {/* <Login /> */}
-              {/* <Register />  */}
-            </>
-          ) : (
-            <>
-              <Drawer.Navigator initialRouteName="Home">
-                {/* <Drawer.Screen name="MyGarden" component={MyGarden} /> */}
-                <Drawer.Screen name="Home" component={Home} />
-                <Drawer.Screen name="IdentifyStack" component={IdentifyStack} />
-                <Drawer.Screen name="GardenStack" component={GardenStack} />
-                {/* <Drawer.Screen name="NotificationsStack" component={NotificationsStack} /> */}
 
-                <Drawer.Screen name="BOTanistChat" component={BOTanistChat} />
+          <>
+            <Drawer.Navigator initialRouteName="Home">
+              {/* <Drawer.Screen name="MyGarden" component={MyGarden} /> */}
+              {/* <Drawer.Screen name="Home" component={Home} /> */}
+              <Drawer.Screen name="Home" component={AuthStack} />
+              <Drawer.Screen name="Identify Plant" component={IdentifyStack} />
+              <Drawer.Screen name="My Garden" component={GardenStack} />
+              {/* <Drawer.Screen name="NotificationsStack" component={NotificationsStack} /> */}
+              <Drawer.Screen name="BOTanist" component={BOTanistChat} />
+              <Drawer.Screen name="Logout" component={Logout} />
 
-                {/* <Drawer.Screen name="RenderPlant" component={RenderPlant}/> */}
-                {/* <Drawer.Screen name="PlantDetails" component={PlantDetails}/> */}
-              </Drawer.Navigator>
-              <SnackBar />
-            </>
-          )}
+              {/* <Drawer.Screen name="Login" component={Login} /> */}
+
+              {/* <Drawer.Screen name="RenderPlant" component={RenderPlant}/>
+            <Drawer.Screen name="PlantDetails" component={PlantDetails}/> */}
+            </Drawer.Navigator>
+            <SnackBar />
+          </>
+
         </PlantsProvider>
       </NavigationContainer>
     </>
