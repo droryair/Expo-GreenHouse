@@ -16,7 +16,7 @@ export default class User {
     // createdAt;
 
     constructor() {
-        this.isLoggedIn = false;
+        this.isLoggedIn = true;
         this.token = '';
         this.id = '';
         this.firstName = '';

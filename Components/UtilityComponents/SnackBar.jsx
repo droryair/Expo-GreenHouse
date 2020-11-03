@@ -2,28 +2,22 @@ import React, { useState, useEffect } from "react"
 import { View } from "react-native"
 import { Snackbar } from "react-native-paper"
 import { StyleSheet } from "react-native"
+import { useUtilityStore } from "../../App"
+
 export default function SnackBar(props) {
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    setVisible(props.visible)
-  }, [props])
-
-  const hideSnackBar = () => {
-    setVisible(false)
-  }
+  const store = useUtilityStore()
   return (
     <Snackbar
-      visible={visible}
-      onDismiss={hideSnackBar}
-      duration={3000}
+      visible={store.utilityStore.snackBar.isShown}
+      onDismiss={store.utilityStore.hideSnackBar}
+      duration={store.utilityStore.snackBar.duration}
       style={styles.snackBar}
       action={{
         label: "OK",
-        onPress: hideSnackBar,
+        onPress: store.utilityStore.hideSnackBar,
       }}
     >
-      {props.snackBarMsg}
+      {store.utilityStore.snackBar.msg}
     </Snackbar>
   )
 }

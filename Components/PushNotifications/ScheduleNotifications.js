@@ -12,11 +12,14 @@ Notifications.setNotificationHandler({
     }),
 });
 
-export default function ScheduleNotifications() {
+export default function ScheduleNotifications(props) {
     const [expoPushToken, setExpoPushToken] = useState('');
     const [notification, setNotification] = useState(false);
     const notificationListener = useRef();
     const responseListener = useRef();
+    const plant = props.route.params.plant
+
+    console.log(props.route)
 
     useEffect(() => {
         registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
@@ -35,29 +38,35 @@ export default function ScheduleNotifications() {
         };
     }, []);
 
+
+
+
     const schedulePushNotification = async () => {
         Notifications.scheduleNotificationAsync({
             content: { 
-                title: 'Winter is coming!' 
+                title: ` ${plant.nickname? plant.nickname:plant.name} is thirsty! :)` ,
+                body: "It's time to water this fabulous plant!"
             }, 
             trigger: { 
-                seconds:1
+                seconds:plant.watering_frequency
             }
         })
+        toNotify = false
     }
+
+
+
 
     return (
         <View style={styles.container}>
+            {/* toNotify && schedulePushNotification() */}
             <Text>React Native Push Notification</Text>
-            <Button onPress={() => notify()} title="button">get notification</Button>
             <Button
                 title="Press to schedule a notification"
                 onPress={async () => {
                     await schedulePushNotification();
                 }}
             />
-            <Button onPress={()=><FutureNotification />} title="future notifications screen"/>
-
         </View>
     );
 }

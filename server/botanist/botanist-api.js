@@ -26,4 +26,24 @@ router.get("/plant/:plantId/diseases", async (req, res) => {
   }
 })
 
+router.get("/plants/reccommend/conditions", async (req, res) => {
+  try {
+    const { conditions } = req.query
+    const recommendedPlants = await botanist.getPlantByConditions(conditions)
+    res.send(recommendedPlants)
+  } catch (err) {
+    res.send(err)
+  }
+})
+
+router.get("/plants/reccommend/type/:type", async (req, res) => {
+  try {
+    const { type } = req.params
+    const recommendedPlants = await botanist.getPlantsByType(type)
+    res.send(recommendedPlants)
+  } catch (err) {
+    res.send(err)
+  }
+})
+
 module.exports = router
