@@ -82,47 +82,51 @@ export default function NewPlant() {
     >
       <Text>
         <div className="new-plant-form">
-          {isSearched ? (
-            selectedPlant === null ? (
+          <div className="search-plant">
+            <Input
+              placeholder="Plant name"
+              value={inputs.search}
+              onChangeText={(value) => setInputs({ ...inputs, search: value })}
+              leftIcon={<Icon name="search" size={24} color="black" />}
+            />
+            <Button
+              title="Search"
+              onPress={handleSearch}
+              disabled={inputs.search === ""}
+            />
+            {isSearched ? (
               <div className="search-results">
                 <Text>
                   Found {searchResults.length} plants that match your search:
                 </Text>
-                {searchResults.length ? (
-                  searchResults.map((result, index) => (
-                    <Button
-                      key={`result-${index}`}
-                      title={result.name}
-                      onPress={handleResultPress}
-                    />
-                  ))
+                {selectedPlant === null ? (
+                  searchResults.length ? (
+                    searchResults.map((result, index) => (
+                      <Button
+                        key={`result-${index}`}
+                        title={result.name}
+                        onPress={handleResultPress}
+                      />
+                    ))
+                  ) : store.utilityStore.emptyState.isShown ? (
+                    <EmptyState />
+                  ) : (
+                    <></>
+                  )
+                ) : store.utilityStore.emptyState.isShown ? (
+                  <EmptyState />
                 ) : (
-                  <></>
+                  <div className="plant-info">
+                    <Text>details</Text>
+                    <Button title="Add Plant" />
+                  </div>
                 )}
+                )
               </div>
             ) : (
-              <div className="plant-info">
-                <Text>details</Text>
-                <Button title="Add Plant" />
-              </div>
-            )
-          ) : (
-            <div className="search-plant">
-              <Input
-                placeholder="Plant name"
-                value={inputs.search}
-                onChangeText={(value) =>
-                  setInputs({ ...inputs, search: value })
-                }
-                leftIcon={<Icon name="search" size={24} color="black" />}
-              />
-              <Button
-                title="Search"
-                onPress={handleSearch}
-                disabled={inputs.search === ""}
-              />
-            </div>
-          )}
+              <></>
+            )}
+          </div>
         </div>
       </Text>
     </View>
