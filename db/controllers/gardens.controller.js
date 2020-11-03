@@ -4,7 +4,14 @@ const db = require("../sequelize")
 const getAllGardens = async (userId) => {
   try {
     const gardenArea = await db.gardenAreas.findAll({
-      where:{id:userId}
+      where:{id:userId},
+      include: [
+        {
+          model: db.conditions,
+          as: "conditions",
+          through: db.gardenAreaToCondition,
+        }
+      ]
     })
     return gardenArea[0].dataValues
   } catch (error) {

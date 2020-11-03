@@ -40,7 +40,7 @@ router.put("/garden/:gardenId", async (req, res) => {
       }
 })
 
-router.delete("/garden/:gardentId", async (req, res) => {
+router.delete("/garden/:gardenId", async (req, res) => {
   try {
     const { gardenId } = req.params
     const remainingGardens = await gardens.deleteGardenArea(gardenId)
