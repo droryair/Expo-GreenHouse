@@ -18,7 +18,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 // const Drawer = createDrawerNavigator();
 export default function MyGarden({ navigation }) {
     const store = usePlantsStore()
-    const areas = store.gardenAreas.areas
+    const areas = store.gardenAreas.Areas
     const onPressAddArea = () => {
         // <NewArea />
     }
