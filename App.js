@@ -1,35 +1,38 @@
 import * as React from "react"
-
 import { createContext, useContext } from "react"
-
 import { StyleSheet, Text, View, Button } from "react-native"
-
-import { createDrawerNavigator } from "@react-navigation/drawer"
+import {
+  createDrawerNavigator,
+  DrawerItem,
+  DrawerContentScrollView,
+  DrawerItemList,
+} from "@react-navigation/drawer"
 import { NavigationContainer } from "@react-navigation/native"
 import IdentifyStack from "./Components/IdentifyComponents/IdentifyStack"
-
 import Plants from "./Stores/Plants"
 import MyGarden from "./Components/GardenComponents/MyGarden"
 import Home from "./Components/GeneralComponents/Home"
 import Identification from "./Stores/Identification"
 import gardenAreasStore from "./Stores/gardenAreasStore"
-
 import User from "./Stores/userStore"
-import Register from "./Components/UserComponents/diffRegister"
-import Login from "./Components/UserComponents/diffLogin"
+import Register from "./Components/UserComponents/Register"
+import Login from "./Components/UserComponents/Login"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-
 import RenderPlant from "./Components/GardenComponents/RenderPlant"
 import PlantDetails from "./Components/GardenComponents/PlantDetails"
 import GardenStack from "./Components/GardenComponents/GardenStack"
 import PushNotifications from "./Components/PushNotifications/PushNotifications"
 import NotificationsStack from "./Components/PushNotifications/NotificationsStack"
 import BOTanistChat from "./Components/BOTanistComponents/BOTanistChat"
+import GetStarted from "./Components/GeneralComponents/GetStarted"
+import AuthStack from "./Components/UserComponents/AuthStack"
+import { TouchableOpacity } from "react-native-gesture-handler"
+import Logout from "./Components/UserComponents/Logout"
+
 import DiseasesStore from "./Stores/DiseasesStore"
 import UtilityStore from "./Stores/UtilityStore"
-import EmptyState from "./Components/UtilityComponents/EmptyState"
-import LoadingState from "./Components/UtilityComponents/LoadingState"
 import SnackBar from "./Components/UtilityComponents/SnackBar"
+import { observer } from "mobx-react"
 
 const utilityStore = new UtilityStore()
 const user = new User()
@@ -57,13 +60,20 @@ const Drawer = createDrawerNavigator()
 
 console.log(store.user)
 
-export default function App() {
+const App = observer(() => {
+  const logout = async () => {
+    await AsyncStorage.removeItem("auth-token")
+    const allStorage = await AsyncStorage.getAllKeys()
+    console.log(allStorage)
+    store.user.isLoggedIn = false
+  }
+
   React.useEffect(() => {
     const checkedLoggedIn = async () => {
       const token = await AsyncStorage.getItem("auth-token")
       console.log(token)
       if (token !== null) {
-        await fetch("http://192.168.1.11:3001", {
+        await fetch(`${store.utilityStore.serverUrl}:3001`, {
           method: "GET",
           headers: {
             Accept: "application/json",
@@ -94,6 +104,7 @@ export default function App() {
     }
     checkedLoggedIn()
   }, [])
+
   return (
     <>
       <NavigationContainer>
@@ -105,15 +116,6 @@ export default function App() {
             </>
           ) : (
             <>
-              {store.utilityStore.loadingState.isShown ? (
-                <LoadingState />
-              ) : store.utilityStore.emptyState.isShown ? (
-                <EmptyState />
-              ) : store.utilityStore.snackBar.isShown ? (
-                <SnackBar />
-              ) : (
-                <></>
-              )}
               <Drawer.Navigator initialRouteName="Home">
                 {/* <Drawer.Screen name="MyGarden" component={MyGarden} /> */}
                 <Drawer.Screen name="Home" component={Home} />
@@ -126,13 +128,14 @@ export default function App() {
                 {/* <Drawer.Screen name="RenderPlant" component={RenderPlant}/> */}
                 {/* <Drawer.Screen name="PlantDetails" component={PlantDetails}/> */}
               </Drawer.Navigator>
+              <SnackBar />
             </>
           )}
         </PlantsProvider>
       </NavigationContainer>
     </>
   )
-}
+})
 
 const styles = StyleSheet.create({
   container: {
@@ -142,3 +145,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 })
+
+export default App
