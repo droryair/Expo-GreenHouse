@@ -8,6 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import RenderPlant from './RenderPlant';
 import { NavigationContainer } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
+import NewArea from './NewArea';
 //COMPONENT RESPONSIBILITIES
 // this component will be responsible for rendering garden management page,
 // and calling the "GardenArea" component with all of the existing garden areas array
@@ -20,7 +21,7 @@ export default function MyGarden({ navigation }) {
     const store = usePlantsStore()
     const areas = store.gardenAreas.Areas
     const onPressAddArea = () => {
-        // <NewArea />
+        <NewArea />
     }
     return (
         <View

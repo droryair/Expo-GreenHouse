@@ -3,6 +3,41 @@ import axios from 'axios';
 
 export default class gardenAreasStore {
     Areas = []
+    ip = "192.168.1.204"
+    constructor() {
+        this.currentUser = {
+            id: 1
+        }
+    this.getAreas()
+    makeObservable(this, {
+        Areas:observable,
+        getAreas: action,
+        addArea:action
+    })
+    
+}
+    getAreas = async () => {        
+        fetch(`http://${this.ip}:3001/gardens/${this.currentUser.id}`, {
+        method: 'GET'
+        })
+        .then(response => response.json())
+        .then(responseJson => {
+            console.log(responseJson)
+            this.Areas = responseJson
+        })
+        .catch(err => {
+            console.log(err);
+            alert(err)
+        })
+        
+    }
+
+    addArea = (areaObj) => {
+        // axios post request
+    };
+}
+
+//Dummy Data
     // areas = [{
     //     type: "Balcony",
     //     nickName: "Eastern Balcony",
@@ -22,39 +57,3 @@ export default class gardenAreasStore {
     //     conditions: ["Full Shadow", "High humidity"],
     //     plants: ['4', '8', '10']
     // }] 
-    
-       constructor() {
-           this.currentUser = {
-               id: 1
-           }
-        this.getAreas()
-        makeObservable(this, {
-            Areas:observable,
-            // areas: observable,
-            getAreas: action,
-            addArea:action
-        })
-        
-    }
-
-    getAreas = async () => {        
-        fetch(`http://192.168.1.204:3001/gardens/${this.currentUser.id}`, {
-        // fetch(`http://192.168.1.204:3001/gardens/1`, {
-            method: 'GET'
-        })
-        .then(response => response.json())
-        .then(responseJson => {
-            console.log(responseJson)
-            this.Areas = responseJson
-        })
-        .catch(err => {
-            console.log(err);
-            alert(err)
-        })
-        
-    }
-
-    addArea = (areaObj) => {
-        // axios post request
-    };
-}
