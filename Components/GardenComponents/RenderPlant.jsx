@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Text, View, Image, ScrollView, StyleSheet } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 import plantIcon from '../../assets/plant.png'
@@ -12,10 +12,12 @@ export default function RenderPlant(props) {
     const navigation = props.navigation
     const area = props.route.params.area
 
+    useEffect(()=>{
+        
+    },[])
 
     // console.log(area);
     const handlePress = (plantID) => {
-
         return (
             navigation.navigate('PlantDetails', { plantID })
         )
