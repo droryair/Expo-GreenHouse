@@ -5,6 +5,7 @@ import { Input } from "react-native-elements"
 import Icon from "react-native-vector-icons/FontAwesome"
 import LoadingState from "./../UtilityComponents/LoadingState"
 import EmptyState from "./../UtilityComponents/EmptyState"
+import SnackBar from "./../UtilityComponents/SnackBar"
 
 export default function NewPlant() {
   const [isSearched, setIsSearched] = useState(false)
@@ -12,7 +13,12 @@ export default function NewPlant() {
   const [isLoading, setIsLoading] = useState(false)
   const [selectedPlant, setSelectedPlant] = useState(null)
   const [searchResults, setSearchResults] = useState([])
-  const serverUrl = "http://10.0.0.4:3001"
+  const [snackBar, setSnackBar] = useState({ msg: "", isShown: false })
+  const [emptyState, setEmptyState] = useState({
+    msg: "Oops... There's no data to show here, please try again",
+    isOpen: true,
+    handleGoBack: null,
+  })
 
   const handleSearch = async () => {
     try {
@@ -21,22 +27,58 @@ export default function NewPlant() {
         `${serverUrl}/plantForm/${inputs.search}`
       )
       setSearchResults(searchResults.data)
+      const isEmpty = searchResults.data.length ? false : true
+      setEmptyState({
+        ...emptyState,
+        isShown: isEmpty,
+        handleGoBack: goBackToSearch,
+      })
       setIsLoading(false)
       setIsSearched(true)
     } catch (err) {
+      setSearchResults(null)
+      setSnackBar({
+        msg: "Oops, something went wrong. Please try again",
+        isShown: true,
+      })
+      setIsLoading(false)
       console.log(err)
     }
+  }
+  const goBackToSearch = () => {
+    setInputs({ ...inputs, search: "" })
+    setIsSearched(false)
+  }
+  const goBackToPlantResults = () => {
+    setSelectedPlant(null)
   }
 
   const handleResultPress = async (event) => {
     const plantName = event.target.innerHTML
     const p = searchResults.find((p) => p.name === plantName)
-    console.log(p)
-    const plant = await axios.get(
-      `${serverUrl}/plantForm/${plantName}/info`,
-      p.detailsUrl
-    )
-    setSelectedPlant(plant.data ? plant.data : null)
+    try {
+      setIsLoading(true)
+      const plant = await axios.get(
+        `${serverUrl}/plantForm/${plantName}/info`,
+        { detailsUrl: p.detailsUrl }
+      )
+      const isEmpty = plant.data ? false : true
+      console.log(plant.data)
+      setEmptyState({
+        msg: "We're sorry, this plant is currently unsupported.",
+        isShown: isEmpty,
+        handleGoBack: goBackToPlantResults,
+      })
+      setIsLoading(false)
+    } catch (err) {
+      setSelectedPlant(null)
+      setSnackBar({
+        msg: "Oops, something went wrong. Please try again",
+        isOpen: true,
+      })
+      setIsLoading(false)
+      console.log(err)
+    }
   }
   return (
     <View
@@ -48,27 +90,28 @@ export default function NewPlant() {
     >
       <Text>
         <div className="new-plant-form">
-          {isLoading ? (
-            <LoadingState />
-          ) : isSearched ? (
-            selectedPlant ? (
-              <div className="plant-info">
-                plant details
-                <Button title="Add Plant" />
+          {isSearched ? (
+            selectedPlant === null ? (
+              <div className="search-results">
+                {searchResults.length
+                  ? searchResults.map((result, index) => (
+                      <Button
+                        key={`result-${index}`}
+                        title={result.name}
+                        onPress={handleResultPress}
+                      />
+                    ))
+                  : {
+                      /* <EmptyState
+                    emptyState={emptyState}
+                    setEmptyState={setEmptyState}
+                  /> */
+                    }}
               </div>
             ) : (
-              <div className="search-results">
-                {searchResults.length ? (
-                  searchResults.map((result, index) => (
-                    <Button
-                      key={`result-${index}`}
-                      title={result.name}
-                      onPress={handleResultPress}
-                    />
-                  ))
-                ) : (
-                  <EmptyState />
-                )}
+              <div className="plant-info">
+                <Text>details</Text>
+                <Button title="Add Plant" />
               </div>
             )
           ) : (
@@ -90,6 +133,7 @@ export default function NewPlant() {
           )}
         </div>
       </Text>
+      <SnackBar snackBarMsg={snackBar.msg} visible={snackBar.isShown} />
     </View>
   )
 }
