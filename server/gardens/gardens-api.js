@@ -11,6 +11,16 @@ res.send(gardenAreas)
 res.send(err)
 }
 })
+router.get("/gardens/allPlants/:gardenId", async (req, res) => {
+try {
+const { gardenId }  = req.params
+const gardenAreas = await gardens.getPlantsOfGardenArea(gardenId)
+res.send(gardenAreas)
+} catch (err) {
+res.send(err)
+}
+})
+
 router.post("/garden", async (req, res) => {
   try {
     const gardenInfo    = req.body
