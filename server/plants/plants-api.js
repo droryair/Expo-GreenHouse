@@ -12,7 +12,7 @@ router.get("/plantForm/:plantName", async (req, res) => {
   }
 })
 
-router.get("/plantForm/:plantName/info", async (req, res) => {
+router.post("/plantForm/:plantName/info", async (req, res) => {
   try {
     const { plantName } = req.params
     const { detailsUrl } = req.body

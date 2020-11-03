@@ -45,7 +45,7 @@ export default function RenderPlant(props) {
           onPress={() => handleNewPlantPress()}
         />
         <View>
-          {plants.map((p, i) => {
+         {/*  {plants.map((p, i) => {
             return (
               <Card key={i}>
                 <Text>
@@ -70,7 +70,7 @@ export default function RenderPlant(props) {
                 />
               </Card>
             )
-          })}
+          })} */}
         </View>
       </View>
     </ScrollView>

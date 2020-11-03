@@ -1,13 +1,13 @@
 class Plant {
   constructor(
-    scientificName,
+    scientific_name,
     conditions,
     diseases,
     img_link,
     measurements,
     external_link
   ) {
-    this.scientificName = scientificName
+    this.scientific_name = scientific_name
     this.conditions = conditions
     this.diseases = diseases
     this.img_link = img_link
