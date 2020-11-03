@@ -4,7 +4,7 @@ import loadingGif from "../../assets/loader.gif"
 
 export default function LoadingState() {
   return (
-    <View
+    <div
       style={{
         flex: 1,
         justifyContent: "center",
@@ -18,7 +18,7 @@ export default function LoadingState() {
         }}
       />
       <Text style={styles.text}>Loading...</Text>
-    </View>
+    </div>
   )
 }
 
@@ -29,5 +29,5 @@ const styles = StyleSheet.create({
     borderRadius: "50px",
     boxShadow: "1px 1px 5px 2px black",
   },
-  text: { marginTop: "10px",marginBottom:"10px" },
+  text: { marginTop: "10px", marginBottom: "10px" },
 })
