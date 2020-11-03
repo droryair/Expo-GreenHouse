@@ -9,7 +9,7 @@ export default class UtilityStore {
       isShown: false,
       handleGoBack: null,
     }
-    this.serverUrl = "http://10.0.0.4:3001"
+    this.serverUrl = "http://10.0.0.4"
     makeObservable(this, {
       snackBar: observable,
       loadingState: observable,

@@ -63,7 +63,7 @@ export default function App() {
       const token = await AsyncStorage.getItem("auth-token")
       console.log(token)
       if (token !== null) {
-        await fetch("http://192.168.1.11:3001", {
+        await fetch(`${store.utilityStore.serverUrl}:3001`, {
           method: "GET",
           headers: {
             Accept: "application/json",
@@ -105,15 +105,7 @@ export default function App() {
             </>
           ) : (
             <>
-              {store.utilityStore.loadingState.isShown ? (
-                <LoadingState />
-              ) : store.utilityStore.emptyState.isShown ? (
-                <EmptyState />
-              ) : store.utilityStore.snackBar.isShown ? (
-                <SnackBar />
-              ) : (
-                <></>
-              )}
+              <SnackBar />
               <Drawer.Navigator initialRouteName="Home">
                 {/* <Drawer.Screen name="MyGarden" component={MyGarden} /> */}
                 <Drawer.Screen name="Home" component={Home} />
