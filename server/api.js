@@ -1,13 +1,15 @@
-const botanist = require('./botanist/botanist-api')
 const plantIdentify = require('./plantIdentify/plantIdentify-api')
-const plants = require('./plants/plants-api')
-const users = require('./users/users-api')
+const gardenAreas   = require('./gardens/gardens-api')
+const botanist      = require('./botanist/botanist-api')
+const plants        = require('./plants/plants-api')
+const users         = require('./users/users-api')
 
 
 
 module.exports = {
-    botanist,
     plantIdentify,
+    gardenAreas,
+    botanist,
     plants,
     users
 }

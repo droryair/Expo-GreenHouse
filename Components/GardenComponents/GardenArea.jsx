@@ -25,7 +25,8 @@ export default function GardenArea(props) {
         <ScrollView>
             <Card>
                 <Text>
-                    <Card.Title>{area.nickName ? area.nickName : area.type}</Card.Title>
+                    {/* <Card.Title>{area.nickName ? area.nickName : area.type}</Card.Title> */}
+                    <Card.Title>{area.name ? area.name : area.type}</Card.Title>
                 </Text>
                 <Card.Divider />
                 <Image
@@ -41,7 +42,7 @@ export default function GardenArea(props) {
                             <FlatList
                                 key={i}
                                 data={[
-                                    { key: `${c}` }
+                                    { key: `${c.value}` }
                                 ]}
                                 renderItem={({ item }) => <Text style={styles.item}>{item.key}</Text>}
                             />
