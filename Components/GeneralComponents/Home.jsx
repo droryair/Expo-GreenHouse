@@ -75,11 +75,11 @@ export default function Home({ navigation }) {
                         title="Identify Plants"
                         color="green"
                     />
-                    <Button
+                    {/* <Button
                         onPress={logout}
                         title="Logout"
                         color="green"
-                    />
+                    /> */}
 
                 </>
                 : <>
@@ -88,12 +88,13 @@ export default function Home({ navigation }) {
                         title="Get Started"
                         color="#841584"
                         accessibilityLabel="Get Started"
+                        onPress={() => hendlePress('Login')}
                     />
-                    <Button
+                    {/* <Button
                         onPress={logout}
                         title="Logout"
                         color="green"
-                    />
+                    /> */}
                 </>
             }
         </View>

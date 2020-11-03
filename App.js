@@ -1,30 +1,34 @@
 import * as React from "react"
-
 import { createContext, useContext } from "react"
-
 import { StyleSheet, Text, View, Button } from "react-native"
-
-import { createDrawerNavigator } from "@react-navigation/drawer"
+import {
+  createDrawerNavigator,
+  DrawerItem,
+  DrawerContentScrollView,
+  DrawerItemList,
+} from "@react-navigation/drawer"
 import { NavigationContainer } from "@react-navigation/native"
 import IdentifyStack from "./Components/IdentifyComponents/IdentifyStack"
-
 import Plants from "./Stores/Plants"
 import MyGarden from "./Components/GardenComponents/MyGarden"
 import Home from "./Components/GeneralComponents/Home"
 import Identification from "./Stores/Identification"
 import gardenAreasStore from "./Stores/gardenAreasStore"
-
 import User from "./Stores/userStore"
-import Register from "./Components/UserComponents/diffRegister"
-import Login from "./Components/UserComponents/diffLogin"
+import Register from "./Components/UserComponents/Register"
+import Login from "./Components/UserComponents/Login"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-
 import RenderPlant from "./Components/GardenComponents/RenderPlant"
 import PlantDetails from "./Components/GardenComponents/PlantDetails"
 import GardenStack from "./Components/GardenComponents/GardenStack"
 import PushNotifications from "./Components/PushNotifications/PushNotifications"
 import NotificationsStack from "./Components/PushNotifications/NotificationsStack"
 import BOTanistChat from "./Components/BOTanistComponents/BOTanistChat"
+import GetStarted from "./Components/GeneralComponents/GetStarted"
+import AuthStack from "./Components/UserComponents/AuthStack"
+import { TouchableOpacity } from "react-native-gesture-handler"
+import Logout from "./Components/UserComponents/Logout"
+
 import DiseasesStore from "./Stores/DiseasesStore"
 import UtilityStore from "./Stores/UtilityStore"
 import SnackBar from "./Components/UtilityComponents/SnackBar"
@@ -57,6 +61,13 @@ const Drawer = createDrawerNavigator()
 console.log(store.user)
 
 const App = observer(() => {
+  const logout = async () => {
+    await AsyncStorage.removeItem("auth-token")
+    const allStorage = await AsyncStorage.getAllKeys()
+    console.log(allStorage)
+    store.user.isLoggedIn = false
+  }
+
   React.useEffect(() => {
     const checkedLoggedIn = async () => {
       const token = await AsyncStorage.getItem("auth-token")
@@ -93,6 +104,7 @@ const App = observer(() => {
     }
     checkedLoggedIn()
   }, [])
+
   return (
     <>
       <NavigationContainer>
