@@ -1,8 +1,8 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const path = require('path')
-const api =require('./server/api')
-const app = express()
+const express       = require('express')
+const bodyParser    = require('body-parser')
+const path          = require('path')
+const api           = require('./server/api')
+const app           = express()
 
 
 // DELETE AFTER DEVELOPMENT
@@ -23,8 +23,9 @@ app.use(function (req, res, next) {
 //  ^ DELETE AFTER DEVELOPMENT ^
 
 
-app.use('/',api.botanist)
 app.use('/',api.plantIdentify)
+app.use('/',api.gardenAreas)
+app.use('/',api.botanist)
 app.use('/',api.plants)
 app.use('/',api.users)
 
