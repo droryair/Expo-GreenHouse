@@ -1,0 +1,19 @@
+{
+    "welcome":"Welcome, user_name! How can I help you today? :)",
+    "suggestions":{
+        "garden":"which garden?",
+        "none":"I can only give you suggestions based on an existing garden area. You might want to create a new one in the 'My garden' page",
+        "results":"Here is a list of all the plants that will fit your garden_name garden :)",
+        "no_matches":"I'm sorry, I couldn't find any plants that will live happily enough in you garden_name due to it's conditions.",
+        "ending":"I hope your future house member is among them. Let me know if you need anything else! :)"
+    },
+    "diseases":{
+        "garden":"which garden?",
+        "plant":"which plant?",
+        "symptoms":"Which of the following symptoms best describes plant_name's disease?",
+        "results":"I think plant_name might be sick with disease_name.",
+        "no_matches":"I'm sorry, but I couldn't find a disease fitting to your description. These are the most common diseases for your beloved plant_name:",
+        "ending":"I hope plant_name will get better soon!"
+    }
+
+}
