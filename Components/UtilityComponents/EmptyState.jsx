@@ -25,21 +25,21 @@ export default function EmptyState() {
   )
 }
 
-const styles = StyleSheet.create({
-  empty: {
-    height: 250,
-    width: 250,
-    borderRadius: "50px",
-    boxShadow: "1px 1px 5px 2px black",
-    display: "grid",
-    justifyContent: "center",
-    alignContent: "center",
-    padding: "10px",
-  },
-  text: {
-    textAlign: "center",
-  },
-  icon: {
-    textAlign: "center",
-  },
-})
+// const styles = StyleSheet.create({
+//   empty: {
+//     height: 250,
+//     width: 250,
+//     borderRadius: "50px",
+//     boxShadow: "1px 1px 5px 2px black",
+//     display: "grid",
+//     justifyContent: "center",
+//     alignContent: "center",
+//     padding: "10px",
+//   },
+//   text: {
+//     textAlign: "center",
+//   },
+//   icon: {
+//     textAlign: "center",
+//   },
+// })
