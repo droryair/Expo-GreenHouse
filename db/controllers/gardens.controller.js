@@ -23,6 +23,21 @@ const getAllGardens = async (userId) => {
     return errMsg
   }
 }
+const getAllPlants = async (gardenId) => {
+  try {
+    const plants = await db.plants.findAll({
+      where:{garden_area_id:gardenId}
+     })
+    return plants
+  } catch (error) {
+    const errMsg = {
+      message: "Error while getting garden areas",
+      error,
+    }
+    console.log(errMsg)
+    return errMsg
+  }
+}
 const createGarden = async (garden) => {
   try{
       const newGarden = await db.gardenAreas.create({
@@ -81,6 +96,7 @@ module.exports = {
   createGarden, 
   associateGardenCondition,
   getAllGardens,
+  getAllPlants,
   updateGarden,
   deleteGarden
 }

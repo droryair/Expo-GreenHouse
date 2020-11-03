@@ -14,15 +14,19 @@ const saveGardenConditionsToDB = async (gardenConditions ,gardenAreaId) => {
     const condition = await controller.gardens.associateGardenCondition(
       conditionFullDetails,
       gardenAreaId
-    )
-    if (condition.error) {
-      return condition
-    } else {
-      conditions.push(condition)
+      )
+      if (condition.error) {
+        return condition
+      } else {
+        conditions.push(condition)
+      }
     }
+    return conditions
   }
-  return conditions
-}
+  const getPlantsOfGardenArea = async (gardenId) => {
+    const  allPlants = await controller.gardens.getAllPlants(gardenId)
+    return allPlants
+  }
 const updateGardenInfo = async (gardenId, updatedDetails) => {
   const updatedGarden = await controller.gardens.updateGarden(
     gardenId,
@@ -40,6 +44,7 @@ module.exports = {
   saveGardenAreaToDB, 
   getAllGardenAreasOfUser, 
   saveGardenConditionsToDB,
+  getPlantsOfGardenArea,
   updateGardenInfo,
   deleteGardenArea
 }
