@@ -9,15 +9,15 @@ export default function SnackBar(props) {
   return (
     <Snackbar
       visible={store.utilityStore.snackBar.isShown}
-      onDismiss={store.utilityStore.hideSnackBar}
+      onDismiss={store.utilityStore.hideSnackBar()}
       duration={store.utilityStore.snackBar.duration}
       style={styles.snackBar}
       action={{
         label: "OK",
-        onPress: store.utilityStore.hideSnackBar,
+        onPress: store.utilityStore.hideSnackBar(),
       }}
     >
-      {store.utilityStore.snackBar.msg}
+      {store.utilityStore.snackBar}
     </Snackbar>
   )
 }
