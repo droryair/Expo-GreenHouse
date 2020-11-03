@@ -27,9 +27,8 @@ import NotificationsStack from "./Components/PushNotifications/NotificationsStac
 import BOTanistChat from "./Components/BOTanistComponents/BOTanistChat"
 import DiseasesStore from "./Stores/DiseasesStore"
 import UtilityStore from "./Stores/UtilityStore"
-import EmptyState from "./Components/UtilityComponents/EmptyState"
-import LoadingState from "./Components/UtilityComponents/LoadingState"
 import SnackBar from "./Components/UtilityComponents/SnackBar"
+import { observer } from "mobx-react"
 
 const utilityStore = new UtilityStore()
 const user = new User()
@@ -57,7 +56,7 @@ const Drawer = createDrawerNavigator()
 
 console.log(store.user)
 
-export default function App() {
+const App = observer(() => {
   React.useEffect(() => {
     const checkedLoggedIn = async () => {
       const token = await AsyncStorage.getItem("auth-token")
@@ -105,7 +104,6 @@ export default function App() {
             </>
           ) : (
             <>
-              <SnackBar />
               <Drawer.Navigator initialRouteName="Home">
                 {/* <Drawer.Screen name="MyGarden" component={MyGarden} /> */}
                 <Drawer.Screen name="Home" component={Home} />
@@ -118,13 +116,14 @@ export default function App() {
                 {/* <Drawer.Screen name="RenderPlant" component={RenderPlant}/> */}
                 {/* <Drawer.Screen name="PlantDetails" component={PlantDetails}/> */}
               </Drawer.Navigator>
+              <SnackBar />
             </>
           )}
         </PlantsProvider>
       </NavigationContainer>
     </>
   )
-}
+})
 
 const styles = StyleSheet.create({
   container: {
@@ -134,3 +133,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 })
+
+export default App
