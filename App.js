@@ -119,14 +119,12 @@ export default function App() {
                 <Drawer.Screen name="Home" component={Home} />
                 <Drawer.Screen name="IdentifyStack" component={IdentifyStack} />
                 <Drawer.Screen name="GardenStack" component={GardenStack} />
-                <Drawer.Screen
-                  name="NotificationsStack"
-                  component={NotificationsStack}
-                />
+                {/* <Drawer.Screen name="NotificationsStack" component={NotificationsStack} /> */}
+
                 <Drawer.Screen name="BOTanistChat" component={BOTanistChat} />
 
-                {/* <Drawer.Screen name="RenderPlant" component={RenderPlant}/>
-            <Drawer.Screen name="PlantDetails" component={PlantDetails}/> */}
+                {/* <Drawer.Screen name="RenderPlant" component={RenderPlant}/> */}
+                {/* <Drawer.Screen name="PlantDetails" component={PlantDetails}/> */}
               </Drawer.Navigator>
             </>
           )}

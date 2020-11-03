@@ -7,24 +7,28 @@ export default class Plants {
             id: "1",
             name: "daffodil",
             nickname: "difi",
-            possibleDiseases: ["1"]
+            possibleDiseases: ["1"],
+            watering_frequency:3
         },
         {
             id: "5",
             name: "daffodil",
-            nickname: "difi",
-            possibleDiseases: ["1"]
+            nickname: "plant 5",
+            possibleDiseases: ["1"],
+            watering_frequency:2
         },        {
             id: "6",
             name: "daffodil",
-            nickname: "difi",
-            possibleDiseases: ["1"]
+            nickname: "plant 6",
+            possibleDiseases: ["1"],
+            watering_frequency:1
         },
         {
             id: "9",
             name: "daffodil",
-            nickname: "difi",
-            possibleDiseases: ["1"]
+            nickname: "plant 9",
+            possibleDiseases: ["1"],
+            watering_frequency:4
         }
     ]
     constructor() {
