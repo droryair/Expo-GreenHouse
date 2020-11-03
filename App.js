@@ -29,19 +29,22 @@ import GardenStack from './Components/GardenComponents/GardenStack';
 import PushNotifications from './Components/PushNotifications/PushNotifications'
 import NotificationsStack from './Components/PushNotifications/NotificationsStack'
 import BOTanistChat from './Components/BOTanistComponents/BOTanistChat'
+import DiseasesStore from './Stores/DiseasesStore';
+
 
 
 
 
 const identification = new Identification()
 const gardenAreas = new gardenAreasStore()
-
 const user = new User
 
 
 const PlantsStore = new Plants()
+const Diseases = new DiseasesStore()
 
-const store = { PlantsStore, identification, gardenAreas, user }
+
+const store = { PlantsStore, identification, gardenAreas, user ,Diseases}
 
 export const PlantsContext = createContext(store)
 export const PlantsProvider = PlantsContext.Provider

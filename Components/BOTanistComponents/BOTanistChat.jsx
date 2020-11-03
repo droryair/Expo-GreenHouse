@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, View, StyleSheet } from 'react-native';
+import { Button, View, StyleSheet, Linking } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { usePlantsStore } from '../../App';
 import GardenArea from '../GardenComponents/GardenArea';
@@ -13,15 +13,15 @@ import { RadioButton, Text } from 'react-native-paper';
 
 export default function BOTanistChat() {
     const [currentChat, setCurrentChat] = useState([])
-    const [value, setValue] = useState()
+    const [value, setValue] = useState('1')
 
     const userName = "Dror"
     const Plantstore = usePlantsStore()
     const areas = Plantstore.gardenAreas.areas
     const allPlants = Object.values(Plantstore.PlantsStore.plantsArr)
-    // console.log(allPlants );
-    // console.log(typeof( allPlants))
-    // console.log(Object.values(allPlants))
+    const allDiseases = Plantstore.Diseases.dummy_diseases // ***change to diseases***
+    console.log(allDiseases)
+
     var gardensNames = areas.map(area => {
         return area.nickName ? area.nickName : area.type
     })
@@ -159,8 +159,14 @@ export default function BOTanistChat() {
     }
 
     const diseasesFunctions = (plant) => {
-        const diseases = plant.possibleDiseases
-        const symptomsMessage = Json.diseases.symptoms
+        const plantName = plant.nickname? plant.nickname:plant.name
+        const diseasesIDs = plant.possibleDiseases
+        const diseases = []
+        diseasesIDs.map(diseaseId=>{
+            diseases.push(allDiseases.find(d=> d.id===diseaseId))
+        })
+        const symptomsMessage =  Json.diseases.symptoms.replace("plant_name", plantName)
+       
         console.log(diseases)
         let radioButton
         setCurrentChat(
@@ -175,8 +181,10 @@ export default function BOTanistChat() {
                             {diseases.map((disease, i) => {
                                 return (
                                     <View key={i}>
-                                        <Text>{disease.main_symptoms}</Text>
+                                        <Text>
                                         <RadioButton value={disease.id} />
+                                        {disease.main_symptoms}
+                                        </Text>
                                     </View>
                                 )
                             })
@@ -184,7 +192,7 @@ export default function BOTanistChat() {
                         </RadioButton.Group>
                         <Button
                             title="Yes, that's the one!"
-                            onPress={diseasesResultFunction(radioButton, diseases)}
+                            onPress={()=>diseasesResultFunction(value, diseases,plantName)}
                         />
                     </View>
                 </>
@@ -192,24 +200,26 @@ export default function BOTanistChat() {
         )
     }
 
-    const diseasesResultFunction = (value, diseases) => {
-        const chosenDisease = diseases.find(d => d.id === value)
-        const resultsMessage = Json.diseases.results
+    const diseasesResultFunction = (value, diseases,plantName) => {
+        const chosenDisease = diseases.find(d => d.id == value)
+        const diseaseName = chosenDisease.name ? chosenDisease.name : chosenDisease.scientific_name
+        const resultsMessage =Json.diseases.results.replace("disease_name", diseaseName).replace("plant_name",plantName)
+
         setCurrentChat(
             ...currentChat,
             [
                 <>
                     <Text>{resultsMessage}</Text>
-                    <Image
+                    {/* <Image
                         style={styles.smallLogo}
                         source={chosenDisease.img_link}
-                    />
-                    <Text>this is how tou can treat {chosenDisease.scientific_name}: {"\n"}
+                    /> */}
+                    <Text>this is how you can treat {chosenDisease.scientific_name}: {"\n"}
                         {chosenDisease.treatment}
                     </Text>
                     <Text style={{ color: 'blue' }}
                         onPress={() => Linking.openURL(chosenDisease.external_link)}>
-                        Read more about {chosenDisease.name ? chosenDisease.name : chosenDisease.scientific_name}
+                        Read more about {diseaseName}
                     </Text>
                 </>
             ]

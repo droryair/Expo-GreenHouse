@@ -10,8 +10,8 @@
     "diseases":{
         "garden":"which garden?",
         "plant":"which plant?",
-        "symptoms":"Which of the following symptoms best describes you plant's disease?",
-        "results":"I think your plant might be sick with disease_name.",
+        "symptoms":"Which of the following symptoms best describes plant_name's disease?",
+        "results":"I think plant_name might be sick with disease_name.",
         "no_matches":"I'm sorry, but I couldn't find a disease fitting to your description. These are the most common diseases for your beloved plant_name:",
         "ending":"I hope plant_name will get better soon!"
     }
