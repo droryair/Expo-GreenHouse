@@ -16,6 +16,9 @@ export default function RenderPlant(props) {
   const handlePress = (plantID) => {
     return navigation.navigate("PlantDetails", { plantID })
   }
+  const handleNewPlantPress = () => {
+    return navigation.navigate("NewPlant", area)
+  }
   return (
     <ScrollView>
       <View
@@ -30,6 +33,17 @@ export default function RenderPlant(props) {
           These are the plants in your -
           {area.nickName ? area.nickName : area.type}- garden area
         </Text>
+        <Button
+          icon={<Icon name="code" color="green" />}
+          buttonStyle={{
+            borderRadius: 0,
+            marginLeft: 0,
+            marginRight: 0,
+            marginBottom: 0,
+          }}
+          title="New Plant"
+          onPress={() => handleNewPlantPress()}
+        />
         <View>
           {plants.map((p, i) => {
             return (
