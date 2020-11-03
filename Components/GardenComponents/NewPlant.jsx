@@ -3,48 +3,17 @@ import axios from "axios"
 import { Text, View, Button } from "react-native"
 import { Input } from "react-native-elements"
 import Icon from "react-native-vector-icons/FontAwesome"
-import LoadingState from "./../UtilityComponents/LoadingState"
-import EmptyState from "./../UtilityComponents/EmptyState"
-import SnackBar from "./../UtilityComponents/SnackBar"
+import { useUtilityStore } from "../../App"
+import LoadingState from "../UtilityComponents/LoadingState"
+import EmptyState from "../UtilityComponents/EmptyState"
 
 export default function NewPlant() {
+  const store = useUtilityStore()
   const [isSearched, setIsSearched] = useState(false)
   const [inputs, setInputs] = useState({ search: "" })
-  const [isLoading, setIsLoading] = useState(false)
   const [selectedPlant, setSelectedPlant] = useState(null)
   const [searchResults, setSearchResults] = useState([])
-  const [snackBar, setSnackBar] = useState({ msg: "", isShown: false })
-  const [emptyState, setEmptyState] = useState({
-    msg: "Oops... There's no data to show here, please try again",
-    isOpen: true,
-    handleGoBack: null,
-  })
 
-  const handleSearch = async () => {
-    try {
-      setIsLoading(true)
-      const searchResults = await axios.get(
-        `${serverUrl}/plantForm/${inputs.search}`
-      )
-      setSearchResults(searchResults.data)
-      const isEmpty = searchResults.data.length ? false : true
-      setEmptyState({
-        ...emptyState,
-        isShown: isEmpty,
-        handleGoBack: goBackToSearch,
-      })
-      setIsLoading(false)
-      setIsSearched(true)
-    } catch (err) {
-      setSearchResults(null)
-      setSnackBar({
-        msg: "Oops, something went wrong. Please try again",
-        isShown: true,
-      })
-      setIsLoading(false)
-      console.log(err)
-    }
-  }
   const goBackToSearch = () => {
     setInputs({ ...inputs, search: "" })
     setIsSearched(false)
@@ -53,30 +22,53 @@ export default function NewPlant() {
     setSelectedPlant(null)
   }
 
+  const handleSearch = async () => {
+    try {
+      store.utilityStore.showLoadingState()
+      const searchResults = await axios.get(
+        `${store.utilityStore.serverUrl}/plantForm/${inputs.search}`
+      )
+      searchResults.data.length
+        ? setSearchResults(searchResults.data)
+        : store.utilityStore.showEmptyState(
+            "Couldn't find any plants with this name. Please change your search and try again.",
+            goBackToSearch
+          )
+      store.utilityStore.hideLoadingState()
+      setIsSearched(true)
+    } catch (err) {
+      setSearchResults(null)
+      store.utilityStore.showSnackBar(
+        "Oops, something went wrong. Please try again"
+      )
+      store.utilityStore.hideLoadingState()
+      console.log(err)
+    }
+  }
+
   const handleResultPress = async (event) => {
     const plantName = event.target.innerHTML
     const p = searchResults.find((p) => p.name === plantName)
     try {
-      setIsLoading(true)
+      store.utilityStore.showLoadingState()
       const plant = await axios.get(
-        `${serverUrl}/plantForm/${plantName}/info`,
+        `${store.utilityStore.serverUrl}/plantForm/${plantName}/info`,
         { detailsUrl: p.detailsUrl }
       )
-      const isEmpty = plant.data ? false : true
-      console.log(plant.data)
-      setEmptyState({
-        msg: "We're sorry, this plant is currently unsupported.",
-        isShown: isEmpty,
-        handleGoBack: goBackToPlantResults,
-      })
-      setIsLoading(false)
+      !plant.data.conditions || !plant.data.conditions.length
+        ? store.utilityStore.showEmptyState(
+            "We're sorry, this plant is currently unsupported.",
+            goBackToPlantResults
+          )
+        : setSelectedPlant(plant.data)
+      store.utilityStore.hideLoadingState()
     } catch (err) {
       setSelectedPlant(null)
-      setSnackBar({
-        msg: "Oops, something went wrong. Please try again",
-        isOpen: true,
-      })
-      setIsLoading(false)
+      store.utilityStore.showSnackBar(
+        "Oops, something went wrong. Please try again"
+      )
+      store.utilityStore.hideLoadingState()
+
       console.log(err)
     }
   }
@@ -93,20 +85,20 @@ export default function NewPlant() {
           {isSearched ? (
             selectedPlant === null ? (
               <div className="search-results">
-                {searchResults.length
-                  ? searchResults.map((result, index) => (
-                      <Button
-                        key={`result-${index}`}
-                        title={result.name}
-                        onPress={handleResultPress}
-                      />
-                    ))
-                  : {
-                      /* <EmptyState
-                    emptyState={emptyState}
-                    setEmptyState={setEmptyState}
-                  /> */
-                    }}
+                <Text>
+                  Found {searchResults.length} plants that match your search:
+                </Text>
+                {searchResults.length ? (
+                  searchResults.map((result, index) => (
+                    <Button
+                      key={`result-${index}`}
+                      title={result.name}
+                      onPress={handleResultPress}
+                    />
+                  ))
+                ) : (
+                  <></>
+                )}
               </div>
             ) : (
               <div className="plant-info">
@@ -133,7 +125,6 @@ export default function NewPlant() {
           )}
         </div>
       </Text>
-      <SnackBar snackBarMsg={snackBar.msg} visible={snackBar.isShown} />
     </View>
   )
 }
