@@ -25,6 +25,9 @@ export default class DiseasesStore {
     
     
     getDiseases=()=>{
+            fetch('http://93.172.62.38/diseases')
+            .then(response => response.json())
+            .then(data => console.log(data));
         //axios get ('/diseases')
     }
 
