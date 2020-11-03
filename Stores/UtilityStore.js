@@ -4,8 +4,12 @@ export default class UtilityStore {
   constructor() {
     this.snackBar = { msg: "", isShown: false, duration: 3000 }
     this.loadingState = { isShown: false }
-    this.emptyState = { msg: "", isShown: false, handleGoBack: null }
-    this.serverUrl = "http://192.168.1.204"
+    this.emptyState = {
+      msg: "No data to show here.",
+      isShown: false,
+      handleGoBack: null,
+    }
+    this.serverUrl = "http://10.0.0.4"
     makeObservable(this, {
       snackBar: observable,
       loadingState: observable,
@@ -49,8 +53,10 @@ export default class UtilityStore {
     this.emptyState.isShown = true
     this.emptyState.handleGoBack = handleGoBack
   }
-  emptyStateGoBack = () => {
+  emptyStateGoBack() {
     this.emptyState.isShown = false
-    this.emptyState.handleGoBack()
+    if (this.emptyState.handleGoBack) {
+      this.emptyState.handleGoBack()
+    }
   }
 }
