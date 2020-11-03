@@ -13,6 +13,7 @@ export default function NewPlant() {
   const [inputs, setInputs] = useState({ search: "" })
   const [selectedPlant, setSelectedPlant] = useState(null)
   const [searchResults, setSearchResults] = useState([])
+  const serverUrl = `${store.utilityStore.serverUrl}:3001`
 
   const goBackToSearch = () => {
     setInputs({ ...inputs, search: "" })
@@ -26,7 +27,7 @@ export default function NewPlant() {
     try {
       store.utilityStore.showLoadingState()
       const searchResults = await axios.get(
-        `${store.utilityStore.serverUrl}/plantForm/${inputs.search}`
+        `${serverUrl}/plantForm/${inputs.search}`
       )
       searchResults.data.length
         ? setSearchResults(searchResults.data)
@@ -52,7 +53,7 @@ export default function NewPlant() {
     try {
       store.utilityStore.showLoadingState()
       const plant = await axios.get(
-        `${store.utilityStore.serverUrl}/plantForm/${plantName}/info`,
+        `${serverUrl}/plantForm/${plantName}/info`,
         { detailsUrl: p.detailsUrl }
       )
       !plant.data.conditions || !plant.data.conditions.length
@@ -81,53 +82,59 @@ export default function NewPlant() {
       }}
     >
       <Text>
-        <div className="new-plant-form">
-          <div className="search-plant">
-            <Input
-              placeholder="Plant name"
-              value={inputs.search}
-              onChangeText={(value) => setInputs({ ...inputs, search: value })}
-              leftIcon={<Icon name="search" size={24} color="black" />}
-            />
-            <Button
-              title="Search"
-              onPress={handleSearch}
-              disabled={inputs.search === ""}
-            />
-            {isSearched ? (
-              <div className="search-results">
-                <Text>
-                  Found {searchResults.length} plants that match your search:
-                </Text>
-                {selectedPlant === null ? (
-                  searchResults.length ? (
-                    searchResults.map((result, index) => (
-                      <Button
-                        key={`result-${index}`}
-                        title={result.name}
-                        onPress={handleResultPress}
-                      />
-                    ))
+        {store.utilityStore.loadingState.isShown ? (
+          <LoadingState />
+        ) : (
+          <div className="new-plant-form">
+            <div className="search-plant">
+              <Input
+                placeholder="Plant name"
+                value={inputs.search}
+                onChangeText={(value) =>
+                  setInputs({ ...inputs, search: value })
+                }
+                leftIcon={<Icon name="search" size={24} color="black" />}
+              />
+              <Button
+                title="Search"
+                onPress={handleSearch}
+                disabled={inputs.search === ""}
+              />
+              {isSearched ? (
+                <div className="search-results">
+                  <Text>
+                    Found {searchResults.length} plants that match your search:
+                  </Text>
+                  {selectedPlant === null ? (
+                    searchResults.length ? (
+                      searchResults.map((result, index) => (
+                        <Button
+                          key={`result-${index}`}
+                          title={result.name}
+                          onPress={handleResultPress}
+                        />
+                      ))
+                    ) : store.utilityStore.emptyState.isShown ? (
+                      <EmptyState />
+                    ) : (
+                      <></>
+                    )
                   ) : store.utilityStore.emptyState.isShown ? (
                     <EmptyState />
                   ) : (
-                    <></>
+                    <div className="plant-info">
+                      <Text>details</Text>
+                      <Button title="Add Plant" />
+                    </div>
+                  )}
                   )
-                ) : store.utilityStore.emptyState.isShown ? (
-                  <EmptyState />
-                ) : (
-                  <div className="plant-info">
-                    <Text>details</Text>
-                    <Button title="Add Plant" />
-                  </div>
-                )}
-                )
-              </div>
-            ) : (
-              <></>
-            )}
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </Text>
     </View>
   )
