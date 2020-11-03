@@ -1,33 +1,43 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { View } from "react-native"
-import { Snackbar } from "react-native-paper"
+import { Snackbar, DefaultTheme } from "react-native-paper"
 import { StyleSheet } from "react-native"
 import { useUtilityStore } from "../../App"
+import { observer } from "mobx-react"
 
-export default function SnackBar(props) {
+const SnackBar = observer(() => {
   const store = useUtilityStore()
   return (
-    <Snackbar
-      visible={store.utilityStore.snackBar.isShown}
-      onDismiss={store.utilityStore.hideSnackBar}
-      duration={store.utilityStore.snackBar.duration}
-      style={styles.snackBar}
-      action={{
-        label: "OK",
-        onPress: store.utilityStore.hideSnackBar,
-      }}
-    >
-      {store.utilityStore.snackBar.msg}
-    </Snackbar>
+    <View style={styles.container}>
+      <Snackbar
+        visible={store.utilityStore.snackBar.isShown}
+        onDismiss={() => store.utilityStore.hideSnackBar()}
+        action={{
+          label: "OK",
+          onPress: () => {
+            store.utilityStore.hideSnackBar()
+          },
+        }}
+        theme={{
+          colors: {
+            primary: "black",
+            onSurface: "#6e963f",
+            accent: "black",
+          },
+        }}
+      >
+        {store.utilityStore.snackBar.msg}
+      </Snackbar>
+    </View>
   )
-}
+})
 
-// const styles = StyleSheet.create({
-//   snackBar: {
-//     backgroundColor: "black",
-//     color: "black",
-//     width: "50%",
-//     height: "auto",
-//     maxHeight: "50px",
-//   },
-// })
+const styles = StyleSheet.create({
+  container: {
+    zIndex: 200,
+    height: "fit-content",
+    justifyContent: "space-between",
+  },
+})
+
+export default SnackBar

@@ -43,7 +43,8 @@ export default class User {
             registerCity: action,
             registerEmail: action,
             registration: action,
-            login: action
+            login: action,
+            getUserDetails: action
         })
     }
 
@@ -60,7 +61,7 @@ export default class User {
     registerCity = async (city) => {
         this.city = city
     }
-    getUserDetails = async (user, token) => {
+    getUserDetails = (user, token) => {
         this.id = user.id,
             this.city = user.city,
             this.email = user.email,
@@ -68,8 +69,9 @@ export default class User {
             this.lastName = user.lastName,
             this.rank = user.rankID,
             this.createdAt = user.createdAt,
-            this.xp = user.xp
-        this.token = token
+            this.xp = user.xp,
+            this.token = token,
+            this.isLoggedIn = true
     }
     registration = async (user) => {
         await fetch('http://192.168.1.11:3001/register', {

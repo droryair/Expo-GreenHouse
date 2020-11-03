@@ -1,16 +1,10 @@
 import React from "react"
-import { Text, View, Image, StyleSheet } from "react-native"
+import { Text, View, Image, StyleSheet, Modal } from "react-native"
 import loadingGif from "../../assets/loader.gif"
 
 export default function LoadingState() {
   return (
-    <div
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <View style={styles.view}>
       <Image
         style={styles.image}
         source={{
@@ -18,16 +12,21 @@ export default function LoadingState() {
         }}
       />
       <Text style={styles.text}>Loading...</Text>
-    </div>
+    </View>
   )
 }
 
-// const styles = StyleSheet.create({
-  // image: {
-  //   height: 250,
-  //   width: 250,
-    // borderRadius: "50",
-    // boxShadow: "1px 1px 5px 2px black",
-  // },
-  // text: { marginTop: "10px", marginBottom: "10px" },
-// })
+const styles = StyleSheet.create({
+  image: {
+    height: 250,
+    width: 250,
+    borderRadius: 50,
+  },
+  text: { marginTop: 10, marginBottom: 10, fontSize: "Large" },
+  view: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#6e963f",
+  },
+})
