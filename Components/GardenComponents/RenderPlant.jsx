@@ -15,6 +15,77 @@ const RenderPlant = observer((props) => {
     const navigation = props.navigation
     const area = props.route.params.area
 
+<<<<<<< HEAD
+  // console.log(area);
+  const handlePress = (plantID) => {
+    return navigation.navigate("PlantDetails", { plantID })
+  }
+  const handleNewPlantPress = () => {
+    return navigation.navigate("NewPlant", area)
+  }
+  return (
+    <ScrollView>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
+        <Text>
+          These are the plants in your -
+          {area.nickName ? area.nickName : area.type}- garden area
+        </Text>
+        <Button
+          icon={<Icon name="code" color="green" />}
+          buttonStyle={{
+            borderRadius: 0,
+            marginLeft: 0,
+            marginRight: 0,
+            marginBottom: 0,
+          }}
+          title="New Plant"
+          onPress={() => handleNewPlantPress()}
+        />
+        <View>
+         {/*  {plants.map((p, i) => {
+            return (
+              <Card key={i}>
+                <Text>
+                  <Card.Title>id: {p}</Card.Title>
+                </Text>
+                <Card.Divider />
+                <Image
+                  style={styles.tinyLogo}
+                  source={p.imgURL ? p.imgURL : plantIcon}
+                />
+                <Text style={{ marginBottom: 10 }}></Text>
+                <Button
+                  icon={<Icon name="code" color="green" />}
+                  buttonStyle={{
+                    borderRadius: 0,
+                    marginLeft: 0,
+                    marginRight: 0,
+                    marginBottom: 0,
+                  }}
+                  title="View Plant >"
+                  onPress={() => handlePress(p)}
+                />
+              </Card>
+            )
+          })} */}
+        </View>
+      </View>
+    </ScrollView>
+  )
+}
+const styles = StyleSheet.create({
+  tinyLogo: {
+    width: 50,
+    height: 50,
+  },
+=======
     useEffect(()=>{
         store.gardenAreas.getGardensPlants(area.id)
     },[])
@@ -62,6 +133,7 @@ const RenderPlant = observer((props) => {
             </View>
         </ScrollView>
     )
+>>>>>>> b502a2c49625b419f3757ca4df5c737c9cf7265d
 })
 const styles = StyleSheet.create({
     tinyLogo: {

@@ -3,7 +3,11 @@ import { observable, action, makeObservable, computed } from "mobx"
 export default class UtilityStore {
   constructor() {
     this.snackBar = { msg: "", isShown: false, duration: 3000 }
-    this.loadingState = { isShown: false }
+    this.loadingState = {
+      isShown: false,
+      title: "Loading..",
+      msg: "Please wait",
+    }
     this.emptyState = {
       msg: "No data to show here.",
       isShown: false,
@@ -30,8 +34,10 @@ export default class UtilityStore {
     this.snackBar.isShown
   }
   showSnackBar(msg) {
-    this.snackBar.msg = msg
-    this.snackBar.isShown = true
+    if (msg) {
+      this.snackBar.msg = msg
+      this.snackBar.isShown = true
+    }
   }
   hideSnackBar = () => {
     this.snackBar.isShown = false
@@ -39,7 +45,13 @@ export default class UtilityStore {
   get isLoading() {
     this.loadingState.isShown
   }
-  showLoadingState = () => {
+  showLoadingState = (title, msg) => {
+    if (msg) {
+      this.loadingState.msg = msg
+    }
+    if (title) {
+      this.loadingState.title = title
+    }
     this.loadingState.isShown = true
   }
   hideLoadingState = () => {
@@ -49,9 +61,11 @@ export default class UtilityStore {
     this.emptyState.isShown
   }
   showEmptyState = (msg, handleGoBack) => {
-    this.emptyState.msg = msg
-    this.emptyState.isShown = true
-    this.emptyState.handleGoBack = handleGoBack
+    if (msg && handleGoBack) {
+      this.emptyState.msg = msg
+      this.emptyState.isShown = true
+      this.emptyState.handleGoBack = handleGoBack
+    }
   }
   emptyStateGoBack() {
     this.emptyState.isShown = false
