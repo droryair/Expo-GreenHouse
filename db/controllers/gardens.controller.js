@@ -4,7 +4,7 @@ const db = require("../sequelize")
 const getAllGardens = async (userId) => {
   try {
     const gardenArea = await db.gardenAreas.findAll({
-      where:{id:userId},
+      where:{user_id:userId},
       include: [
         {
           model: db.conditions,
@@ -13,7 +13,7 @@ const getAllGardens = async (userId) => {
         }
       ]
     })
-    return gardenArea[0].dataValues
+    return gardenArea
   } catch (error) {
     const errMsg = {
       message: "Error while getting garden areas",

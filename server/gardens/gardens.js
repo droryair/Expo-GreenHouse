@@ -1,5 +1,4 @@
 const controller = require("../../db/controllers/controller")
-const gardenController = require("../../db/controllers/gardens.controller")
 
 const getAllGardenAreasOfUser = async (userId) => {
   const  allGardens = await controller.gardens.getAllGardens(userId)
