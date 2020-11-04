@@ -6,7 +6,7 @@ export default class User {
 
 
     constructor(utils) {
-        this.utils = utils;
+        this.utils = utils
         this.isLoggedIn = true;
         this.token = '';
         this.id = '';
@@ -65,7 +65,8 @@ export default class User {
             this.isLoggedIn = true
     }
     registration = async (user) => {
-        await fetch("http://192.168.1.11:3001/register", {
+        // await fetch('http://192.168.1.11:3001/register', {
+        await fetch(`${this.utils.serverUrl}:3001/register`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -96,7 +97,9 @@ export default class User {
 
     }
     login = async (user) => {
-        await fetch("http://192.168.1.11:3001/login", {
+
+        await fetch(`${this.utils.serverUrl}:3001/login`, {
+
             method: 'POST',
             headers: {
                 Accept: 'application/json',

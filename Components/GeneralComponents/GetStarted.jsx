@@ -12,7 +12,8 @@ import { usePlantsStore } from '../../App';
 export default function GetStarted({ navigation }) {
 
 
-    const store = usePlantsStore()
+    const store         = usePlantsStore(),
+          {serverUrl}   = store.utilityStore
     const [authToken, setAuthToken] = React.useState(null)
 
     React.useEffect(() => {
@@ -21,7 +22,7 @@ export default function GetStarted({ navigation }) {
             console.log(token);
             if (token !== null) {
                 setAuthToken(token)
-                await fetch('http://192.168.1.11:3001', {
+                await fetch(`${serverUrl}:3001`, {
                     method: 'GET',
                     headers: {
                         Accept: 'application/json',
