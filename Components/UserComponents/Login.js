@@ -39,7 +39,7 @@ const Login = observer(({ navigation }) => {
         }
         await store.user.login(user)
         console.log(store.user)
-        return store.user.isLoggedIn && navigation.navigate('Home')
+        return store.user.isLoggedIn && navigation.replace('Home')
     }
 
 

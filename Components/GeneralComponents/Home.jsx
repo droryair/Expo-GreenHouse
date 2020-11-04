@@ -62,7 +62,6 @@ export default function Home({ navigation }) {
                 alignItems: "center"
             }}>
             <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
-            <Text>Hello, world!</Text>
             {store.user.isLoggedIn
                 ? <>
                     <Button
