@@ -117,8 +117,11 @@ const App = observer(() => {
               <Drawer.Screen name="Identify Plant" component={IdentifyStack} />
               <Drawer.Screen name="My Garden" component={GardenStack} />
               <Drawer.Screen name="BOTanist" component={BOTanistChat} />
-              <Drawer.Screen options={{ headerLeft: () => null }}
-                name="Logout" component={Logout} />
+              <Drawer.Screen
+                options={{ headerLeft: () => null }}
+                name="Logout"
+                component={Logout}
+              />
             </Drawer.Navigator>
             <SnackBar />
           </>
@@ -134,6 +137,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "column",
   },
 })
 
