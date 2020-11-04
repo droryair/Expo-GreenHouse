@@ -24,7 +24,7 @@ export default class gardenAreasStore {
         fetch(`${this.utils.serverUrl}:3001/gardens/${this.currentUser.id}`, {
             method: 'GET'
         })
-            .then(response => this.Areas = response)
+            .then(response => response.json())
             .then(responseJson => {
                 this.Areas = responseJson
             })
