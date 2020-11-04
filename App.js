@@ -33,12 +33,13 @@ import DiseasesStore from "./Stores/DiseasesStore"
 import UtilityStore from "./Stores/UtilityStore"
 import SnackBar from "./Components/UtilityComponents/SnackBar"
 import { observer } from "mobx-react"
+import BOTanistStore from "./Stores/BotanistStore"
 
 const utilityStore = new UtilityStore()
 const user = new User(utilityStore)
 const identification = new Identification(utilityStore)
 const gardenAreas = new gardenAreasStore(utilityStore, user)
-
+const BotanistStore = new BOTanistStore(utilityStore)
 const PlantsStore = new Plants()
 const Diseases = new DiseasesStore()
 
@@ -49,6 +50,7 @@ const store = {
   user,
   Diseases,
   utilityStore,
+  BotanistStore
 }
 
 export const PlantsContext = createContext(store)

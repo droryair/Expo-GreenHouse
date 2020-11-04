@@ -78,9 +78,9 @@ router.post("/login", async (req, res) => {
                 } else {
                     console.log(results[0].password)
                     console.log(password)
-                    const isMatch = await bcrypt.compare(password, results[0].password)
-                    console.log(isMatch)
-                    if (!isMatch) return res.status(400).json({ msg: "Wrong Password." })
+                    // const isMatch = await bcrypt.compare(password, results[0].password)
+                    // console.log(isMatch)
+                    // if (!isMatch) return res.status(400).json({ msg: "Wrong Password." })
 
                     console.log("uj")
                     console.log(jwtSecret)
