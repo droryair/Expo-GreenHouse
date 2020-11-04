@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native"
 import React from "react"
-import { Button, Text, View } from "react-native"
+import { Button, Text, View, TouchableOpacity } from "react-native"
 import MyGarden from "../GardenComponents/MyGarden"
 import PlantIdentify from "../IdentifyComponents/PlantIdentify"
 import { createStackNavigator } from "@react-navigation/stack"
@@ -73,15 +73,35 @@ export default function GetStarted({ navigation }) {
       <Backgroundvideo asset={require("../../assets/leafs_and_drops_01.mov")} />
       <Logo
         asset={require("../../assets/GeenHouse-logo-white.png")}
-        marginBottom={80}
+        styling={{ marginBottom: 200 }}
       />
-      <Button
+      {/*   <Button
         title="Get Started"
-        color="#000000"
-        style={{ padding: 50, zIndex: 100 }}
+        color="rgba(0, 0, 0, 0.5)"
+
         accessibilityLabel="Get Started"
         onPress={() => hendlePress(authToken == null ? "Login" : "Home")}
-      />
+      /> */}
+      <TouchableOpacity
+        accessibilityLabel="Get Started"
+        onPress={() => hendlePress(authToken == null ? "Login" : "Home")}
+      >
+        <Text
+          style={{
+            color: "#fff",
+            borderColor: "#fff",
+            borderWidth: 2,
+            padding: 10,
+            borderRadius: 10,
+            width: 200,
+            fontSize: 20,
+            textAlign: "center",
+            backgroundColor: "hsla(87, 0%, 0%, 0.77)",
+          }}
+        >
+          Get Started
+        </Text>
+      </TouchableOpacity>
     </View>
   )
 }
