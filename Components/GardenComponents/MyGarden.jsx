@@ -30,8 +30,8 @@ export default function MyGarden({ navigation }) {
             justifyContent: "center",
             alignItems: "center"
             }}>
-                <ScrollView>
             <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
+            <ScrollView>
             {/* <Button
                 onPress={onPressAddArea}
                 title="+ | New Garden Area"

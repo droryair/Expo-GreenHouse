@@ -141,8 +141,8 @@ const NewPlant = observer(() => {
         }}
       >
         <Text>
-          <div className="new-plant-form">
-            <div className="search-plant">
+          <View className="new-plant-form">
+            <View className="search-plant">
               <Input
                 placeholder="Plant name"
                 value={inputs.search}
@@ -155,7 +155,7 @@ const NewPlant = observer(() => {
                 disabled={inputs.search === ""}
               />
               {isSearched ? (
-                <div className="search-results">
+                <View className="search-results">
                   {selectedPlant === null ? (
                     <>
                       <Text>
@@ -175,7 +175,7 @@ const NewPlant = observer(() => {
                         )}
                     </>
                   ) : (
-                      <div className="plant-info">
+                      <View className="plant-info">
                         <Text>
                           Scientific Name: {selectedPlant.scientific_name}
                         </Text>
@@ -187,7 +187,7 @@ const NewPlant = observer(() => {
                           }
                         />
                         <Text>Garden Area: {gardenArea.name}</Text>
-                        <div>
+                        <View>
                           <Text>Should be watered each</Text>
                           <Input
                             type="number"
@@ -198,17 +198,17 @@ const NewPlant = observer(() => {
                             }
                           />
                           <Text>Days</Text>
-                        </div>
+                        </View>
                         <Image source={selectedPlant.img_link} />
                         <Button title="Add Plant" onPress={savePlantToDB} />
-                      </div>
+                      </View>
                     )}
-                </div>
+                </View>
               ) : (
                   <></>
                 )}
-            </div>
-          </div>
+            </View>
+          </View>
         </Text>
       </View>
     )
