@@ -32,12 +32,11 @@ export default function MyGarden({ navigation }) {
             }}>
                 <ScrollView>
             <Button title="Menu" onPress={() => navigation.toggleDrawer()} />
-            <Text>My Garden</Text>
-            <Button
+            {/* <Button
                 onPress={onPressAddArea}
                 title="+ | New Garden Area"
                 color="green"
-            />
+            /> */}
             {/* <View */}
                 {/* style={{
                     flex: 1,

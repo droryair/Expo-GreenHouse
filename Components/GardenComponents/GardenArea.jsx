@@ -25,7 +25,6 @@ export default function GardenArea(props) {
         <ScrollView>
             <Card>
                 <Text>
-                    {/* <Card.Title>{area.nickName ? area.nickName : area.type}</Card.Title> */}
                     <Card.Title>{area.name ? area.name : area.type}</Card.Title>
                 </Text>
                 <Card.Divider />
@@ -34,9 +33,6 @@ export default function GardenArea(props) {
                     source={area.imgURL ? area.imgURL : balcony}
                 />
                 <Text style={{ marginBottom: 10 }}>
-                    {/* <ul>
-                        {area.conditions.map((c, i) => <li key={i}>{c}</li>)}
-                    </ul> */}
                     {area.conditions.map((c, i) => {
                         return (
                             <FlatList
