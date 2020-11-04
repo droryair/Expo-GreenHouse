@@ -58,10 +58,14 @@ const RenderPlant = observer((props) => {
                   <Card.Title>{p.nickname}</Card.Title>
                 </Text>
                 <Card.Divider />
-                <Image
-                  style={styles.tinyLogo}
-                  source={p.img_link ? p.img_link : plantIcon}
-                />
+                  {p.img_link 
+                    ? <Image
+                        style={styles.tinyLogo}
+                        source={{uri:p.img_link}}
+                      />
+                    : null
+                  }
+
                 <Text style={{ marginBottom: 10 }}></Text>
                 <Button
                   icon={<Icon name="code" color="green" />}
