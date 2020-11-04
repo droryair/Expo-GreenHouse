@@ -7,13 +7,14 @@ export default class UtilityStore {
       isShown: false,
       title: "Loading..",
       msg: "Please wait",
+      loader: 1,
     }
     this.emptyState = {
       msg: "No data to show here.",
       isShown: false,
       handleGoBack: null,
     }
-    this.serverUrl = "http://192.168.1.204"
+    this.serverUrl = "http://10.0.0.4"
     makeObservable(this, {
       snackBar: observable,
       loadingState: observable,
@@ -52,6 +53,7 @@ export default class UtilityStore {
     if (title) {
       this.loadingState.title = title
     }
+    this.loadingState.loader = Math.floor(Math.random() * 4) + 1
     this.loadingState.isShown = true
   }
   hideLoadingState = () => {
