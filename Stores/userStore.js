@@ -4,16 +4,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class User {
 
-    // isLoggedIn;
-    // token;
-    // id;
-    // firstName;
-    // lastName;
-    // city;
-    // email;
-    // xp;
-    // rank;
-    // createdAt;
 
     constructor(utils) {
         this.utils = utils
@@ -107,7 +97,9 @@ export default class User {
 
     }
     login = async (user) => {
+
         await fetch(`${this.utils.serverUrl}:3001/login`, {
+
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -119,7 +111,7 @@ export default class User {
         })
             .then(response => response.json())
             .then(async responseJson => {
-
+                console.log(this.utils)
                 console.log(responseJson);
 
 

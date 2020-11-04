@@ -109,26 +109,17 @@ const App = observer(() => {
     <>
       <NavigationContainer>
         <PlantsProvider value={store}>
-
           <>
             <Drawer.Navigator initialRouteName="Home">
-              {/* <Drawer.Screen name="MyGarden" component={MyGarden} /> */}
-              {/* <Drawer.Screen name="Home" component={Home} /> */}
               <Drawer.Screen name="Home" component={AuthStack} />
               <Drawer.Screen name="Identify Plant" component={IdentifyStack} />
               <Drawer.Screen name="My Garden" component={GardenStack} />
-              {/* <Drawer.Screen name="NotificationsStack" component={NotificationsStack} /> */}
               <Drawer.Screen name="BOTanist" component={BOTanistChat} />
-              <Drawer.Screen name="Logout" component={Logout} />
-
-              {/* <Drawer.Screen name="Login" component={Login} /> */}
-
-              {/* <Drawer.Screen name="RenderPlant" component={RenderPlant}/>
-            <Drawer.Screen name="PlantDetails" component={PlantDetails}/> */}
+              <Drawer.Screen options={{ headerLeft: () => null }}
+                name="Logout" component={Logout} />
             </Drawer.Navigator>
             <SnackBar />
           </>
-
         </PlantsProvider>
       </NavigationContainer>
     </>
