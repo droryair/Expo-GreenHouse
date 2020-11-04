@@ -10,12 +10,12 @@ export default function EmptyState() {
       <Text style={styles.empty}>
         <Entypo name="emoji-sad" size={24} color="black" style={styles.icon} />
         <Text style={styles.text}>{store.utilityStore.emptyState.msg}</Text>
-        <Button
+        {/* <Button
           title="< Go Back"
           onPress={() => {
             store.utilityStore.emptyStateGoBack()
           }}
-        />
+        /> */}
       </Text>
     </View>
   )
@@ -26,15 +26,16 @@ const styles = StyleSheet.create({
     height: 250,
     width: 250,
     borderRadius: 50,
-    flex:1,
-    // gridGap: 10,
-    justifyContent: 'center',
-    // alignContent: "center",
+    display: "flex",
+    justifyContent: "center",
+    alignContent: "center",
+
     padding: 10,
     backgroundColor: "white",
   },
   text: {
     textAlign: "center",
+    fontSize: 20,
   },
   icon: {
     textAlign: "center",

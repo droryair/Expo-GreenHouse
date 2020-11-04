@@ -39,9 +39,9 @@ const NewPlant = observer(() => {
       results.data.length
         ? setSearchResults(results.data)
         : store.utilityStore.showEmptyState(
-          "Couldn't find any plants with this name. Please change your search and try again.",
-          goBackToSearch()
-        )
+            "Couldn't find any plants with this name. Please change your search and try again.",
+            goBackToSearch()
+          )
       store.utilityStore.hideLoadingState()
       setIsSearched(true)
     } catch (err) {
@@ -68,19 +68,19 @@ const NewPlant = observer(() => {
           { detailsUrl: p.detailsUrl }
         )
         results.data.conditions.length ||
-          results.data ||
-          results.data.diseases.length
+        results.data ||
+        results.data.diseases.length
           ? setSelectedPlant(results.data)
           : store.utilityStore.showEmptyState(
-            "We're sorry, this plant is currently unsupported.",
-            goBackToPlantResults()
-          )
+              "We're sorry, this plant is currently unsupported.",
+              goBackToPlantResults
+            )
         store.utilityStore.hideLoadingState()
       } else {
         setSelectedPlant(null)
         store.utilityStore.showEmptyState(
           "Couldn't find this plant. Please try again.",
-          goBackToPlantResults()
+          goBackToPlantResults
         )
         store.utilityStore.hideLoadingState()
         console.log(err)
@@ -117,8 +117,8 @@ const NewPlant = observer(() => {
       store.utilityStore.hideLoadingState()
       plant.data
         ? store.utilityStore.showSnackBar(
-          `Successfully added ${inputs.nickname} to your ${gardenArea.name} garden!`
-        )
+            `Successfully added ${inputs.nickname} to your ${gardenArea.name} garden!`
+          )
         : null
     } catch (err) {
       store.utilityStore.showSnackBar(
@@ -133,84 +133,84 @@ const NewPlant = observer(() => {
   return store.utilityStore.loadingState.isShown ? (
     <LoadingState />
   ) : (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Text>
-          <View className="new-plant-form">
-            <View className="search-plant">
-              <Input
-                placeholder="Plant name"
-                value={inputs.search}
-                onChangeText={(value) => setInputs({ ...inputs, search: value })}
-                leftIcon={<Icon name="search" size={24} color="black" />}
-              />
-              <Button
-                title="Search"
-                onPress={handleSearch}
-                disabled={inputs.search === ""}
-              />
-              {isSearched ? (
-                <View className="search-results">
-                  {selectedPlant === null ? (
-                    <>
-                      <Text>
-                        Found {searchResults.length} plants that match your
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Text>
+        <View className="new-plant-form">
+          <View className="search-plant">
+            <Input
+              placeholder="Plant name"
+              value={inputs.search}
+              onChangeText={(value) => setInputs({ ...inputs, search: value })}
+              leftIcon={<Icon name="search" size={24} color="black" />}
+            />
+            <Button
+              title="Search"
+              onPress={handleSearch}
+              disabled={inputs.search === ""}
+            />
+            {isSearched ? (
+              <View className="search-results">
+                {selectedPlant === null ? (
+                  <>
+                    <Text>
+                      Found {searchResults.length} plants that match your
                       search:
                     </Text>
-                      {searchResults.length ? (
-                        searchResults.map((result, index) => (
-                          <Button
-                            key={`result-${index}`}
-                            title={result.name}
-                            onPress={handleResultPress}
-                          />
-                        ))
-                      ) : (
-                          <EmptyState />
-                        )}
-                    </>
-                  ) : (
-                      <View className="plant-info">
-                        <Text>
-                          Scientific Name: {selectedPlant.scientific_name}
-                        </Text>
-                        <Input
-                          placeholder="Nickname"
-                          value={inputs.nickname}
-                          onChangeText={(value) =>
-                            setInputs({ ...inputs, nickname: value })
-                          }
+                    {searchResults.length ? (
+                      searchResults.map((result, index) => (
+                        <Button
+                          key={`result-${index}`}
+                          title={result.name}
+                          onPress={handleResultPress}
                         />
-                        <Text>Garden Area: {gardenArea.name}</Text>
-                        <View>
-                          <Text>Should be watered each</Text>
-                          <Input
-                            type="number"
-                            placeholder=""
-                            value={inputs.wateringFrequency}
-                            onChangeText={(value) =>
-                              setInputs({ ...inputs, wateringFrequency: value })
-                            }
-                          />
-                          <Text>Days</Text>
-                        </View>
-                        <Image source={selectedPlant.img_link} />
-                        <Button title="Add Plant" onPress={savePlantToDB} />
-                      </View>
+                      ))
+                    ) : (
+                      <EmptyState />
                     )}
-                </View>
-              ) : (
-                  <></>
+                  </>
+                ) : (
+                  <View className="plant-info">
+                    <Text>
+                      Scientific Name: {selectedPlant.scientific_name}
+                    </Text>
+                    <Input
+                      placeholder="Nickname"
+                      value={inputs.nickname}
+                      onChangeText={(value) =>
+                        setInputs({ ...inputs, nickname: value })
+                      }
+                    />
+                    <Text>Garden Area: {gardenArea.name}</Text>
+                    <View>
+                      <Text>Should be watered each</Text>
+                      <Input
+                        type="number"
+                        placeholder=""
+                        value={inputs.wateringFrequency}
+                        onChangeText={(value) =>
+                          setInputs({ ...inputs, wateringFrequency: value })
+                        }
+                      />
+                      <Text>Days</Text>
+                    </View>
+                    <Image source={{ uri: selectedPlant.img_link }} />
+                    <Button title="Add Plant" onPress={savePlantToDB} />
+                  </View>
                 )}
-            </View>
+              </View>
+            ) : (
+              <></>
+            )}
           </View>
-        </Text>
-      </View>
-    )
+        </View>
+      </Text>
+    </View>
+  )
 })
 export default NewPlant
