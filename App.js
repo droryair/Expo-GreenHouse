@@ -35,7 +35,7 @@ import SnackBar from "./Components/UtilityComponents/SnackBar"
 import { observer } from "mobx-react"
 
 const utilityStore = new UtilityStore()
-const user = new User()
+const user = new User(utilityStore)
 const identification = new Identification(utilityStore)
 const gardenAreas = new gardenAreasStore(utilityStore, user)
 
