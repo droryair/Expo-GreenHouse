@@ -37,7 +37,7 @@ const Login = observer(({ navigation }) => {
     }
     await store.user.login(user)
     console.log(store.user)
-    return store.user.isLoggedIn && navigation.navigate("Home")
+    return store.user.isLoggedIn && navigation.replace("Home")
   }
 
   return (
@@ -103,7 +103,7 @@ const Login = observer(({ navigation }) => {
                   borderRadius: 10,
                   width: 100,
                   textAlign: "center",
-                  backgroundColor: "hsla(87, 0%, 0%, 0.77)",
+                  backgroundColor: "hsla(87, 0%, 0%, 0.5)",
                 },
               ]}
             >
@@ -123,6 +123,7 @@ const Login = observer(({ navigation }) => {
                 styles.textSign,
                 {
                   color: "#DCFFB2",
+                  textAlign: "center",
                 },
               ]}
             >
@@ -170,6 +171,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 18,
     fontWeight: "bold",
+    marginBottom: 5,
   },
   action: {
     flexDirection: "row",
@@ -184,6 +186,10 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     color: "white",
     height: 50,
+    backgroundColor: "hsla(87, 0%, 0%, 0.3)",
+    borderRadius: 10,
+    paddingLeft: 20,
+    fontWeight: "bold",
   },
   button: {
     alignItems: "center",

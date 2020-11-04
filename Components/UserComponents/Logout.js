@@ -24,7 +24,7 @@ export default function Logout({ navigation }) {
             const allStorage = await AsyncStorage.getAllKeys()
             console.log(allStorage);
             store.user.isLoggedIn = false
-            navigation.navigate('GetStarted')
+            navigation.navigate('AuthStack')
 
         }
         logout()

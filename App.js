@@ -35,7 +35,7 @@ import SnackBar from "./Components/UtilityComponents/SnackBar"
 import { observer } from "mobx-react"
 
 const utilityStore = new UtilityStore()
-const user = new User()
+const user = new User(utilityStore)
 const identification = new Identification(utilityStore)
 const gardenAreas = new gardenAreasStore(utilityStore, user)
 
@@ -109,26 +109,17 @@ const App = observer(() => {
     <>
       <NavigationContainer>
         <PlantsProvider value={store}>
-
           <>
             <Drawer.Navigator initialRouteName="Home">
-              {/* <Drawer.Screen name="MyGarden" component={MyGarden} /> */}
-              {/* <Drawer.Screen name="Home" component={Home} /> */}
               <Drawer.Screen name="Home" component={AuthStack} />
               <Drawer.Screen name="Identify Plant" component={IdentifyStack} />
               <Drawer.Screen name="My Garden" component={GardenStack} />
-              {/* <Drawer.Screen name="NotificationsStack" component={NotificationsStack} /> */}
               <Drawer.Screen name="BOTanist" component={BOTanistChat} />
-              <Drawer.Screen name="Logout" component={Logout} />
-
-              {/* <Drawer.Screen name="Login" component={Login} /> */}
-
-              {/* <Drawer.Screen name="RenderPlant" component={RenderPlant}/>
-            <Drawer.Screen name="PlantDetails" component={PlantDetails}/> */}
+              <Drawer.Screen options={{ headerLeft: () => null }}
+                name="Logout" component={Logout} />
             </Drawer.Navigator>
             <SnackBar />
           </>
-
         </PlantsProvider>
       </NavigationContainer>
     </>

@@ -11,7 +11,8 @@ import Backgroundvideo from "../UtilityComponents/BackgroundVideo"
 import Logo from "../UtilityComponents/Logo"
 
 export default function GetStarted({ navigation }) {
-  const store = usePlantsStore()
+  const store = usePlantsStore(),
+    { serverUrl } = store.utilityStore
   const [authToken, setAuthToken] = React.useState(null)
 
   React.useEffect(() => {
@@ -20,7 +21,7 @@ export default function GetStarted({ navigation }) {
       console.log(token)
       if (token !== null) {
         setAuthToken(token)
-        await fetch("http://192.168.1.11:3001", {
+        await fetch(`${serverUrl}:3001`, {
           method: "GET",
           headers: {
             Accept: "application/json",
@@ -96,7 +97,7 @@ export default function GetStarted({ navigation }) {
             width: 200,
             fontSize: 20,
             textAlign: "center",
-            backgroundColor: "hsla(87, 0%, 0%, 0.77)",
+            backgroundColor: "hsla(87, 0%, 0%, 0.5)",
           }}
         >
           Get Started

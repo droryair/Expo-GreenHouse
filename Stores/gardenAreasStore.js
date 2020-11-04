@@ -10,44 +10,44 @@ export default class gardenAreasStore {
         this.currentUser = {
             id: 1
         }
-    this.getAreas()
-    makeObservable(this, {
-        Areas:               observable,
-        currentGardenPlants: observable,
-        getAreas:            action,
-        getGardensPlants:    action,
-        addArea:             action
-    })
-    
-}
-    getAreas = async () => {        
-        fetch(`${this.utils.serverUrl}:3001/gardens/${this.currentUser.id}`, {
-        method: 'GET'
+        this.getAreas()
+        makeObservable(this, {
+            Areas: observable,
+            currentGardenPlants: observable,
+            getAreas: action,
+            getGardensPlants: action,
+            addArea: action
         })
-        .then(response => response.json())
-        .then(responseJson => {
-            this.Areas = responseJson
-        })
-        .catch(err => {
-            console.log(err);
-            alert(err)
-        })
-        
+
     }
-    getGardensPlants = async (gardenId) => {        
+    getAreas = async () => {
+        fetch(`${this.utils.serverUrl}:3001/gardens/${this.currentUser.id}`, {
+            method: 'GET'
+        })
+            .then(response => response.json())
+            .then(responseJson => {
+                this.Areas = responseJson
+            })
+            .catch(err => {
+                console.log(err);
+                alert(err)
+            })
+
+    }
+    getGardensPlants = async (gardenId) => {
         this.currentGardenPlants = []
         fetch(`${this.utils.serverUrl}:3001/gardens/allPlants/${gardenId}`, {
-        method: 'GET'
+            method: 'GET'
         })
-        .then(response => response.json())
-        .then(responseJson => {
-            this.currentGardenPlants = responseJson
-        })
-        .catch(err => {
-            console.log(err);
-            alert(err)
-        })
-        
+            .then(response => response.json())
+            .then(responseJson => {
+                this.currentGardenPlants = responseJson
+            })
+            .catch(err => {
+                console.log(err);
+                alert(err)
+            })
+
     }
 
     addArea = (areaObj) => {
