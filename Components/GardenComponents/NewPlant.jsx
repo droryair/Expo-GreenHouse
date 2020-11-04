@@ -83,7 +83,6 @@ const NewPlant = observer(() => {
           goBackToPlantResults
         )
         store.utilityStore.hideLoadingState()
-        console.log(err)
       }
     } catch (err) {
       setSelectedPlant(null)

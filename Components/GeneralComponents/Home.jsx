@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
   },
   button: {
     display: "flex",
-    height: 200,
+    height: 250,
     justifyContent: "center",
     borderColor: "white",
     borderWidth: 2,
