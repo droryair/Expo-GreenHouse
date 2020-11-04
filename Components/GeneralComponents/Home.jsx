@@ -16,6 +16,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import { usePlantsStore } from "../../App"
 import Logo from "../UtilityComponents/Logo"
 import Backgroundvideo from "../UtilityComponents/BackgroundVideo"
+// import GardenStack from "./Components/GardenComponents/GardenStack"
 
 //component assumptions:
 // there are components named : "MyGarden" ,"IdentifyPlants","Recommended"
@@ -88,6 +89,7 @@ export default function Home({ navigation }) {
             />
             <Text style={styles.buttonText}>Tend Garden</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
             style={styles.button}
             onPress={() => hendlePress("PlantIdentify")}
@@ -99,10 +101,11 @@ export default function Home({ navigation }) {
             />
             <Text style={styles.buttonText}>Identify Plants</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
             style={styles.button}
-            onPress={() => hendlePress("MyGarden")}
-            title="Tend Garden"
+            onPress={() => hendlePress("BOTanistChat")}
+            title="BOTanistC"
           >
             <ImageBackground
               source={require("../../assets/background/botanist2.jpg")}

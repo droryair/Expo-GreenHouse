@@ -14,7 +14,7 @@ export default class UtilityStore {
       isShown: false,
       handleGoBack: null,
     }
-    this.serverUrl = "http://10.0.0.4"
+    this.serverUrl = "http://192.168.1.204"
     makeObservable(this, {
       snackBar: observable,
       loadingState: observable,
