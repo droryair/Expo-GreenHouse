@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "white",
   },
-  text: { marginTop: 10, marginBottom: 10, fontSize: 30 },
+  text: { marginTop: 10, marginBottom: 10, fontSize: 20 ,fontWeight:"bold" },
   msg: { marginTop: 10, marginBottom: 10, fontSize: 20 },
   view: {
     flex: 1,
