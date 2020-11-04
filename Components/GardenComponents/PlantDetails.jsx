@@ -49,28 +49,38 @@ export default function PlantDetails(props){
                 alignItems: "center"
             }}>
             <Card>
-                <Text style={styles.title}>{plantData.nickname}</Text>
-                    {plantData.img_link 
-                        ? <Image
-                            style={styles.tinyLogo}
-                            source={{uri:plantData.img_link}}
-                        />
-                        : null
-                    }
-                <Text>
-                        <Text style={styles.header}>Scientific Name: </Text>  
-                        {plantData.scientific_name}
-                </Text>
-                <Text>
-                    <Text style={styles.header}>Watering:</Text>  
-                    Every {plantData.watering_frequency} days
-                </Text>
-                <Card.Divider />
                 <ScrollView>
+                    <Text style={styles.title}>{plantData.nickname}</Text>
+                        {plantData.img_link 
+                            ? <Image
+                                style={styles.tinyLogo}
+                                source={{uri:plantData.img_link}}
+                            />
+                            : null
+                        }
                     <Text>
-                        <Text style={styles.header}>Growing Conditions: </Text>  
+                            <Text style={styles.header}>Scientific Name: </Text>  
+                            {plantData.scientific_name}
                     </Text>
-                    {conditions.map((c, i) => <Text key={i}><Text style={styles.header}>{c.name}: </Text> {c.value} </Text> )}
+                    <Text>
+                        <Text style={styles.header}>Watering </Text>  
+                        Every {plantData.watering_frequency} days
+                    </Text>
+                    <Text>
+                        <Text style={styles.header}> Last watered at </Text>  
+                        03/11/2020 20:13
+                    </Text>
+                    <Text>
+                        <Text style={styles.header}> Soil checked at </Text>  
+                        02/11/2020 07:46
+                    </Text>
+                    <Card.Divider />
+                    <ScrollView>
+                        <Text>
+                            <Text style={styles.header}>Growing Conditions: </Text>  
+                        </Text>
+                        {conditions.map((c, i) => <Text key={i}><Text style={styles.header}>{c.name}: </Text> {c.value} </Text> )}
+                    </ScrollView>
                 </ScrollView>
                 <Button
                     title="notify watering"
@@ -85,8 +95,9 @@ export default function PlantDetails(props){
 
 const styles = StyleSheet.create({
     tinyLogo: {
-        width: 100,
-        height: 100,
+        width: "50%",
+        height: 150,
+        marginLeft: "25%"
     },
     title:{
         fontSize:30, 

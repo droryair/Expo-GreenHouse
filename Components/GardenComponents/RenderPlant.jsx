@@ -20,13 +20,14 @@ const RenderPlant = observer((props) => {
   }, [])
 
   const handlePress = (plantID) => {
+    console.table(currentGardenPlants);
     return navigation.navigate("PlantDetails", { plantID })
   }
   const handleNewPlantPress = () => {
     return navigation.navigate("NewPlant", area)
   }
   return (
-    <ScrollView>
+    <ScrollView style={styles.scroll}>
       <View
         style={{
           flex: 1,
@@ -53,7 +54,7 @@ const RenderPlant = observer((props) => {
         <View>
           {currentGardenPlants.map((p, i) => {
             return (
-              <Card key={i}>
+              <Card style={styles.card} key={i}>
                 <Text>
                   <Card.Title>{p.nickname}</Card.Title>
                 </Text>
@@ -88,9 +89,17 @@ const RenderPlant = observer((props) => {
 })
 const styles = StyleSheet.create({
   tinyLogo: {
-    width: 50,
-    height: 50,
+    width: "100%",
+    height: 200,
   },
+  card:{
+    flex:1,
+    // width: "90%",
+    // marginLeft: "5%"
+  },
+  scroll:{
+    width:"100%"
+  }
 })
 
 export default RenderPlant

@@ -42,7 +42,7 @@ const Login = observer(({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Backgroundvideo asset={require("../../assets/leafs_and_drops_01.mov")} />
+      <Backgroundvideo asset={require("../../assets/background/plants-raindrops.mp4")} />
       <StatusBar backgroundColor="#009387" barStyle="light-content" />
       <View style={styles.header}>
         <Logo
@@ -52,7 +52,7 @@ const Login = observer(({ navigation }) => {
             height: 70,
             marginBottom: 20,
           }}
-          asset={require("../../assets/GeenHouse-logo-white.png")}
+          asset={require("../../assets/logo/GeenHouse-logo-white.png")}
         />
 
         <Text style={styles.text_header}>Login Now!</Text>

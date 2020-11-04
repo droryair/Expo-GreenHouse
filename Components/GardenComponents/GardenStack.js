@@ -11,10 +11,10 @@ const Stack = createStackNavigator()
 export default function GardenStack() {
   return (
     <Stack.Navigator initialRouteName="MyGarden">
-      <Stack.Screen name="MyGarden" component={MyGarden} />
-      <Stack.Screen name="RenderPlant" component={RenderPlant} />
-      <Stack.Screen name="PlantDetails" component={PlantDetails} />
-      <Stack.Screen name="NewPlant" component={NewPlant} />
+      <Stack.Screen name="MyGarden"     component={MyGarden}       options={{ title: 'My Garden' }}/>
+      <Stack.Screen name="RenderPlant"  component={RenderPlant}   options={{ title: 'Plants In Garden' }} />
+      <Stack.Screen name="PlantDetails" component={PlantDetails}  options={{ title: 'Plant Details' }}/>
+      <Stack.Screen name="NewPlant"     component={NewPlant}      options={{ title: 'Add Plant' }}/>
       <Stack.Screen
         name="ScheduleNotifications"
         component={ScheduleNotifications}

@@ -71,9 +71,9 @@ export default function GetStarted({ navigation }) {
         alignItems: "center",
       }}
     >
-      <Backgroundvideo asset={require("../../assets/leafs_and_drops_01.mov")} />
+      <Backgroundvideo asset={require("../../assets/background/plants-raindrops.mp4")} />
       <Logo
-        asset={require("../../assets/GeenHouse-logo-white.png")}
+        asset={require("../../assets/logo/GeenHouse-logo-white.png")}
         styling={{ marginBottom: 200 }}
       />
       {/*   <Button

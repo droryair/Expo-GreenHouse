@@ -13,7 +13,7 @@ export default function Backgroundvideo(props) {
         resizeMode="cover"
         shouldPlay
         isLooping
-        style={styles.video}
+        style={[styles.video, props.styling]}
       />
     </View>
   )
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     zIndex: 0,
-    opacity: 0.7,
+    opacity: 0.6,
   },
   overlay: {
     position: "absolute",
