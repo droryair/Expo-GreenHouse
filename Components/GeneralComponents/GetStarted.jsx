@@ -23,7 +23,6 @@ export default function GetStarted({ navigation }) {
             if (token !== null) {
                 setAuthToken(token)
                 await fetch(`${serverUrl}:3001`, {
-                // await fetch('http://192.168.1.11:3001', {
                     method: 'GET',
                     headers: {
                         Accept: 'application/json',

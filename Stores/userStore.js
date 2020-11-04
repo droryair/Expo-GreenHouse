@@ -107,7 +107,6 @@ export default class User {
 
     }
     login = async (user) => {
-        // await fetch('http://192.168.1.11:3001/login', {
         await fetch(`${this.utils.serverUrl}:3001/login`, {
             method: 'POST',
             headers: {
