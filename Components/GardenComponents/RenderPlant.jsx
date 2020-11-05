@@ -36,8 +36,9 @@ const RenderPlant = observer((props) => {
       navigation.navigate("MyGarden")
     })
   }
-  const handlePress = (plantID) => {
-    return navigation.navigate("PlantDetails", { plantID ,navigation})
+
+  const handlePress = (plantID, plant) => {
+    return navigation.navigate("PlantDetails", { plantID, plant, navigation })
   }
   const handleNewPlantPress = () => {
     return navigation.navigate("NewPlant", { area })
@@ -46,56 +47,57 @@ const RenderPlant = observer((props) => {
     <LoadingState />
   ) : (
     <View style={styles.container}>
-      <ScrollView style={styles.scroll}>
-        <ImageBackground
-          source={require("../../assets/background/background1.jpeg")}
-          style={styles.image}
+      <View style={styles.header}>
+        <Button
+          title="Menu"
+          onPress={() => navigation.toggleDrawer()}
+          style={styles.menu}
+          color="black"
         />
-        <View style={styles.header}>
-          <Button
-            title="Menu"
-            onPress={() => navigation.toggleDrawer()}
-            style={styles.menu}
-            color="black"
-          />
-          <Logo
-            asset={require("../../assets/logo/GeenHouse-logo-black.png")}
-            styling={{
-              width: 130,
-              height: 30,
-              marginTop: 10,
-              marginBottom: 10,
-              justifyContent: "center",
-            }}
-          />
-        </View>
-        <View>
-          <View style={styles.newPlantBtn}>
-            <TouchableOpacity
-              title="New Plant"
-              onPress={() => handleNewPlantPress()}
-            >
-              <Text
-                style={[
-                  styles.textSign,
-                  {
-                    color: "#fff",
-                    borderColor: "#fff",
-                    borderWidth: 2,
-                    padding: 10,
-                    borderRadius: 10,
-                    width: 300,
-                    textAlign: "center",
-                    backgroundColor: "hsla(87, 0%, 0%, 0.5)",
-                    fontSize: 20,
-                  },
-                ]}
+        <Logo
+          asset={require("../../assets/logo/GeenHouse-logo-black.png")}
+          styling={{
+            width: 130,
+            height: 30,
+            marginTop: 10,
+            marginBottom: 10,
+            justifyContent: "center",
+          }}
+        />
+      </View>
+      <ImageBackground
+        source={require("../../assets/background/background1.jpeg")}
+        style={styles.image}
+      />
+      <View style={{ justifyContent: "center", alignItems: "center" }}>
+        <ScrollView>
+          <View>
+            <View style={styles.newPlantBtn}>
+              <TouchableOpacity
+                title="New Plant"
+                onPress={() => handleNewPlantPress()}
               >
-                + New Plant
-              </Text>
-            </TouchableOpacity>
-          </View>
-          {/*  <Button
+                <Text
+                  style={[
+                    styles.textSign,
+                    {
+                      color: "#fff",
+                      borderColor: "#fff",
+                      borderWidth: 2,
+                      padding: 10,
+                      borderRadius: 10,
+                      width: 300,
+                      textAlign: "center",
+                      backgroundColor: "hsla(87, 0%, 0%, 0.5)",
+                      fontSize: 20,
+                    },
+                  ]}
+                >
+                  + New Plant
+                </Text>
+              </TouchableOpacity>
+            </View>
+            {/*  <Button
           icon={<Icon name="code" color="green" />}
           buttonStyle={{
             borderRadius: 0,
@@ -106,49 +108,49 @@ const RenderPlant = observer((props) => {
           title="New Plant"
           onPress={() => handleNewPlantPress()}
         /> */}
-          <Text style={styles.title}>
-            These are the plants in your -
-            {area.nickName ? area.nickName : area.type}- garden area
-          </Text>
-          <View>
-            {store.utilityStore.emptyState.isShown &&
-            !currentGardenPlants.length ? (
-              <EmptyState />
-            ) : (
-              currentGardenPlants.map((p, i) => {
-                return (
-                  <Card style={styles.card} key={i}>
-                    <Text>
-                      <Card.Title>{p.nickname}</Card.Title>
-                    </Text>
-                    <Card.Divider />
-                    {p.img_link ? (
-                      <Image
-                        style={styles.tinyLogo}
-                        source={{ uri: p.img_link }}
+            <Text style={styles.title}>
+              These are the plants in your -
+              {area.nickName ? area.nickName : area.type}- garden area
+            </Text>
+            <View>
+              {store.utilityStore.emptyState.isShown &&
+              !currentGardenPlants.length ? (
+                <EmptyState />
+              ) : (
+                currentGardenPlants.map((p, i) => {
+                  return (
+                    <Card style={styles.card} key={i}>
+                      <Text>
+                        <Card.Title>{p.nickname}</Card.Title>
+                      </Text>
+                      <Card.Divider />
+                      {p.img_link ? (
+                        <Image
+                          style={styles.tinyLogo}
+                          source={{ uri: p.img_link }}
+                        />
+                      ) : null}
+                      <Text style={{ marginBottom: 10 }}></Text>
+                      <Button
+                        icon={<Icon name="code" color="green" />}
+                        buttonStyle={{
+                          borderRadius: 0,
+                          marginLeft: 0,
+                          marginRight: 0,
+                          marginBottom: 0,
+                        }}
+                        color="#6e963f"
+                        title="View Plant >"
+                        onPress={() => handlePress(p.id)}
                       />
-                    ) : null}
-
-                    <Text style={{ marginBottom: 10 }}></Text>
-                    <Button
-                      icon={<Icon name="code" color="green" />}
-                      buttonStyle={{
-                        borderRadius: 0,
-                        marginLeft: 0,
-                        marginRight: 0,
-                        marginBottom: 0,
-                      }}
-                      color="#6e963f"
-                      title="View Plant >"
-                      onPress={() => handlePress(p.id)}
-                    />
-                  </Card>
-                )
-              })
-            )}
+                    </Card>
+                  )
+                })
+              )}
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
     </View>
   )
 })
@@ -160,6 +162,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "white",
     paddingLeft: 20,
+    zIndex: 1,
   },
   image: {
     flex: 1,
@@ -185,8 +188,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
   title: {
     textAlign: "center",

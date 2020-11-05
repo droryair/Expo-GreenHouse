@@ -9,7 +9,7 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from "react-native"
-import { Input } from "react-native-elements"
+import { Input, Card } from "react-native-elements"
 import Icon from "react-native-vector-icons/FontAwesome"
 import { useUtilityStore } from "../../App"
 import LoadingState from "../UtilityComponents/LoadingState"
@@ -29,7 +29,6 @@ const NewPlant = observer((props) => {
   const [searchResults, setSearchResults] = useState([])
   const serverUrl = `${store.utilityStore.serverUrl}:3001`
   const gardenArea = props.route.params.area
-  console.log(props)
   const [step, setStep] = useState(1)
   const instructions = {
     1: "First, enter your plant to gather information.",
@@ -76,6 +75,7 @@ const NewPlant = observer((props) => {
   const handleResultPress = async (event) => {
     try {
       const plantName = event.target.innerHTML
+      console.log(plantName)
       const p = searchResults.find((p) => p.name === plantName)
       if (p) {
         store.utilityStore.showLoadingState(
@@ -117,7 +117,9 @@ const NewPlant = observer((props) => {
       console.log(err)
     }
   }
-
+  const navigateToNewPlant = (plantID, plant) => {
+    return navigation.navigate("PlantDetails", { plantID, plant, navigation })
+  }
   const savePlantToDB = async () => {
     if (inputs.nickname === "" || inputs.wateringFrequency === "") {
       alert("All fields are required!")
@@ -143,14 +145,13 @@ const NewPlant = observer((props) => {
           store.utilityStore.showSnackBar(
             `Successfully added ${inputs.nickname} to your ${gardenArea.name} garden!`
           )
-          props.navigation.navigate("MyGarden", { plantID })
+          setIsSearched(false)
         }
       } catch (err) {
         store.utilityStore.showSnackBar(
           "Oops, something went wrong. Please try again"
         )
         store.utilityStore.hideLoadingState()
-
         console.log(err)
       }
     }
@@ -163,19 +164,23 @@ const NewPlant = observer((props) => {
       style={{
         flex: 1,
         justifyContent: "center",
-        alignItems: "center",
       }}
     >
-      <ScrollView>
-        <ImageBackground
-          source={require("../../assets/background/background2.jpg")}
-          style={styles.image}
-        />
-        <Text style={styles.container}>
-          <View style={styles.form}>
+      <ImageBackground
+        source={require("../../assets/background/background2.jpg")}
+        style={styles.image}
+      />
+      <Text style={styles.container}>
+        <View style={styles.form}>
+          <ScrollView>
             <Text style={styles.title}>Add new plant</Text>
-            <Text style={styles.subtitles}>{instructions[step]}</Text>
-            <View className="search-plant">
+            <Text style={[styles.subtitles, { width: "80%" }]}>
+              {instructions[step]}
+            </Text>
+            <View
+              className="search-plant"
+              style={{ zIndex: 100, width: "90%" }}
+            >
               <Input
                 placeholder="Plant name"
                 value={inputs.search}
@@ -184,28 +189,35 @@ const NewPlant = observer((props) => {
                 }
                 leftIcon={<Icon name="search" size={24} color="black" />}
               />
-              <Button
-                title="Search"
-                onPress={handleSearch}
-                disabled={inputs.search === ""}
-                color={"#6e963f"}
-              />
+              <View style={{ width: "80%", marginBottom: 10 }}>
+                <Button
+                  title="Search"
+                  onPress={handleSearch}
+                  disabled={inputs.search === ""}
+                  color={"#6e963f"}
+                />
+              </View>
+              <Card.Divider />
               {isSearched ? (
                 <View className="search-results">
                   {selectedPlant === null ? (
                     <>
-                      <Text style={styles.subtitles}>
+                      <Text style={[styles.subtitles, { marginBottom: 10 }]}>
                         Found {searchResults.length} plants that match your
                         search:
                       </Text>
                       {searchResults.length ? (
                         searchResults.map((result, index) => (
-                          <Button
+                          <View
                             key={`result-${index}`}
-                            title={result.name}
-                            onPress={handleResultPress}
-                            color="hsla(87, 25%, 73%, 0.88)"
-                          />
+                            style={{ marginTop: 10, width: "90%" }}
+                          >
+                            <Button
+                              title={result.name}
+                              onPress={handleResultPress}
+                              color="hsl(87, 24%, 60%)"
+                            />
+                          </View>
                         ))
                       ) : (
                         <EmptyState />
@@ -213,7 +225,7 @@ const NewPlant = observer((props) => {
                     </>
                   ) : (
                     <View className="plant-info">
-                      <Text>
+                      <Text style={styles.topics}>
                         Scientific Name: {selectedPlant.scientific_name}
                       </Text>
                       <Input
@@ -223,19 +235,33 @@ const NewPlant = observer((props) => {
                           setInputs({ ...inputs, nickname: value })
                         }
                       />
-                      <Text>Garden Area: {gardenArea.name}</Text>
+                      <Text style={styles.topics}>
+                        Garden Area: {gardenArea.name}
+                      </Text>
+                      <Card.Divider />
                       <View>
-                        <Text>Should be watered each</Text>
-                        <Input
-                          type="number"
-                          placeholder=""
-                          value={inputs.wateringFrequency}
-                          onChangeText={(value) =>
-                            setInputs({ ...inputs, wateringFrequency: value })
-                          }
-                        />
-                        <Text>Days</Text>
+                        <Text style={styles.topics}>
+                          Should be watered each
+                        </Text>
+                        <View
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            width: "90%",
+                          }}
+                        >
+                          <Input
+                            type="number"
+                            placeholder=""
+                            value={inputs.wateringFrequency}
+                            onChangeText={(value) =>
+                              setInputs({ ...inputs, wateringFrequency: value })
+                            }
+                          />
+                          <Text>Days</Text>
+                        </View>
                       </View>
+                      <Card.Divider />
                       <Image source={{ uri: selectedPlant.img_link }} />
                       <Button title="Add Plant" onPress={savePlantToDB} />
                     </View>
@@ -245,24 +271,24 @@ const NewPlant = observer((props) => {
                 <></>
               )}
             </View>
-          </View>
+          </ScrollView>
           <Text style={styles.step}>Step {step}/3</Text>
-        </Text>
-      </ScrollView>
+        </View>
+      </Text>
     </View>
   )
 })
 export default NewPlant
 
 const styles = StyleSheet.create({
-  header: {
+  /*   header: {
     display: "flex",
     flexDirection: "row",
     alignItems: "stretch",
     backgroundColor: "white",
     paddingLeft: 20,
     zIndex: 1,
-  },
+  }, */
   image: {
     flex: 1,
     resizeMode: "cover",
@@ -273,33 +299,43 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     flex: 1,
-    zIndex: 0,
+    zIndex: -1,
     opacity: 0.8,
   },
   container: {
     backgroundColor: "white",
     borderRadius: 10,
-    flex: 1,
-    margin: 20,
-    padding: 10,
+    display: "flex",
+    zIndex: 0,
+    margin: 10,
+  },
+  topics: {
+    color: "black",
+    fontSize: 18,
   },
   form: {
-    padding: 20,
-    justifyContent: "center",
-    flex: 1,
-    justifyContent: "center",
+    display: "flex",
+    padding: 10,
+    alignItems: "center",
   },
   title: {
     color: "black",
-    fontSize: 30,
+    fontSize: 28,
     fontWeight: "bold",
   },
-  step: { color: "#6e963f", fontSize: 18, letterSpacing: 2 },
-  subtitles: { color: "#6e963f", fontSize: 14, fontWeight: "bold" },
+  step: {
+    color: "#6e963f",
+    fontSize: 12,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  subtitles: {
+    color: "#6e963f",
+  },
   option: {
-    borderWidth: 2,
+    /*     borderWidth: 2,
     borderColor: "black",
     marginTop: 10,
-    padding: 5,
+    padding: 5, */
   },
 })

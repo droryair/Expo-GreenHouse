@@ -10,15 +10,13 @@ export default function EmptyState() {
       <Text style={styles.empty}>
         <Entypo name="emoji-sad" size={24} color="black" style={styles.icon} />
         <Text style={styles.text}>{store.utilityStore.emptyState.msg}</Text>
-        {
- /*          <Button
+        {/*          <Button
             title="< Go Back"
             color="black"
             onPress={() => {
               store.utilityStore.emptyStateGoBack()
             }}
-          /> */
-        }
+          /> */}
       </Text>
     </View>
   )
@@ -45,5 +43,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    width: "80%",
   },
 })

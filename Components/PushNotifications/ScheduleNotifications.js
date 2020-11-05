@@ -3,6 +3,7 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 import * as Notifications from 'expo-notifications';
 import * as Permissions from 'expo-permissions';
 import FutureNotification from './FutureNotification';
+import { Constants } from 'expo-camera';
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
@@ -20,6 +21,7 @@ export default function ScheduleNotifications(props) {
     const plant = props.route.params.plant
 
     console.log(props.route)
+    console.log(plant)
 
     useEffect(() => {
         registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
