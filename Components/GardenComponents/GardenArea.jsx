@@ -20,7 +20,6 @@ export default function GardenArea(props) {
   const navigation = props.navigation
   const area = props.area
   const plants = area.plants
-  
 
   const handlePress = () => {
     return navigation.navigate("RenderPlant", { plants, area })
@@ -40,6 +39,9 @@ export default function GardenArea(props) {
           />
           <Text style={{ marginBottom: 10 }}>
             {area.conditions.map((c, i) => {
+              if (c.name === "sheltered") {
+                c.value = c.value === 1 ?  "sheltered" : "not-sheltered"
+              }
               return (
                 <FlatList
                   key={i}

@@ -27,7 +27,7 @@ export default function AuthStack() {
       <Stack.Screen name="Logout" component={Logout} />
       <Stack.Screen name="MyGarden" component={GardenStack} />
       <Stack.Screen name="PlantIdentify" component={IdentifyStack} />
-      <Stack.Screen name="BOTanist" component={BOTanistChat} />
+      <Stack.Screen name="BOTanistChat" component={BOTanistChat} />
     </Stack.Navigator>
   )
 }

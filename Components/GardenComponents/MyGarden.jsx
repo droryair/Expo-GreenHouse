@@ -71,9 +71,11 @@ export default function MyGarden({ navigation }) {
         {store.utilityStore.emptyState.isShown && !areas.length ? (
           <EmptyState />
         ) : (
-          areas.map((a, i) => {
-            return <GardenArea key={i} area={a} navigation={navigation} />
-          })
+          <ScrollView>
+            {areas.map((a, i) => {
+              return <GardenArea key={i} area={a} navigation={navigation} />
+            })}
+          </ScrollView>
         )}
         {/* </View> */}
       </ScrollView>
