@@ -38,7 +38,6 @@ const utilityStore = new UtilityStore()
 const user = new User(utilityStore)
 const identification = new Identification(utilityStore)
 const gardenAreas = new gardenAreasStore(utilityStore, user)
-
 const PlantsStore = new Plants()
 const Diseases = new DiseasesStore()
 

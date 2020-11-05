@@ -82,11 +82,11 @@ export default function PlantDetails(props) {
           </Text>
           <Text>
             <Text style={styles.header}>- Last watered at: </Text>
-            03/11/2020 20:13
+            {plantData.updated_at}
           </Text>
           <Text>
             <Text style={styles.header}>- Soil checked at: </Text>
-            02/11/2020 07:46
+            {plantData.updated_at}
           </Text>
           <Card.Divider />
           <ScrollView>

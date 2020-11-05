@@ -8,15 +8,15 @@ export default function LoadingState() {
   const getRandomLoader = () => {
     switch (store.utilityStore.loadingState.loader) {
       case 1:
-        return require("../../assets/loader1.gif")
+        return require("../../assets/loaders/loader1.gif")
       case 2:
-        return require("../../assets/loader2.gif")
+        return require("../../assets/loaders/loader2.gif")
       case 3:
-        return require("../../assets/loader3.gif")
+        return require("../../assets/loaders/loader3.gif")
       case 4:
-        return require("../../assets/loader4.gif")
+        return require("../../assets/loaders/loader4.gif")
       default:
-        return require("../../assets/loader1.gif")
+        return require("../../assets/loaders/loader1.gif")
     }
   }
   return (
