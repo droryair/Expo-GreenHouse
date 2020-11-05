@@ -35,7 +35,7 @@ export default function PlantDetails(props) {
         setConditions(
           responseJson[0].conditions.map((c) => {
             if (c.name === "sheltered") {
-              c.value = c.value === 1 ? "sheltered" : "not-sheltered"
+              c.value = c.value === 1 ? "Yes" : "No"
             }
             return {
               name: c.name,
