@@ -10,6 +10,8 @@ import { NavigationContainer } from "@react-navigation/native"
 import { ScrollView } from "react-native-gesture-handler"
 import NewArea from "./NewArea"
 import Logo from "../UtilityComponents/Logo"
+import LoadingState from "../UtilityComponents/LoadingState"
+import EmptyState from "../UtilityComponents/EmptyState"
 
 //COMPONENT RESPONSIBILITIES
 // this component will be responsible for rendering garden management page,
@@ -25,7 +27,10 @@ export default function MyGarden({ navigation }) {
   const onPressAddArea = () => {
     ;<NewArea />
   }
-  return (
+
+  return store.utilityStore.loadingState.isShown ? (
+    <LoadingState />
+  ) : (
     <View style={styles.container}>
       <View style={styles.header}>
         <Button
@@ -46,7 +51,7 @@ export default function MyGarden({ navigation }) {
         />
       </View>
       <ImageBackground
-        source={require("../../assets/background/background2.jpg")}
+        source={require("../../assets/background/background1.jpeg")}
         style={styles.image}
       />
       <ScrollView>
@@ -63,9 +68,13 @@ export default function MyGarden({ navigation }) {
                     alignItems: "center",
                     flexDirection: 'row'
                 }}> */}
-        {areas.map((a, i) => {
-          return <GardenArea key={i} area={a} navigation={navigation} />
-        })}
+        {store.utilityStore.emptyState.isShown && !areas.length ? (
+          <EmptyState />
+        ) : (
+          areas.map((a, i) => {
+            return <GardenArea key={i} area={a} navigation={navigation} />
+          })
+        )}
         {/* </View> */}
       </ScrollView>
     </View>
@@ -97,6 +106,7 @@ const styles = StyleSheet.create({
     left: 0,
     flex: 1,
     zIndex: 0,
+    opacity: 0.8,
   },
   title: {
     textAlign: "center",

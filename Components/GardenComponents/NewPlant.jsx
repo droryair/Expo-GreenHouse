@@ -19,7 +19,7 @@ const NewPlant = observer(() => {
   const [selectedPlant, setSelectedPlant] = useState(null)
   const [searchResults, setSearchResults] = useState([])
   const serverUrl = `${store.utilityStore.serverUrl}:3001`
-  const gardenArea = { id: 19, name: "Bedroom" }
+  const gardenArea = store.gardenAreas.currentArea
 
   const goBackToSearch = () => {
     setInputs({ ...inputs, search: "" })

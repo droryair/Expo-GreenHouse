@@ -71,20 +71,21 @@ export default function PlantDetails(props) {
               source={{ uri: plantData.img_link }}
             />
           ) : null} */}
+          <Card.Divider />
           <Text>
             <Text style={styles.header}>Scientific Name: </Text>
             {plantData.scientific_name}
           </Text>
           <Text>
-            <Text style={styles.header}>Watering </Text>
+            <Text style={styles.header}>- Watering </Text>
             Every {plantData.watering_frequency} days
           </Text>
           <Text>
-            <Text style={styles.header}> Last watered at </Text>
+            <Text style={styles.header}>- Last watered at: </Text>
             03/11/2020 20:13
           </Text>
           <Text>
-            <Text style={styles.header}> Soil checked at </Text>
+            <Text style={styles.header}>- Soil checked at: </Text>
             02/11/2020 07:46
           </Text>
           <Card.Divider />
@@ -94,7 +95,7 @@ export default function PlantDetails(props) {
             </Text>
             {conditions.map((c, i) => (
               <Text key={i}>
-                <Text style={styles.header}>{c.name}: </Text> {c.value}{" "}
+                <Text style={styles.header}>- {c.name}: </Text> {c.value}
               </Text>
             ))}
           </ScrollView>
@@ -129,10 +130,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontWeight: "bold",
+    textAlign: "center",
   },
   header: {
-    fontSize: 15,
+    fontSize: 18,
     fontWeight: "bold",
+    color: "#6e963f",
   },
   image: {
     flex: 1,

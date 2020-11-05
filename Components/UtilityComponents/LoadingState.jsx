@@ -22,7 +22,9 @@ export default function LoadingState() {
   return (
     <View style={styles.view}>
       <Text style={styles.text}>{store.utilityStore.loadingState.title}</Text>
-      <Image style={styles.image} source={getRandomLoader()} />
+      <View style={styles.imageContainer}>
+        <Image style={styles.image} source={getRandomLoader()} />
+      </View>
       <Text style={styles.msg}>{store.utilityStore.loadingState.msg}</Text>
     </View>
   )
@@ -32,11 +34,18 @@ const styles = StyleSheet.create({
   image: {
     height: 250,
     width: 250,
+  },
+  imageContainer: {
     borderRadius: 10,
     backgroundColor: "white",
+    padding: 10,
+    flex: 0.8,
+    width: 300,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  text: { marginTop: 10, marginBottom: 10, fontSize: 20 ,fontWeight:"bold" },
-  msg: { marginTop: 10, marginBottom: 10, fontSize: 20 },
+  text: { marginTop: 100, marginBottom: 10, fontSize: 20, fontWeight: "bold" },
+  msg: { marginTop: 10, marginBottom: 100, fontSize: 20 },
   view: {
     flex: 1,
     justifyContent: "center",

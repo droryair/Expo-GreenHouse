@@ -20,6 +20,7 @@ export default function GardenArea(props) {
   const navigation = props.navigation
   const area = props.area
   const plants = area.plants
+  
 
   const handlePress = () => {
     return navigation.navigate("RenderPlant", { plants, area })

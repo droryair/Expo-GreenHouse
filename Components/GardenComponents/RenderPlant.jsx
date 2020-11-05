@@ -14,6 +14,8 @@ import { Card, Icon } from "react-native-elements"
 import { usePlantsStore } from "../../App"
 import plantIcon from "../../assets/plant.png"
 import Logo from "../UtilityComponents/Logo"
+import LoadingState from "../UtilityComponents/LoadingState"
+import EmptyState from "../UtilityComponents/EmptyState"
 
 // this component will be responsible to determine a plant format
 // and rendering each plant from a given array
@@ -29,6 +31,11 @@ const RenderPlant = observer((props) => {
     store.gardenAreas.getGardensPlants(area.id)
   }, [])
 
+  if (!currentGardenPlants.length) {
+    store.utilityStore.showEmptyState(null, () => {
+      navigation.navigate("MyGarden")
+    })
+  }
   const handlePress = (plantID) => {
     console.table(currentGardenPlants)
     return navigation.navigate("PlantDetails", { plantID })
@@ -36,10 +43,12 @@ const RenderPlant = observer((props) => {
   const handleNewPlantPress = () => {
     return navigation.navigate("NewPlant", area)
   }
-  return (
+  return store.utilityStore.loadingState.isShown ? (
+    <LoadingState />
+  ) : (
     <ScrollView style={styles.scroll}>
       <ImageBackground
-        source={require("../../assets/background/background2.jpg")}
+        source={require("../../assets/background/background1.jpeg")}
         style={styles.image}
       />
       <View style={styles.header}>
@@ -78,6 +87,7 @@ const RenderPlant = observer((props) => {
                   width: 300,
                   textAlign: "center",
                   backgroundColor: "hsla(87, 0%, 0%, 0.5)",
+                  fontSize: 20,
                 },
               ]}
             >
@@ -101,33 +111,41 @@ const RenderPlant = observer((props) => {
           {area.nickName ? area.nickName : area.type}- garden area
         </Text>
         <View>
-          {currentGardenPlants.map((p, i) => {
-            return (
-              <Card style={styles.card} key={i}>
-                <Text>
-                  <Card.Title>{p.nickname}</Card.Title>
-                </Text>
-                <Card.Divider />
-                {p.img_link ? (
-                  <Image style={styles.tinyLogo} source={{ uri: p.img_link }} />
-                ) : null}
+          {store.utilityStore.emptyState.isShown &&
+          !currentGardenPlants.length ? (
+            <EmptyState />
+          ) : (
+            currentGardenPlants.map((p, i) => {
+              return (
+                <Card style={styles.card} key={i}>
+                  <Text>
+                    <Card.Title>{p.nickname}</Card.Title>
+                  </Text>
+                  <Card.Divider />
+                  {p.img_link ? (
+                    <Image
+                      style={styles.tinyLogo}
+                      source={{ uri: p.img_link }}
+                    />
+                  ) : null}
 
-                <Text style={{ marginBottom: 10 }}></Text>
-                <Button
-                  icon={<Icon name="code" color="green" />}
-                  buttonStyle={{
-                    borderRadius: 0,
-                    marginLeft: 0,
-                    marginRight: 0,
-                    marginBottom: 0,
-                  }}
-                  color="#6e963f"
-                  title="View Plant >"
-                  onPress={() => handlePress(p.id)}
-                />
-              </Card>
-            )
-          })}
+                  <Text style={{ marginBottom: 10 }}></Text>
+                  <Button
+                    icon={<Icon name="code" color="green" />}
+                    buttonStyle={{
+                      borderRadius: 0,
+                      marginLeft: 0,
+                      marginRight: 0,
+                      marginBottom: 0,
+                    }}
+                    color="#6e963f"
+                    title="View Plant >"
+                    onPress={() => handlePress(p.id)}
+                  />
+                </Card>
+              )
+            })
+          )}
         </View>
       </View>
     </ScrollView>
@@ -153,6 +171,7 @@ const styles = StyleSheet.create({
     left: 0,
     flex: 1,
     zIndex: 0,
+    opacity: 0.8,
   },
   tinyLogo: {
     width: "100%",

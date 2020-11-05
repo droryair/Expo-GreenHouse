@@ -16,6 +16,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import { usePlantsStore } from "../../App"
 import Logo from "../UtilityComponents/Logo"
 import Backgroundvideo from "../UtilityComponents/BackgroundVideo"
+import { ScrollView } from "react-native-gesture-handler"
 // import GardenStack from "./Components/GardenComponents/GardenStack"
 
 //component assumptions:
@@ -77,7 +78,7 @@ export default function Home({ navigation }) {
         style={styles.menu}
       /> */}
       {store.user.isLoggedIn ? (
-        <>
+        <ScrollView>
           <TouchableOpacity
             style={styles.button}
             onPress={() => hendlePress("MyGarden")}
@@ -128,7 +129,7 @@ export default function Home({ navigation }) {
                         title="Logout"
                         color="green"
                     /> */}
-        </>
+        </ScrollView>
       ) : (
         <View
           style={{
