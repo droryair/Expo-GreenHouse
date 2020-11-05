@@ -19,9 +19,9 @@ const RenderPlant = observer((props) => {
     store.gardenAreas.getGardensPlants(area.id)
   }, [])
 
-  const handlePress = (plantID) => {
+  const handlePress = (plantID, plant) => {
     console.table(currentGardenPlants);
-    return navigation.navigate("PlantDetails", { plantID })
+    return navigation.navigate("PlantDetails", { plantID, plant })
   }
   const handleNewPlantPress = () => {
     return navigation.navigate("NewPlant", area)
@@ -77,7 +77,7 @@ const RenderPlant = observer((props) => {
                     marginBottom: 0,
                   }}
                   title="View Plant >"
-                  onPress={() => handlePress(p.id)}
+                  onPress={() => handlePress(p.id, p )}
                 />
               </Card>
             )

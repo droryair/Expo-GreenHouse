@@ -9,6 +9,7 @@ import plantIcon from '../../assets/plant.png'
 // and rendering them from a given plant details object
 
 export default function PlantDetails(props){
+    const {plant}       = props.route.params
     const store         = usePlantsStore(),
           {serverUrl}   = store.utilityStore,
           {plantID}     = props.route.params,
@@ -38,6 +39,7 @@ export default function PlantDetails(props){
     },[])
 
     const notifyWatering=()=>{
+        console.log(props.route)
         navigation.navigate('ScheduleNotifications', {plant})
     }
 
