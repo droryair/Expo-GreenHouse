@@ -21,7 +21,7 @@ export default class gardenAreasStore {
 
     }
     getAreas = async () => {
-        fetch(`${this.utils.serverUrl}:3001/gardens/${this.currentUser.id}`, {
+        await fetch(`${this.utils.serverUrl}:3001/gardens/${this.currentUser.id}`, {
             method: 'GET'
         })
             .then(response => response.json())
@@ -36,12 +36,14 @@ export default class gardenAreasStore {
     }
     getGardensPlants = async (gardenId) => {
         this.currentGardenPlants = []
-        fetch(`${this.utils.serverUrl}:3001/gardens/allPlants/${gardenId}`, {
+        await fetch(`${this.utils.serverUrl}:3001/gardens/allPlants/${gardenId}`, {
             method: 'GET'
         })
             .then(response => response.json())
             .then(responseJson => {
+                console.log(responseJson);
                 this.currentGardenPlants = responseJson
+                return responseJson
             })
             .catch(err => {
                 console.log(err);
