@@ -14,7 +14,7 @@ export default class UtilityStore {
       isShown: false,
       handleGoBack: null,
     }
-    this.serverUrl = "http://192.168.1.204"
+    this.serverUrl = "http://10.0.0.4"
     makeObservable(this, {
       snackBar: observable,
       loadingState: observable,
@@ -63,9 +63,11 @@ export default class UtilityStore {
     this.emptyState.isShown
   }
   showEmptyState = (msg, handleGoBack) => {
-    if (msg && handleGoBack) {
+    if (msg) {
       this.emptyState.msg = msg
       this.emptyState.isShown = true
+    }
+    if (handleGoBack) {
       this.emptyState.handleGoBack = handleGoBack
     }
   }
@@ -73,6 +75,7 @@ export default class UtilityStore {
     this.emptyState.isShown = false
     if (this.emptyState.handleGoBack) {
       this.emptyState.handleGoBack()
+      this.emptyState.handleGoBack = null
     }
   }
 }

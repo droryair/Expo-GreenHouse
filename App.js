@@ -50,7 +50,7 @@ const store = {
   user,
   Diseases,
   utilityStore,
-  BotanistStore
+  BotanistStore,
 }
 
 export const PlantsContext = createContext(store)
