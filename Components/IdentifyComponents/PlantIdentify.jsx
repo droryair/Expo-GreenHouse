@@ -11,15 +11,20 @@ import {
   ScrollView,
   ImageBackground,
 } from "react-native"
-import { PlantsContext } from "../../App"
+import { PlantsContext, useUtilityStore } from "../../App"
 import Logo from "../UtilityComponents/Logo"
+import LoadingState from "../UtilityComponents/LoadingState"
+import EmptyState from "../UtilityComponents/EmptyState"
 
 const PlantIdentify = observer(({ navigation }) => {
+  const store = useUtilityStore()
   const plantsStore = useContext(PlantsContext)
   const handlePress = (componentName) => {
     return navigation.navigate(componentName)
   }
-  return (
+  return store.utilityStore.loadingState.isShown ? (
+    <LoadingState />
+  ) : (
     <View style={styles.container}>
       <View style={styles.headerMenu}>
         <Button
@@ -51,28 +56,35 @@ const PlantIdentify = observer(({ navigation }) => {
       >
         <Text style={styles.buttonText}>Take A Picture</Text>
       </TouchableOpacity>
-      <Text style={styles.plantHeader}>
-        {plantsStore.identification.identified.plant_name}
-      </Text>
-      <ScrollView style={styles.scroll}>
-        {plantsStore.identification.similarImage ? (
-          <Image
-            style={styles.plantImage}
-            source={{
-              uri: plantsStore.identification.similarImage,
-            }}
-          />
-        ) : null}
-        <Text
-          style={{
-            marginBottom: 20,
-            color: "white",
-            padding: 20,
-          }}
-        >
-          {plantsStore.identification.wikiData}
-        </Text>
-      </ScrollView>
+      {plantsStore.identification.identified === {} &&
+      store.utilityStore.emptyState.isShown ? (
+        <EmptyState />
+      ) : (
+        <>
+          <Text style={styles.plantHeader}>
+            {plantsStore.identification.identified.plant_name}
+          </Text>
+          <ScrollView style={styles.scroll}>
+            {plantsStore.identification.similarImage ? (
+              <Image
+                style={styles.plantImage}
+                source={{
+                  uri: plantsStore.identification.similarImage,
+                }}
+              />
+            ) : null}
+            <Text
+              style={{
+                marginBottom: 20,
+                color: "white",
+                padding: 20,
+              }}
+            >
+              {plantsStore.identification.wikiData}
+            </Text>
+          </ScrollView>
+        </>
+      )}
     </View>
   )
 })

@@ -34,7 +34,7 @@ const SnackBar = observer(() => {
 
 const styles = StyleSheet.create({
   container: {
-    zIndex: 200,
+    zIndex: 500,
     justifyContent: "space-between",
   },
 })

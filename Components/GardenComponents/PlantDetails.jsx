@@ -16,15 +16,14 @@ import plantIcon from "../../assets/plant.png"
 // this component will be responsible to determine a plant details format
 // and rendering them from a given plant details object
 
-export default function PlantDetails(props){
-    const {plant}       = props.route.params
-    const store         = usePlantsStore(),
-          {serverUrl}   = store.utilityStore,
-          {plantID}     = props.route.params,
-          navigation    = props.navigation,
-          [plantData, setPlantData] = useState({}), 
-          [conditions, setConditions] = useState([])
-
+export default function PlantDetails(props) {
+  const { plant } = props.route.params
+  const store = usePlantsStore(),
+    { serverUrl } = store.utilityStore,
+    { plantID } = props.route.params,
+    navigation = props.navigation,
+    [plantData, setPlantData] = useState({}),
+    [conditions, setConditions] = useState([])
 
   const getPlantDetails = () => {
     fetch(`${serverUrl}:3001/plant/${plantID}`, {
@@ -34,10 +33,15 @@ export default function PlantDetails(props){
       .then((responseJson) => {
         setPlantData(responseJson[0])
         setConditions(
-          responseJson[0].conditions.map((c) => ({
-            name: c.name,
-            value: c.value,
-          }))
+          responseJson[0].conditions.map((c) => {
+            if (c.name === "sheltered") {
+              c.value = c.value === 1 ? "Yes" : "No"
+            }
+            return {
+              name: c.name,
+              value: c.value,
+            }
+          })
         )
       })
       .catch((err) => {
@@ -50,9 +54,9 @@ export default function PlantDetails(props){
     getPlantDetails()
   }, [])
 
-  const notifyWatering=()=>{
-    navigation.navigate('ScheduleNotifications', {plant})
-}
+  const notifyWatering = () => {
+    navigation.navigate("ScheduleNotifications", { plant })
+  }
 
   return (
     <View style={styles.container}>
@@ -106,7 +110,6 @@ export default function PlantDetails(props){
       </View>
     </View>
   )
-
 }
 
 const styles = StyleSheet.create({

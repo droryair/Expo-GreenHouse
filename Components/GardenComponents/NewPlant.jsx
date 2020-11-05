@@ -33,7 +33,7 @@ const NewPlant = observer((props) => {
   const instructions = {
     1: "First, enter your plant to gather information.",
     2: "Now select your plant from the list below.",
-    3: "Almost done! Please fill-in the remaining fields in the form.",
+    3: "Please fill-in the the form.",
   }
 
   const goBackToSearch = () => {
@@ -72,54 +72,6 @@ const NewPlant = observer((props) => {
     }
   }
 
-  const handleResultPress = async (event) => {
-    try {
-      const plantName = event.target.innerHTML
-      console.log(plantName)
-      const p = searchResults.find((p) => p.name === plantName)
-      if (p) {
-        store.utilityStore.showLoadingState(
-          "Searching for matching plants!",
-          "This might take a few seconds..."
-        )
-        const results = await axios.post(
-          `${serverUrl}/plantForm/${plantName}/info`,
-          { detailsUrl: p.detailsUrl }
-        )
-        if (
-          results.data.conditions.length ||
-          results.data ||
-          results.data.diseases.length
-        ) {
-          setSelectedPlant(results.data)
-          setStep(3)
-        } else {
-          store.utilityStore.showEmptyState(
-            "We're sorry, this plant is currently unsupported.",
-            goBackToPlantResults
-          )
-        }
-        store.utilityStore.hideLoadingState()
-      } else {
-        setSelectedPlant(null)
-        store.utilityStore.showEmptyState(
-          "Couldn't find this plant. Please try again.",
-          goBackToPlantResults
-        )
-        store.utilityStore.hideLoadingState()
-      }
-    } catch (err) {
-      setSelectedPlant(null)
-      store.utilityStore.showSnackBar(
-        "Oops, something went wrong. Please try again"
-      )
-      store.utilityStore.hideLoadingState()
-      console.log(err)
-    }
-  }
-  const navigateToNewPlant = (plantID, plant) => {
-    return navigation.navigate("PlantDetails", { plantID, plant, navigation })
-  }
   const savePlantToDB = async () => {
     if (inputs.nickname === "" || inputs.wateringFrequency === "") {
       alert("All fields are required!")
@@ -170,16 +122,16 @@ const NewPlant = observer((props) => {
         source={require("../../assets/background/background2.jpg")}
         style={styles.image}
       />
-      <Text style={styles.container}>
-        <View style={styles.form}>
-          <ScrollView>
+      <ScrollView>
+        <Text style={styles.container}>
+          <View style={styles.form}>
             <Text style={styles.title}>Add new plant</Text>
-            <Text style={[styles.subtitles, { width: "80%" }]}>
-              {instructions[step]}
-            </Text>
+            <View style={styles.instructions}>
+              <Text style={{ color: "#6e963f" }}>{instructions[step]}</Text>
+            </View>
             <View
               className="search-plant"
-              style={{ zIndex: 100, width: "90%" }}
+              style={{ zIndex: 100, width: "80%" }}
             >
               <Input
                 placeholder="Plant name"
@@ -214,7 +166,40 @@ const NewPlant = observer((props) => {
                           >
                             <Button
                               title={result.name}
-                              onPress={handleResultPress}
+                              onPress={async () => {
+                                console.log(result.detailsUrl)
+                                try {
+                                  store.utilityStore.showLoadingState(
+                                    "Searching for matching plants!",
+                                    "This might take a few seconds..."
+                                  )
+                                  const results = await axios.post(
+                                    `${serverUrl}/plantForm/${result.name}/info`,
+                                    { detailsUrl: result.detailsUrl }
+                                  )
+                                  if (
+                                    results.data.conditions.length ||
+                                    results.data ||
+                                    results.data.diseases.length
+                                  ) {
+                                    setSelectedPlant(results.data)
+                                    setStep(3)
+                                  } else {
+                                    store.utilityStore.showEmptyState(
+                                      "We're sorry, this plant is currently unsupported.",
+                                      goBackToPlantResults
+                                    )
+                                  }
+                                  store.utilityStore.hideLoadingState()
+                                } catch (err) {
+                                  setSelectedPlant(null)
+                                  store.utilityStore.showSnackBar(
+                                    "Oops, something went wrong. Please try again"
+                                  )
+                                  store.utilityStore.hideLoadingState()
+                                  console.log(err)
+                                }
+                              }}
                               color="hsl(87, 24%, 60%)"
                             />
                           </View>
@@ -239,7 +224,7 @@ const NewPlant = observer((props) => {
                         Garden Area: {gardenArea.name}
                       </Text>
                       <Card.Divider />
-                      <View>
+                      <View style={{ width: "80%" }}>
                         <Text style={styles.topics}>
                           Should be watered each
                         </Text>
@@ -271,10 +256,11 @@ const NewPlant = observer((props) => {
                 <></>
               )}
             </View>
-          </ScrollView>
-          <Text style={styles.step}>Step {step}/3</Text>
-        </View>
-      </Text>
+
+            <Text style={styles.step}>Step {step}/3</Text>
+          </View>
+        </Text>
+      </ScrollView>
     </View>
   )
 })
@@ -307,7 +293,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     display: "flex",
     zIndex: 0,
-    margin: 10,
+    paddingBottom: 40,
+    alignItems: "center",
   },
   topics: {
     color: "black",
@@ -332,6 +319,7 @@ const styles = StyleSheet.create({
   subtitles: {
     color: "#6e963f",
   },
+  instructions: { width: "50%" },
   option: {
     /*     borderWidth: 2,
     borderColor: "black",
