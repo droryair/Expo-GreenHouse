@@ -33,7 +33,7 @@ import DiseasesStore from "./Stores/DiseasesStore"
 import UtilityStore from "./Stores/UtilityStore"
 import SnackBar from "./Components/UtilityComponents/SnackBar"
 import { observer } from "mobx-react"
-import BOTanistStore from "./Stores/BotanistStore"
+import BOTanistStore from "./Stores/BOTanistStore"
 
 const utilityStore = new UtilityStore()
 const user = new User(utilityStore)
